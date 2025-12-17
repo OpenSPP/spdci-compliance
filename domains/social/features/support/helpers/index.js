@@ -17,10 +17,9 @@ export {
 } from '../../../../../common/helpers/envelope.js';
 
 export {
-  applyCommonHeaders,
-  checkHeader,
+  // Note: applyCommonHeaders is exported from ./helpers.js instead
+  // The SR-specific version supports extraHeaders and DCI_AUTH_TOKEN
   validateRequiredHeaders,
-  getHeaderValue,
 } from '../../../../../common/helpers/headers.js';
 
 export {

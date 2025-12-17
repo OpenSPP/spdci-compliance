@@ -1,27 +1,55 @@
 /**
  * HTTP Header Utilities for SPDCI Compliance Testing
+ *
+ * These utilities are generic and don't assume any specific auth mechanism.
+ * Configure authentication via environment variables:
+ *   - AUTH_TOKEN: Bearer token value (will be prefixed with "Bearer " if needed)
+ *   - EXTRA_HEADERS_JSON: JSON object/array of additional headers
  */
 
 /**
  * Apply common SPDCI headers to a request
+ *
+ * @param {object} request - Pactum spec object
+ * @param {object} options - Configuration options
+ * @param {string} [options.contentType] - Content-Type header value
+ * @param {string} [options.authorization] - Authorization header value (omit to skip)
+ * @param {string} [options.correlationId] - X-Correlation-ID header value
+ * @param {string[]} [options.omitHeaders] - Header names to omit (case-insensitive)
  */
 export function applyCommonHeaders(request, options = {}) {
   const {
     contentType = 'application/json',
-    authorization = process.env.AUTH_TOKEN || 'Bearer test-token',
+    authorization = getDefaultAuthorization(),
     correlationId = null,
+    omitHeaders = [],
   } = options;
 
-  request.withHeaders({
-    'Content-Type': contentType,
-    'Authorization': authorization,
-  });
+  const omit = new Set(omitHeaders.map(h => String(h).toLowerCase()));
 
-  if (correlationId) {
+  if (!omit.has('content-type')) {
+    request.withHeaders({ 'Content-Type': contentType });
+  }
+
+  if (authorization && !omit.has('authorization')) {
+    request.withHeaders({ 'Authorization': authorization });
+  }
+
+  if (correlationId && !omit.has('x-correlation-id')) {
     request.withHeaders({ 'X-Correlation-ID': correlationId });
   }
 
   return request;
+}
+
+/**
+ * Get default authorization from environment
+ * Returns null if not configured (no auth by default)
+ */
+function getDefaultAuthorization() {
+  const token = process.env.AUTH_TOKEN;
+  if (!token) return null;
+  return token.startsWith('Bearer ') ? token : `Bearer ${token}`;
 }
 
 /**
