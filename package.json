@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "cucumber-js",
-    "test:social": "cucumber-js --tags '@domain=social'",
+    "test:social": "cucumber-js --tags '@profile=sr-registry'",
     "test:crvs": "cucumber-js --tags '@domain=crvs'",
     "test:dr": "cucumber-js --tags '@domain=dr'",
     "test:fr": "cucumber-js --tags '@domain=fr'",

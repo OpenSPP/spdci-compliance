@@ -1,7 +1,7 @@
 import http from 'node:http';
 import { EventEmitter } from 'node:events';
 
-import { assertOpenApiRequest } from './openapi-validator.js';
+import { assertOpenApiRequest } from '../../../../../common/helpers/openapi-validator.js';
 
 let server;
 let serverBaseUrl;

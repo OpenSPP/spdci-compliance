@@ -200,6 +200,57 @@ export async function assertOpenApiRequest({ path: opPath, method, domain }, bod
 }
 
 /**
+ * Validate a body against a named component schema from the OpenAPI spec
+ */
+export async function assertOpenApiComponentResponse(componentName, body, domain) {
+  const { openApi, ajv, validators } = await loadOpenApi(domain);
+  const key = `component:${componentName}`;
+
+  let validate = validators.get(key);
+  if (!validate) {
+    const schema = openApi.components?.schemas?.[componentName];
+    if (!schema) {
+      throw new Error(`OpenAPI: component schema "${componentName}" not found`);
+    }
+    validate = ajv.compile(schema);
+    validators.set(key, validate);
+  }
+
+  const ok = validate(body);
+  if (!ok) {
+    const details = formatAjvErrors(validate.errors);
+    throw new Error(`OpenAPI component validation failed for "${componentName}"\n${details}`);
+  }
+}
+
+/**
+ * Validate that a body represents a valid HTTP error response
+ * Accepts either a standard HTTP problem details format or a DCI error envelope
+ */
+export async function assertHttpErrorResponse(body) {
+  if (!body || typeof body !== 'object') {
+    throw new Error('HTTP error response body must be an object');
+  }
+
+  // Accept DCI error envelope format
+  if (body.message?.error || body.message?.ack_status === 'ERR') {
+    return;
+  }
+
+  // Accept RFC 7807 Problem Details format
+  if (body.type || body.title || body.status || body.detail) {
+    return;
+  }
+
+  // Accept simple error object
+  if (body.error || body.code || body.message) {
+    return;
+  }
+
+  throw new Error('HTTP error response does not match expected error format');
+}
+
+/**
  * Validate a response body against OpenAPI spec
  */
 export async function assertOpenApiResponse({ path: opPath, method, statusCode, domain }, body) {
