@@ -89,6 +89,11 @@ Then(/^The request should be rejected as unauthorized$/, async function () {
     await assertOpenApiComponentResponse('Response', this.response.body);
     chai.expect(this.response.body?.message?.ack_status, 'Expected ACK ERR for missing auth').to.equal('ERR');
     const code = this.response.body?.message?.error?.code;
+    // Intentionally strict: only accept auth-specific error codes for auth tests.
+    // The spec's ErrorEnum defines 14 codes, but for authentication failures,
+    // only 'err.request.unauthorized' (401-like) and 'err.request.forbidden' (403-like)
+    // are semantically correct. Accepting other codes like 'err.request.bad' would
+    // be a false positive - those indicate different failure modes.
     chai.expect(
       ['err.request.unauthorized', 'err.request.forbidden'],
       `Expected message.error.code to indicate auth failure, got "${code}"`

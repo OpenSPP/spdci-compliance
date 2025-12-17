@@ -224,25 +224,42 @@ export async function assertOpenApiComponentResponse(componentName, body, domain
 }
 
 /**
- * Validate that a body represents a valid HTTP error response
- * Accepts either a standard HTTP problem details format or a DCI error envelope
+ * Validate that a body represents a valid HTTP error response.
+ *
+ * INTEROPERABILITY NOTE: This function accepts multiple error formats to accommodate
+ * different implementation approaches. The SPDCI spec primarily defines the DCI error
+ * envelope format, but implementations may use other standard formats for HTTP 4xx errors.
+ *
+ * Accepted formats (in priority order):
+ *
+ * 1. DCI Error Envelope (SPDCI-native):
+ *    { message: { ack_status: "ERR", error: { code: "err.request.bad", message: "..." } } }
+ *
+ * 2. RFC 7807 Problem Details (HTTP standard):
+ *    { type: "...", title: "...", status: 400, detail: "..." }
+ *
+ * 3. Simple error object (common fallback):
+ *    { error: "...", code: "...", message: "..." }
+ *
+ * For strict SPDCI compliance, implementations SHOULD use format #1.
+ * Formats #2 and #3 are accepted for interoperability with HTTP frameworks.
  */
 export async function assertHttpErrorResponse(body) {
   if (!body || typeof body !== 'object') {
     throw new Error('HTTP error response body must be an object');
   }
 
-  // Accept DCI error envelope format
+  // Priority 1: DCI error envelope format (SPDCI-native, preferred)
   if (body.message?.error || body.message?.ack_status === 'ERR') {
     return;
   }
 
-  // Accept RFC 7807 Problem Details format
+  // Priority 2: RFC 7807 Problem Details format (HTTP standard)
   if (body.type || body.title || body.status || body.detail) {
     return;
   }
 
-  // Accept simple error object
+  // Priority 3: Simple error object (common fallback)
   if (body.error || body.code || body.message) {
     return;
   }

@@ -17,9 +17,15 @@ export function getTimestamp() {
 
 /**
  * Create a standard SPDCI message header
+ *
+ * Default values for sender_id and receiver_id are TEST PLACEHOLDERS.
+ * For production/integration testing, always set via environment variables:
+ *   - SENDER_ID: Your registered sender identifier
+ *   - RECEIVER_ID: Target registry/system identifier
  */
 export function createHeader(action, options = {}) {
   const {
+    // Test defaults - override via SENDER_ID/RECEIVER_ID env vars for real testing
     senderId = process.env.SENDER_ID || 'test-client',
     receiverId = process.env.RECEIVER_ID || 'registry-server',
     version = '1.0.0',

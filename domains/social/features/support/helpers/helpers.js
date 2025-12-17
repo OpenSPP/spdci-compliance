@@ -19,8 +19,14 @@ export { generateId, getTimestamp };
 // ============================================
 
 export const localhost = process.env.API_BASE_URL || 'http://127.0.0.1:3333/';
-export const defaultResponseTime = 15000;
-export const defaultExpectedResponseTime = 15000;
+
+// Response time threshold for tests.
+// This is a TEST TIMEOUT ACCOMMODATION, not a spec-mandated SLA.
+// The SPDCI spec does not define response time requirements.
+// Configure via RESPONSE_TIME_THRESHOLD_MS for different environments.
+const responseTimeThreshold = Number(process.env.RESPONSE_TIME_THRESHOLD_MS) || 15000;
+export const defaultResponseTime = responseTimeThreshold;
+export const defaultExpectedResponseTime = responseTimeThreshold;
 
 export const acceptHeader = {
   key: 'Accept',
