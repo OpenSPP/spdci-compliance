@@ -167,6 +167,7 @@ See [common/mock-server/README.md](common/mock-server/README.md) for details.
 
 This project builds upon the work of the [Social Protection Digital Convergence Initiative (SPDCI)](https://spdci.org/):
 
+- **SR Mockup Compliance**: [spdci/SR-Mockup-Compliance](https://github.com/spdci/SR-Mockup-Compliance) - The original Social Registry compliance test suite by [@aishamerhebi](https://github.com/aishamerhebi) that served as the starting point for this project
 - **API Standards**: [spdci/api-standards](https://github.com/spdci/api-standards) - The OpenAPI specifications this test suite validates against
 - **Schemas**: [spdci/schemas](https://github.com/spdci/schemas) - JSON schemas for SPDCI data models
 
