@@ -25,16 +25,21 @@ spdci-compliance/
 │   │   ├── headers.js         # Header builders and validators
 │   │   ├── openapi-validator.js
 │   │   └── callback-server.js # Callback server for async testing
-│   ├── features/              # Shared test scenarios
-│   │   ├── client_compliance.feature  # SPMIS client tests
-│   │   ├── security_headers.feature   # Security header tests
+│   ├── features/              # Shared test scenarios (apply to ALL domains)
+│   │   ├── validation_format.feature   # Timestamp, locale format tests
+│   │   ├── validation_boundary.feature # String length boundary tests
+│   │   ├── pagination.feature          # Pagination parameter tests
+│   │   ├── client_compliance.feature   # SPMIS client tests
+│   │   ├── security_headers.feature    # Security header tests
 │   │   └── support/           # Shared step definitions
+│   ├── requirements.json      # Common compliance requirements (DCI-*)
 │   └── mock-server/           # Mock registry for client testing
 │       └── server.mjs
 ├── domains/                    # Domain-specific tests
 │   ├── social/                # Social Registry (implemented)
 │   │   ├── features/          # SR-specific scenarios
 │   │   ├── payloads/          # SR-specific data generators
+│   │   ├── requirements.json  # SR-specific requirements (SR-*)
 │   │   └── config.js          # SR endpoints, record types
 │   ├── crvs/                  # Civil Registration (not implemented)
 │   ├── dr/                    # Disbursement Registry (not implemented)
