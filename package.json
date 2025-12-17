@@ -1,0 +1,41 @@
+{
+  "name": "spdci-compliance",
+  "version": "1.0.0",
+  "description": "SPDCI API Compliance Test Suite - Multi-registry compliance testing for DCI standards",
+  "type": "module",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:social": "cucumber-js --tags '@domain=social'",
+    "test:crvs": "cucumber-js --tags '@domain=crvs'",
+    "test:dr": "cucumber-js --tags '@domain=dr'",
+    "test:fr": "cucumber-js --tags '@domain=fr'",
+    "test:ibr": "cucumber-js --tags '@domain=ibr'",
+    "test:core": "cucumber-js --tags '@tier=core'",
+    "test:smoke": "cucumber-js --tags '@smoke'",
+    "mock-server": "node common/mock-server/server.mjs"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^10.1.1",
+    "@cucumber/cucumber": "^10.0.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "chai": "^4.3.7",
+    "chai-json-schema": "^1.5.1",
+    "chai-string": "^1.5.0",
+    "pactum": "^3.1.0"
+  },
+  "devDependencies": {
+    "cucumber-html-reporter": "^5.5.0"
+  },
+  "keywords": [
+    "spdci",
+    "dci",
+    "compliance",
+    "social-registry",
+    "crvs",
+    "testing",
+    "openapi"
+  ],
+  "author": "OpenSPP",
+  "license": "MIT"
+}
