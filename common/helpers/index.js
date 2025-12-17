@@ -11,6 +11,17 @@ export {
   assertOpenApiResponse,
   getOpenApiSpec,
 } from './openapi-validator.js';
+export {
+  startCallbackServer,
+  stopCallbackServer,
+  getCallbackUrl,
+  getCallbacks,
+  getCallbacksByAction,
+  getLastCallback,
+  clearCallbacks,
+  waitForCallback,
+  waitForCallbackAction,
+} from './callback-server.js';
 
 // Domain configuration
 const domains = {

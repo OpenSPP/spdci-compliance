@@ -111,9 +111,36 @@ npx cucumber-js --tags '@endpoint=registry/search'
 
 ## Test Profiles
 
-- **`<domain>-registry`**: Test registry server compliance (SR, CRVS, etc.)
-- **`spmis-client`**: Test SPMIS client compliance against mock server
-- **`spmis-subscriber`**: Test subscription/notification handling
+### Registry Server Testing (`<domain>-registry`)
+
+Test that a registry server correctly implements the SPDCI spec:
+
+```bash
+# Test a Social Registry server
+API_BASE_URL=http://sr-server:8080 DOMAIN=social npm run test:social
+```
+
+### Client Testing (`spmis-client`)
+
+Test that an SPMIS client correctly sends requests to registries:
+
+```bash
+# 1. Start the mock registry server
+npm run mock-server
+
+# 2. Configure your client to use http://localhost:3335
+
+# 3. Run client compliance tests (requires client trigger API)
+PROFILE=spmis-client CLIENT_TRIGGER_URL=http://your-client:8080/test/trigger npm test
+```
+
+The mock server:
+- Validates incoming requests against the OpenAPI spec
+- Records all requests for assertion
+- Sends async callbacks to client's `sender_uri`
+- Provides admin API for test control
+
+See [common/mock-server/README.md](common/mock-server/README.md) for details.
 
 ## Contributing
 
