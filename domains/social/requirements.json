@@ -540,6 +540,159 @@
       "path": "/registry/search",
       "kind": "happy",
       "description": "Client can send predicate query type."
+    },
+    {
+      "id": "SR-VAL-FMT-TS-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid timestamp format."
+    },
+    {
+      "id": "SR-VAL-FMT-TS-02",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search accepts valid ISO 8601 timestamp with timezone."
+    },
+    {
+      "id": "SR-VAL-FMT-TS-03",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "negative",
+      "description": "Subscribe rejects timestamp without timezone."
+    },
+    {
+      "id": "SR-VAL-FMT-LOC-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search accepts valid ISO 639.3 locale code."
+    },
+    {
+      "id": "SR-VAL-FMT-LOC-02",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid locale format - too short."
+    },
+    {
+      "id": "SR-VAL-FMT-LOC-03",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid locale format - uppercase."
+    },
+    {
+      "id": "SR-VAL-BND-TXN-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search accepts transaction_id at max length (99 chars)."
+    },
+    {
+      "id": "SR-VAL-BND-TXN-02",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects transaction_id exceeding max length."
+    },
+    {
+      "id": "SR-VAL-BND-REF-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search accepts reference_id at reasonable length."
+    },
+    {
+      "id": "SR-VAL-BND-SUB-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "happy",
+      "description": "Unsubscribe accepts subscription_code at max length (99 chars)."
+    },
+    {
+      "id": "SR-VAL-BND-SUB-02",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "negative",
+      "description": "Unsubscribe rejects subscription_code exceeding max length."
+    },
+    {
+      "id": "SR-CORE-PAG-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search request with pagination parameters."
+    },
+    {
+      "id": "SR-CORE-PAG-02",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "happy",
+      "description": "Sync search request with pagination."
+    },
+    {
+      "id": "SR-CORE-PAG-03",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search with page_number greater than 1."
+    },
+    {
+      "id": "SR-VAL-PAG-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid page_size (zero)."
+    },
+    {
+      "id": "SR-VAL-PAG-02",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid page_number (zero)."
+    },
+    {
+      "id": "SR-VAL-PAG-03",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects negative page_size."
     }
   ]
 }

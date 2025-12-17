@@ -48,6 +48,7 @@ Some validation issues are handled in code rather than spec modifications. See `
 These issues have been reported to the SPDCI team:
 - [api-standards#45](https://github.com/spdci/api-standards/issues/45) - Ambiguous oneOf schema for query field
 - [api-standards#46](https://github.com/spdci/api-standards/issues/46) - Ambiguous oneOf schema for attribute_value field
+- [api-standards#47](https://github.com/spdci/api-standards/issues/47) - Ambiguous oneOf schema for SubscriptionInfo.filter field
 
 ## Other Specifications
 
@@ -123,6 +124,23 @@ subscription = env['spp.subscription'].create({
     ...
 })
 ```
+
+## Out of Scope Features
+
+The following features are **NOT specified** in the SPDCI API standards and are therefore
+not included in the compliance test suite:
+
+| Feature | Reason |
+|---------|--------|
+| Rate Limiting | Not defined in spec - implementation-specific |
+| Version Negotiation | Not defined in spec - all endpoints use header.version field |
+| Idempotency | Not defined in spec - no idempotency key header |
+| CORS Headers | Not defined in spec - deployment-specific |
+| Compression | Not defined in spec - HTTP transport layer concern |
+| Concurrent Request Handling | Not defined in spec - implementation-specific |
+
+These features may be important for production deployments but are outside the scope
+of SPDCI API compliance testing.
 
 ## Updating Specifications
 
