@@ -142,10 +142,17 @@ The mock server:
 
 See [common/mock-server/README.md](common/mock-server/README.md) for details.
 
+## Acknowledgments
+
+This project builds upon the work of the [Social Protection Digital Convergence Initiative (SPDCI)](https://spdci.org/):
+
+- **API Standards**: [spdci/api-standards](https://github.com/spdci/api-standards) - The OpenAPI specifications this test suite validates against
+- **Schemas**: [spdci/schemas](https://github.com/spdci/schemas) - JSON schemas for SPDCI data models
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-MIT
+Apache 2.0 - See [LICENSE](LICENSE) for details.
