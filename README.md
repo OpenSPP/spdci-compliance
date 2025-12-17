@@ -18,29 +18,29 @@ Unified compliance testing framework for SPDCI (Social Protection Digital Conver
 
 ```
 spdci-compliance/
-├── common/                     # Shared infrastructure (60-70% of codebase)
+├── common/                     # Shared infrastructure
 │   ├── helpers/               # Request builders, validators, utilities
+│   │   ├── index.js           # Re-exports all helpers
 │   │   ├── envelope.js        # Message envelope (header, signature, message)
 │   │   ├── headers.js         # Header builders and validators
 │   │   ├── openapi-validator.js
-│   │   └── callbacks.js       # Callback server utilities
+│   │   └── callback-server.js # Callback server for async testing
 │   ├── features/              # Shared test scenarios
-│   │   ├── security_auth.feature
-│   │   ├── security_headers.feature
-│   │   ├── async_workflow.feature
+│   │   ├── client_compliance.feature  # SPMIS client tests
+│   │   ├── security_headers.feature   # Security header tests
 │   │   └── support/           # Shared step definitions
-│   └── mock-server/           # Generic mock server with domain plugins
+│   └── mock-server/           # Mock registry for client testing
 │       └── server.mjs
 ├── domains/                    # Domain-specific tests
-│   ├── social/                # Social Registry
+│   ├── social/                # Social Registry (implemented)
 │   │   ├── features/          # SR-specific scenarios
 │   │   ├── payloads/          # SR-specific data generators
 │   │   └── config.js          # SR endpoints, record types
-│   ├── crvs/                  # Civil Registration
-│   ├── dr/                    # Disbursement Registry
-│   ├── fr/                    # Functional Registry
-│   └── ibr/                   # ID & Beneficiary Registry
-├── spec/                       # OpenAPI specifications (symlinks or copies)
+│   ├── crvs/                  # Civil Registration (not implemented)
+│   ├── dr/                    # Disbursement Registry (not implemented)
+│   ├── fr/                    # Functional Registry (not implemented)
+│   └── ibr/                   # ID & Beneficiary Registry (not implemented)
+├── spec/                       # OpenAPI specifications
 └── cucumber.js                 # Cucumber configuration
 ```
 

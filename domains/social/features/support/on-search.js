@@ -11,9 +11,9 @@ import {
   applyCommonHeaders,
   checkHeader,
   getRequestPath
-} from './helpers/helpers.js';
+} from './helpers/index.js';
 
-import { assertOpenApiRequest, assertOpenApiResponse } from './helpers/openapi-validator.js';
+import { assertOpenApiRequest, assertOpenApiResponse } from './helpers/index.js';
 
 import chaiJsonSchema from 'chai-json-schema'; // Import correctly
 import chaiString from 'chai-string';

@@ -12,9 +12,9 @@ import {
   notifyEndpoint,
   createSearchRequestPayload,
   createNotifyPayload,
-} from './helpers/helpers.js';
+} from './helpers/index.js';
 
-import { assertOpenApiRequest, assertOpenApiComponentResponse, assertHttpErrorResponse } from './helpers/openapi-validator.js';
+import { assertOpenApiRequest, assertOpenApiComponentResponse, assertHttpErrorResponse } from './helpers/index.js';
 
 const OPERATIONS = {
   'async search': { endpoint: asyncsearchEndpoint, buildPayload: createSearchRequestPayload },

@@ -17,9 +17,9 @@ import {
   applyCommonHeaders,
   getRequestPath,
   getCallbackPathForAction,
-} from './helpers/helpers.js';
+} from './helpers/index.js';
 
-import { assertOpenApiRequest, assertOpenApiResponse } from './helpers/openapi-validator.js';
+import { assertOpenApiRequest, assertOpenApiResponse } from './helpers/index.js';
 import { waitForCallback } from './helpers/callback-server.js';
 
 function getCallbackWaitMs() {
