@@ -41,7 +41,7 @@ spdci-compliance/
 │   ├── fr/                    # Functional Registry (not implemented)
 │   └── ibr/                   # ID & Beneficiary Registry (not implemented)
 ├── spec/                       # OpenAPI specifications
-└── cucumber.js                 # Cucumber configuration
+└── cucumber.cjs                # Cucumber configuration
 ```
 
 ## Shared vs Domain-Specific
@@ -86,20 +86,41 @@ npm run test:smoke   # Quick smoke tests
 
 ### Run with specific tags
 ```bash
-npx cucumber-js --tags '@domain=social and @tier=core'
+npx cucumber-js --tags '@profile=sr-registry and @tier=core'
 npx cucumber-js --tags '@endpoint=registry/search'
+npx cucumber-js --tags '@smoke'
 ```
 
 ## Environment Variables
 
+### Connection
+
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `API_BASE_URL` | `http://localhost:8080` | Target API base URL |
+| `API_BASE_URL` | `http://127.0.0.1:3333/` | Target API base URL |
 | `DOMAIN` | `social` | Active domain (social, crvs, dr, fr, ibr) |
-| `PROFILE` | `sr-registry` | Test profile |
-| `TIER` | `core` | Test tier (core, extended, optional) |
 | `OPENAPI_SPEC_PATH` | Auto-detected | Path to OpenAPI spec |
 | `CALLBACK_SERVER_PORT` | `3336` | Callback receiver port |
+
+### Authentication
+
+The test suite does not assume any authentication mechanism by default. Configure auth using:
+
+| Variable | Description |
+|----------|-------------|
+| `DCI_AUTH_TOKEN` | Bearer token (auto-prefixed with "Bearer " if needed) |
+| `AUTH_TOKEN` | Alternative to DCI_AUTH_TOKEN |
+| `EXTRA_HEADERS_JSON` | Additional headers as JSON: `{"Authorization":"Bearer xxx","X-Tenant":"abc"}` |
+| `EXTRA_HEADERS` | Additional headers as string: `Authorization:Bearer xxx;X-Tenant:abc` |
+
+**Example:**
+```bash
+# Using bearer token
+DCI_AUTH_TOKEN=your-token-here npm run test:social
+
+# Using custom headers for gateway/tenancy
+EXTRA_HEADERS_JSON='{"Authorization":"Bearer xxx","X-Tenant-ID":"tenant1"}' npm run test:social
+```
 
 ## Adding a New Domain
 
