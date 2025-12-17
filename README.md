@@ -6,7 +6,7 @@ Unified compliance testing framework for SPDCI (Social Protection Digital Conver
 
 | Domain | Spec | Status |
 |--------|------|--------|
-| Social Registry (SR) | `social_api_v1.0.0.yaml` | **In Progress** |
+| Social Registry (SR) | `social_api_v1.0.0.yaml` | **Complete** |
 | Civil Registration (CRVS) | `crvs_api_v1.0.0.yaml` | Not Implemented |
 | Disbursement Registry (DR) | `dr_api_v1.0.0.yaml` | Not Implemented |
 | Functional Registry (FR) | `fr_api_v1.0.0.yaml` | Not Implemented |

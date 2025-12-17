@@ -1,0 +1,49 @@
+version: '3.3'
+
+networks:
+  isolation-network:
+    driver: bridge
+
+services:
+  # Local test execution waits for API to be available and create test harnes report
+  gherkin-test-report:
+    image: gherkin-test-execution
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    command: run_tests
+    environment:
+      - RESULT_NAME=${RESULT_NAME:-example_result}
+      - EXPORT_RESULTS=${EXPORT_SCRIPT:-docker/export_to_mongo.sh}
+      - NPM_REGISTRY=https://registry.npmjs.org/
+      - API_URL=${API_URL:-localhost:3333/healthcheck}
+      - PROFILE=${PROFILE-}
+      - TIER=${TIER-}
+      - CUCUMBER_TAGS=${CUCUMBER_TAGS-}
+      # Test configuration - override to test different implementations
+      # Use ${VAR-default} (not :-) so empty string is respected
+      - API_BASE_URL=${API_BASE_URL-http://127.0.0.1:3333/}
+      - SR_ENDPOINT_PREFIX=${SR_ENDPOINT_PREFIX-registry/}
+      - EXTRA_HEADERS_JSON=${EXTRA_HEADERS_JSON-}
+      - EXTRA_HEADERS=${EXTRA_HEADERS-}
+      - DCI_AUTH_TOKEN=${DCI_AUTH_TOKEN-}
+      - DCI_SENDER_ID=${DCI_SENDER_ID:-test-client}
+      - DCI_RECEIVER_ID=${DCI_RECEIVER_ID:-sr-server}
+      - DCI_SIGNATURE=${DCI_SIGNATURE:-unsigned-stub}
+      - DCI_CALLBACK_URL=${DCI_CALLBACK_URL:-http://localhost:3000/callback}
+      # Callback receiver (for sr-registry async workflow checks)
+      - CALLBACK_SERVER_ENABLED=${CALLBACK_SERVER_ENABLED-false}
+      - CALLBACK_SERVER_HOST=${CALLBACK_SERVER_HOST-127.0.0.1}
+      - CALLBACK_SERVER_LISTEN_HOST=${CALLBACK_SERVER_LISTEN_HOST-127.0.0.1}
+      - CALLBACK_SERVER_PORT=${CALLBACK_SERVER_PORT-0}
+      - CALLBACK_WAIT_MS=${CALLBACK_WAIT_MS-120000}
+      # Signature tests are tagged @signature and excluded unless explicitly enabled
+      - SIGNATURE_TESTS_ENABLED=${SIGNATURE_TESTS_ENABLED-false}
+      # OpenAPI validation path configuration
+      - OPENAPI_PATH_STRIP=${OPENAPI_PATH_STRIP-}
+    volumes:
+      - ./result/:/app/results
+    network_mode: 'host'
+
+volumes:
+  test_result:

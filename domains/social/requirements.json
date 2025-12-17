@@ -1,0 +1,545 @@
+{
+  "spec": "social_api_v1.0.0.yaml",
+  "requirements": [
+    {
+      "id": "SR-CORE-RG-ASYNC-SEARCH-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Async search accepts a spec-valid request and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-SUBSCRIBE-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "happy",
+      "description": "Async subscribe accepts a spec-valid request and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-UNSUBSCRIBE-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "happy",
+      "description": "Async unsubscribe accepts a spec-valid request and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-TXNSTATUS-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/txn/status",
+      "kind": "happy",
+      "description": "Async txn status accepts a spec-valid request and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-RG-SYNC-SEARCH-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "happy",
+      "description": "Sync search accepts a spec-valid request and returns a spec-valid SearchResponse message."
+    },
+    {
+      "id": "SR-CORE-RG-SYNC-TXNSTATUS-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/txn/status",
+      "kind": "happy",
+      "description": "Sync txn status accepts a spec-valid request and returns a spec-valid TxnStatusResponse message."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-SEARCH-CB-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "workflow",
+      "description": "Async search responds with ACK and triggers an on-search callback to header.sender_uri."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-SUBSCRIBE-CB-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "workflow",
+      "description": "Async subscribe responds with ACK and triggers an on-subscribe callback to header.sender_uri."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-UNSUBSCRIBE-CB-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "workflow",
+      "description": "Async unsubscribe responds with ACK and triggers an on-unsubscribe callback to header.sender_uri."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-TXNSTATUS-CB-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/txn/status",
+      "kind": "workflow",
+      "description": "Async txn status responds with ACK and triggers a txn/on-status callback to header.sender_uri."
+    },
+    {
+      "id": "SR-CORE-SP-ON-SEARCH-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-search",
+      "kind": "happy",
+      "description": "SPMIS on-search accepts a spec-valid SearchResponse and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-SP-ON-SUBSCRIBE-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-subscribe",
+      "kind": "happy",
+      "description": "SPMIS on-subscribe accepts a spec-valid SubscribeResponse and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-SP-ON-UNSUBSCRIBE-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-unsubscribe",
+      "kind": "happy",
+      "description": "SPMIS on-unsubscribe accepts a spec-valid UnSubscribeResponse and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-SP-TXN-ON-STATUS-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/txn/on-status",
+      "kind": "happy",
+      "description": "SPMIS txn/on-status accepts a spec-valid TxnStatusResponse and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-SP-NOTIFY-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/notify",
+      "kind": "happy",
+      "description": "SPMIS notify accepts a spec-valid NotifyEventRequest and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-SEARCH-NEG-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Async search rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-SUBSCRIBE-NEG-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "negative",
+      "description": "Async subscribe rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-UNSUBSCRIBE-NEG-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "negative",
+      "description": "Async unsubscribe rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-TXNSTATUS-NEG-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/txn/status",
+      "kind": "negative",
+      "description": "Async txn status rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-RG-SYNC-SEARCH-NEG-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "negative",
+      "description": "Sync search rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-RG-SYNC-TXNSTATUS-NEG-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/txn/status",
+      "kind": "negative",
+      "description": "Sync txn status rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-SP-ON-SEARCH-NEG-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-search",
+      "kind": "negative",
+      "description": "SPMIS on-search rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-SP-ON-SUBSCRIBE-NEG-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-subscribe",
+      "kind": "negative",
+      "description": "SPMIS on-subscribe rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-SP-ON-UNSUBSCRIBE-NEG-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-unsubscribe",
+      "kind": "negative",
+      "description": "SPMIS on-unsubscribe rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-SP-TXN-ON-STATUS-NEG-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/txn/on-status",
+      "kind": "negative",
+      "description": "SPMIS txn/on-status rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-CORE-SP-NOTIFY-NEG-01",
+      "tier": "core",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/notify",
+      "kind": "negative",
+      "description": "SPMIS notify rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "SR-SEC-AUTH-RG-ASYNC-SEARCH-01",
+      "tier": "security",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "auth",
+      "description": "Async search enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-RG-ASYNC-SUBSCRIBE-01",
+      "tier": "security",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "auth",
+      "description": "Async subscribe enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-RG-ASYNC-UNSUBSCRIBE-01",
+      "tier": "security",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "auth",
+      "description": "Async unsubscribe enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-RG-ASYNC-TXNSTATUS-01",
+      "tier": "security",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/txn/status",
+      "kind": "auth",
+      "description": "Async txn status enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-RG-SYNC-SEARCH-01",
+      "tier": "security",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "auth",
+      "description": "Sync search enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-RG-SYNC-TXNSTATUS-01",
+      "tier": "security",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/txn/status",
+      "kind": "auth",
+      "description": "Sync txn status enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-SP-ON-SEARCH-01",
+      "tier": "security",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-search",
+      "kind": "auth",
+      "description": "SPMIS on-search enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-SP-ON-SUBSCRIBE-01",
+      "tier": "security",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-subscribe",
+      "kind": "auth",
+      "description": "SPMIS on-subscribe enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-SP-ON-UNSUBSCRIBE-01",
+      "tier": "security",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/on-unsubscribe",
+      "kind": "auth",
+      "description": "SPMIS on-unsubscribe enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-SP-TXN-ON-STATUS-01",
+      "tier": "security",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/txn/on-status",
+      "kind": "auth",
+      "description": "SPMIS txn/on-status enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-AUTH-SP-NOTIFY-01",
+      "tier": "security",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/notify",
+      "kind": "auth",
+      "description": "SPMIS notify enforces bearer auth (missing token returns 401/403)."
+    },
+    {
+      "id": "SR-SEC-SIG-RG-01",
+      "tier": "security",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "signature",
+      "description": "Rejects an invalid message signature (tested on async search)."
+    },
+    {
+      "id": "SR-SEC-SIG-SP-01",
+      "tier": "security",
+      "profile": "spmis-subscriber",
+      "method": "POST",
+      "path": "/registry/notify",
+      "kind": "signature",
+      "description": "Rejects an invalid message signature (tested on notify)."
+    },
+    {
+      "id": "SR-EXTRA-RG-SYNC-SEARCH-REGRECORDS-01",
+      "tier": "extra",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "extra",
+      "description": "Optional extra checks for reg_records structure (non-normative)."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-SEARCH-EXPRESSION-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Async search accepts a spec-valid expression query and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-RG-ASYNC-SEARCH-PREDICATE-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Async search accepts a spec-valid predicate query and returns a valid Response envelope."
+    },
+    {
+      "id": "SR-CORE-RG-SYNC-SEARCH-EXPRESSION-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "happy",
+      "description": "Sync search accepts a spec-valid expression query and returns a spec-valid SearchResponse message."
+    },
+    {
+      "id": "SR-CORE-RG-SYNC-SEARCH-PREDICATE-01",
+      "tier": "core",
+      "profile": "sr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "happy",
+      "description": "Sync search accepts a spec-valid predicate query and returns a spec-valid SearchResponse message."
+    },
+    {
+      "id": "SP-CORE-CL-SEARCH-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client sends a spec-valid search request to the SR."
+    },
+    {
+      "id": "SP-CORE-CL-SEARCH-ACK-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client correctly receives and accepts ACK response from SR."
+    },
+    {
+      "id": "SP-CORE-CL-SEARCH-ERR-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Client handles ERR response from SR gracefully."
+    },
+    {
+      "id": "SP-CORE-CL-SUBSCRIBE-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "happy",
+      "description": "Client sends a spec-valid subscribe request to the SR."
+    },
+    {
+      "id": "SP-CORE-CL-UNSUBSCRIBE-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "happy",
+      "description": "Client sends a spec-valid unsubscribe request to the SR."
+    },
+    {
+      "id": "SP-CORE-CL-SYNC-SEARCH-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "happy",
+      "description": "Client sends a spec-valid sync search request to the SR."
+    },
+    {
+      "id": "SP-SEC-CL-AUTH-01",
+      "tier": "security",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "auth",
+      "description": "Client includes proper Authorization header with Bearer token."
+    },
+    {
+      "id": "SP-CORE-CL-CONTENTTYPE-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client sends correct Content-Type header (application/json)."
+    },
+    {
+      "id": "SP-CORE-CL-HEADER-VERSION-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client sends correct header version (1.0.0)."
+    },
+    {
+      "id": "SP-CORE-CL-HEADER-SENDERID-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client includes sender_id in message header."
+    },
+    {
+      "id": "SP-CORE-CL-HEADER-RECEIVERID-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client includes receiver_id in message header."
+    },
+    {
+      "id": "SP-CORE-CL-HEADER-SENDERURI-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client includes valid sender_uri for async callback delivery."
+    },
+    {
+      "id": "SP-CORE-CL-MSG-TXNID-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client includes transaction_id in message body."
+    },
+    {
+      "id": "SP-CORE-CL-QUERY-IDTYPE-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client can send idtype-value query type."
+    },
+    {
+      "id": "SP-CORE-CL-QUERY-EXPRESSION-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client can send expression query type."
+    },
+    {
+      "id": "SP-CORE-CL-QUERY-PREDICATE-01",
+      "tier": "core",
+      "profile": "spmis-client",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Client can send predicate query type."
+    }
+  ]
+}
