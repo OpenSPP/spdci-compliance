@@ -87,12 +87,14 @@ export async function startCallbackServer({ host = '127.0.0.1', port = 0 } = {})
       try {
         await assertOpenApiRequest({ path, method: 'post' }, body);
       } catch (e) {
+        const errorMsg = String(e?.message || e);
+        console.error(`[callback-server] OpenAPI validation failed for ${path}:`, errorMsg);
         json(res, 200, {
           message: {
             ack_status: 'ERR',
             timestamp: nowIso(),
             correlation_id: body?.message?.correlation_id || 'corr-openapi-invalid',
-            error: { code: 'err.request.bad', message: String(e?.message || e) },
+            error: { code: 'err.request.bad', message: errorMsg },
           },
         });
         return;
