@@ -200,7 +200,11 @@ export async function assertOpenApiRequest({ path: opPath, method, domain }, bod
 }
 
 /**
- * Validate a body against a named component schema from the OpenAPI spec
+ * Validate a body against a named component from the OpenAPI spec.
+ *
+ * Looks for the component in the following locations (in order):
+ * 1. components/schemas/{componentName} - direct schema definition
+ * 2. components/responses/{componentName} - response definition (extracts schema from content)
  */
 export async function assertOpenApiComponentResponse(componentName, body, domain) {
   const { openApi, ajv, validators } = await loadOpenApi(domain);
@@ -208,9 +212,19 @@ export async function assertOpenApiComponentResponse(componentName, body, domain
 
   let validate = validators.get(key);
   if (!validate) {
-    const schema = openApi.components?.schemas?.[componentName];
+    // First try components/schemas
+    let schema = openApi.components?.schemas?.[componentName];
+
+    // If not found, try components/responses and extract the schema
     if (!schema) {
-      throw new Error(`OpenAPI: component schema "${componentName}" not found`);
+      const response = openApi.components?.responses?.[componentName];
+      if (response) {
+        schema = response.content?.['application/json']?.schema;
+      }
+    }
+
+    if (!schema) {
+      throw new Error(`OpenAPI: component "${componentName}" not found in schemas or responses`);
     }
     validate = ajv.compile(schema);
     validators.set(key, validate);
