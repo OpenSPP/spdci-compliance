@@ -1,0 +1,158 @@
+{
+  "description": "Common SPDCI compliance requirements that apply to all domains",
+  "requirements": [
+    {
+      "id": "DCI-VAL-FMT-TS-01",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid timestamp format."
+    },
+    {
+      "id": "DCI-VAL-FMT-TS-02",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search accepts valid ISO 8601 timestamp with timezone."
+    },
+    {
+      "id": "DCI-VAL-FMT-TS-03",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "negative",
+      "description": "Subscribe rejects timestamp without timezone."
+    },
+    {
+      "id": "DCI-VAL-FMT-LOC-01",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search accepts valid ISO 639.3 locale code."
+    },
+    {
+      "id": "DCI-VAL-FMT-LOC-02",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid locale format - too short."
+    },
+    {
+      "id": "DCI-VAL-FMT-LOC-03",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid locale format - uppercase."
+    },
+    {
+      "id": "DCI-VAL-BND-TXN-01",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search accepts transaction_id at max length (99 chars)."
+    },
+    {
+      "id": "DCI-VAL-BND-TXN-02",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects transaction_id exceeding max length."
+    },
+    {
+      "id": "DCI-VAL-BND-REF-01",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search accepts reference_id at reasonable length."
+    },
+    {
+      "id": "DCI-VAL-BND-SUB-01",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "happy",
+      "description": "Unsubscribe accepts subscription_code at max length (99 chars)."
+    },
+    {
+      "id": "DCI-VAL-BND-SUB-02",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "negative",
+      "description": "Unsubscribe rejects subscription_code exceeding max length."
+    },
+    {
+      "id": "DCI-CORE-PAG-01",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search request with pagination parameters."
+    },
+    {
+      "id": "DCI-CORE-PAG-02",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "happy",
+      "description": "Sync search request with pagination."
+    },
+    {
+      "id": "DCI-CORE-PAG-03",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Search with page_number greater than 1."
+    },
+    {
+      "id": "DCI-VAL-PAG-01",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid page_size (zero)."
+    },
+    {
+      "id": "DCI-VAL-PAG-02",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects invalid page_number (zero)."
+    },
+    {
+      "id": "DCI-VAL-PAG-03",
+      "tier": "core",
+      "profile": "registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Search rejects negative page_size."
+    }
+  ]
+}

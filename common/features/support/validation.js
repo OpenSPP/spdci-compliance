@@ -1,11 +1,17 @@
 /**
- * Validation Step Definitions
+ * Common Validation Step Definitions
  *
- * Tests for SPDCI format and boundary validation requirements:
+ * Tests for SPDCI format and boundary validation requirements that apply
+ * to ALL SPDCI domains (social, crvs, dr, fr, ibr):
  * - Timestamp: ISO 8601 with timezone (format: date-time)
  * - Locale: ISO 639.3 language codes (pattern: ^[a-z]{3,3}$)
  * - String lengths: transaction_id, correlation_id (max 99), messages (max 999)
  * - Pagination: page_size, page_number
+ *
+ * Configuration (environment variables):
+ * - API_BASE_URL: Base URL of the registry under test (default: http://127.0.0.1:3333/)
+ * - DOMAIN: Domain to test (social, crvs, dr, fr, ibr) (default: social)
+ * - DCI_AUTH_TOKEN: Bearer token for authentication (optional)
  */
 
 import chai from 'chai';
@@ -14,39 +20,38 @@ const { spec } = pkg;
 import { Given, When, Then } from '@cucumber/cucumber';
 
 import {
-  localhost,
-  applyCommonHeaders,
-  getRequestPath,
-  asyncsearchEndpoint,
-  subscribeEndpoint,
-  unsubscribeEndpoint,
-  searchEndpoint,
-  createSearchRequestPayload,
-  createSubscribeRequestPayload,
-  createUnsubscribeRequestPayload,
-  getTimestamp,
   generateId,
-} from './helpers/index.js';
+  getTimestamp,
+  createHeader,
+  createEnvelope,
+} from '../../helpers/envelope.js';
 
-import { assertOpenApiRequest, assertHttpErrorResponse } from './helpers/index.js';
+import {
+  assertHttpErrorResponse,
+} from '../../helpers/openapi-validator.js';
 
 // ============================================
-// ENDPOINT MAPPING
+// CONFIGURATION
 // ============================================
 
+const baseUrl = process.env.API_BASE_URL || 'http://127.0.0.1:3333/';
+const domain = process.env.DOMAIN || 'social';
+const authToken = process.env.DCI_AUTH_TOKEN;
+
+// Domain-specific endpoint prefixes
+const endpointPrefix = process.env.ENDPOINT_PREFIX || 'registry/';
+
+// Common endpoints across all SPDCI domains
 const ENDPOINTS = {
-  'async search': asyncsearchEndpoint,
-  'async subscribe': subscribeEndpoint,
-  'async unsubscribe': unsubscribeEndpoint,
-  'sync search': searchEndpoint,
+  'async search': `${endpointPrefix}search`,
+  'async subscribe': `${endpointPrefix}subscribe`,
+  'async unsubscribe': `${endpointPrefix}unsubscribe`,
+  'sync search': `${endpointPrefix}sync/search`,
 };
 
-const PAYLOAD_BUILDERS = {
-  'async search': createSearchRequestPayload,
-  'async subscribe': createSubscribeRequestPayload,
-  'async unsubscribe': createUnsubscribeRequestPayload,
-  'sync search': createSearchRequestPayload,
-};
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
 
 function getEndpoint(name) {
   const key = String(name || '').trim().toLowerCase();
@@ -54,11 +59,75 @@ function getEndpoint(name) {
   return ENDPOINTS[key];
 }
 
-function buildPayload(name) {
-  const key = String(name || '').trim().toLowerCase();
-  const builder = PAYLOAD_BUILDERS[key];
-  if (!builder) throw new Error(`Unknown payload type: ${name}`);
-  return builder();
+function applyHeaders(request) {
+  request.withHeaders('Accept', 'application/json');
+  request.withHeaders('Content-Type', 'application/json');
+  if (authToken) {
+    const token = authToken.startsWith('Bearer ') ? authToken : `Bearer ${authToken}`;
+    request.withHeaders('Authorization', token);
+  }
+  return request;
+}
+
+/**
+ * Create a generic search request payload (works for all SPDCI domains)
+ */
+function createSearchPayload() {
+  return createEnvelope('search', {
+    transaction_id: generateId(),
+    search_request: [{
+      reference_id: `ref-${generateId()}`,
+      timestamp: getTimestamp(),
+      search_criteria: {
+        query_type: 'idtype-value',
+        query: { type: 'UIN', value: 'TEST-001' },
+      },
+    }],
+  });
+}
+
+/**
+ * Create a generic subscribe request payload
+ */
+function createSubscribePayload() {
+  return createEnvelope('subscribe', {
+    transaction_id: generateId(),
+    subscribe_request: [{
+      reference_id: `ref-${generateId()}`,
+      timestamp: getTimestamp(),
+      subscribe_criteria: {
+        reg_event_type: 'REGISTER',
+        filter: { type: 'UIN', value: 'TEST-001' },
+        notify_record_type: 'Member',
+      },
+    }],
+  });
+}
+
+/**
+ * Create a generic unsubscribe request payload
+ */
+function createUnsubscribePayload() {
+  return createEnvelope('unsubscribe', {
+    transaction_id: generateId(),
+    timestamp: getTimestamp(),
+    subscription_codes: ['sub-test-001'],
+  });
+}
+
+function buildPayload(operationType) {
+  const key = String(operationType || '').trim().toLowerCase();
+  switch (key) {
+    case 'async search':
+    case 'sync search':
+      return createSearchPayload();
+    case 'async subscribe':
+      return createSubscribePayload();
+    case 'async unsubscribe':
+      return createUnsubscribePayload();
+    default:
+      throw new Error(`Unknown payload type: ${operationType}`);
+  }
 }
 
 // ============================================
@@ -80,7 +149,7 @@ When(/^The timestamp is set to an invalid format "([^"]*)"$/, function (invalidT
 });
 
 When(/^The timestamp is set to a valid ISO 8601 format$/, function () {
-  const validTimestamp = getTimestamp(); // Returns ISO 8601 with timezone
+  const validTimestamp = getTimestamp();
   if (this.payload.message?.search_request?.[0]) {
     this.payload.message.search_request[0].timestamp = validTimestamp;
   } else if (this.payload.message?.subscribe_request?.[0]) {
@@ -110,9 +179,9 @@ When(/^The locale is set to invalid code "([^"]*)"$/, function (invalidLocale) {
 
 When(/^The format test request is sent to "([^"]+)"$/, async function (operationType) {
   const endpoint = getEndpoint(operationType);
-  const baseUrl = localhost + endpoint;
+  const url = baseUrl + endpoint;
   const request = spec();
-  applyCommonHeaders(request.post(baseUrl));
+  applyHeaders(request.post(url));
   this.response = await request.withJson(this.payload);
 });
 
@@ -120,11 +189,9 @@ Then(/^The request should be rejected due to invalid format$/, async function ()
   chai.expect(this.response, 'Expected a response').to.exist;
   const status = Number(this.response.statusCode);
 
-  // Accept either HTTP 4xx error or 200 with ACK ERR
   if (status >= 400 && status < 500) {
     await assertHttpErrorResponse(this.response.body);
   } else if (status === 200 || status === 202) {
-    // Check for ACK ERR response
     const ackStatus = this.response.body?.message?.ack_status;
     chai.expect(ackStatus, 'Expected ACK ERR for invalid format').to.equal('ERR');
   } else {
@@ -136,10 +203,8 @@ Then(/^The request should be accepted or processed$/, async function () {
   chai.expect(this.response, 'Expected a response').to.exist;
   const status = Number(this.response.statusCode);
 
-  // Accept 200, 202 with ACK, or successful processing
   if (status === 200 || status === 202) {
     const ackStatus = this.response.body?.message?.ack_status;
-    // ACK or no ack_status (direct response) is acceptable
     if (ackStatus) {
       chai.expect(['ACK', 'succ'], `Expected successful response, got ${ackStatus}`).to.include(ackStatus);
     }
@@ -189,9 +254,9 @@ When(/^The subscription_code is set to (\d+) characters$/, function (length) {
 
 When(/^The boundary test request is sent to "([^"]+)"$/, async function (operationType) {
   const endpoint = getEndpoint(operationType);
-  const baseUrl = localhost + endpoint;
+  const url = baseUrl + endpoint;
   const request = spec();
-  applyCommonHeaders(request.post(baseUrl));
+  applyHeaders(request.post(url));
   this.response = await request.withJson(this.payload);
 });
 
@@ -219,17 +284,6 @@ Given(/^A valid "([^"]+)" request payload is prepared with pagination$/, functio
   this.payload = buildPayload(operationType);
 });
 
-When(/^The pagination is set to page_size (\d+) and page_number (\d+)$/, function (pageSize, pageNumber) {
-  const pagination = {
-    page_size: Number(pageSize),
-    page_number: Number(pageNumber),
-  };
-
-  if (this.payload.message?.search_request?.[0]) {
-    this.payload.message.search_request[0].pagination = pagination;
-  }
-});
-
 When(/^The pagination is set to page_size (-?\d+) and page_number (-?\d+)$/, function (pageSize, pageNumber) {
   const pagination = {
     page_size: Number(pageSize),
@@ -242,22 +296,20 @@ When(/^The pagination is set to page_size (-?\d+) and page_number (-?\d+)$/, fun
 });
 
 When(/^The paginated search request is sent$/, async function () {
-  const baseUrl = localhost + asyncsearchEndpoint;
+  const url = baseUrl + ENDPOINTS['async search'];
   const request = spec();
-  applyCommonHeaders(request.post(baseUrl));
+  applyHeaders(request.post(url));
   this.response = await request.withJson(this.payload);
 });
 
 When(/^The paginated sync search request is sent$/, async function () {
-  const baseUrl = localhost + searchEndpoint;
+  const url = baseUrl + ENDPOINTS['sync search'];
   const request = spec();
-  applyCommonHeaders(request.post(baseUrl));
+  applyHeaders(request.post(url));
   this.response = await request.withJson(this.payload);
 });
 
 Then(/^The response should acknowledge pagination$/, function () {
-  // Pagination acknowledgment varies by implementation
-  // Just verify we got a valid response
   chai.expect(this.response, 'Expected a response').to.exist;
 });
 
