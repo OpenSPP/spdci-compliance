@@ -1,55 +1,61 @@
 openapi: 3.0.3
 info:
-  title: Interoperability APIs - Foundational/Functional registries
+  title: Interoperability APIs - Integrated Beneficiary Registry
   x-logo:
     url: ./dci-logo.png
     backgroundColor: '#FFFFFF'
     altText: Digital Convergence Initiative
   description: |-
-    The Farmer registry interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between Farmer registry and SP system.
+    The IBR(Integrated Beneficiary Registry) interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between IBR registry and SP-System.
     You can now help us improve the API whether it's by making changes to the definition itself or to the code.
     That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
 
     1. Search: The Search API provides functionality to search based on demographic, identifiers and custom query
-    2. Event subscription: The Event subscription APIs describe APIs useful to subscribe / unsubscribe events. When any event happens in farmer registry it sends event details on notify end point
-    3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
+    2. Enrollment updates: The enrollment updates API send  details of beneficiaries enrolled in programs  from SP-System
+    3. Enrolled : the enrolled API is a special type of search to return the programs a beneficiary is enrolled in
 
-    Gitbook reference link:
-    - [FR - V1.0 ](https://standards.spdci.org/standards/wip-farmers-registry)
+    Gitbook reference link[WIP]:
+    - [Integrated Beneficiary Registry - V1.0 ](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0)
 
     Code directory links:
-    - [CropTypeEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.01-croptypeenum)
-    - [CropEndUse](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.02-cropsenduse)
-    - [LandTenureEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.03-landtenureenum)
-    - [MeasurementUnitEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.04-measurementunitenum)
-    - [FarmTypeEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.05-farmtypeenum)
-    - [MachineriesEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.06-machineriesenum)
-    - [AnimalsEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.07-animalsenum)
-    - [AquaCulture](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.08-aquaculture)
-    - [AgriSupportActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.09-agrisupportactivities)
-    - [AquaSupportActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.10-aquasupportactivities)
-    - [FertiliserType](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.11-fertilisertype)
-    - [livestockSystem](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.12-livestocksystem)
-    - [EquipmentSource](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.13-equipmentsource)
-    - [IrrigationWater](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.14-irrigationwater)
-    - [CropActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.15-cropactivities)
-    - [ForestActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.16-forestactivities)
+    - [Assistance Unit](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.01-assistance_unit)
+    - [Enrollment Status](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.02-enrolment_status)
+    - [Benefit Type](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.03-benefit_type)
+    - [Institution Type](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.04-institution_type)   
+    - [Legal Status](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.05-legal_status)
+    - [Social Protection Functions](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.06-social_protection_functions)
+    - [Contribution Type](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.07-contribution_type)
+    - [Programme Type](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.08-programme_type)
 
     Data Objects:
-    - [Farmer](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.01-farmer)
-    - [FarmInfo](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.02-farminfo)
-    - [FarmingActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.03-farmingactivities)
-    - [CropDetails](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.04-cropdetails)
-    - [LiveStockDetails](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.05-livestockdetails)
-    - [Machinery](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.06-machinery)
-    - [Group](https://standards.spdci.org/standards/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.02-group) 
-    - [Member](https://standards.spdci.org/standards/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.03-member)
+    - [Beneficiary](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/data-objects/do.ibr.01-beneficiary)
+    - [Programme](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/data-objects/do.ibr.02-programme)
+    - [Benefit](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/data-objects/do.ibr.03-benefit)
+    - [Benefit Frequency](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/data-objects/do.ibr.o4-benefit-frequency) 
+    - [Group](https://standards.spdci.org/standards/v/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.02-group)
+    - [Member](https://standards.spdci.org/standards/v/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.03-member)
 
 
-    Each request is build up of three parts
+    Each request is build up of three parts 
     - signature 
     - header 
     - message
+
+    Information about each part is given below
+
+    **Signature:**
+    - The signature is used to verify the integrity of the message.
+    - The signature is a hash of the message and is encrypted using the private key of the sender.
+    - The receiver can verify the signature using the public key of the sender.
+
+    **Header:**
+    - The header contains information about various message header, refer to the header schema for more details.
+
+    **Message:**
+
+    - The message contains the actual payload of the message.
+    - Refer example section to get sample data and also read Gitbook for details data objects
+    - The receiver can decrypt the message using the private key of the "err.receiver_id.invalid"
   version: 1.0.0
   contact:
     name: DCI Social Protection
@@ -80,7 +86,7 @@ tags:
   - name: SearchStatusReasonCode
     x-displayName: SearchStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
+      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" /> 
   - name: SubscribeRequest
     x-displayName: SubscribeRequest
     description: |
@@ -92,11 +98,11 @@ tags:
   - name: SubscribeStatusReasonCode
     x-displayName: SubscribeStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
+      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />       
   - name: NotifyEventRequest
     x-displayName: NotifyEventRequest
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
+      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />       
   - name: UnSubscribeRequest
     x-displayName: UnSubscribeRequest
     description: |
@@ -108,7 +114,7 @@ tags:
   - name: UnSubscribeStatusReasonCode
     x-displayName: UnSubscribeStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />        
+      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />            
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -117,6 +123,22 @@ tags:
     x-displayName: TxnStatusResponse
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/TxnStatusResponse" />    
+  - name: EnrollmentUpdatesRequest
+    x-displayName: EnrollmentUpdatesRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/EnrollmentUpdatesRequest" />    
+  - name: EnrollmentUpdatesResponse
+    x-displayName: EnrollmentUpdatesResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/EnrollmentUpdatesResponse" />    
+  - name: EnrolledRequest
+    x-displayName: EnrolledRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/EnrolledRequest" />    
+  - name: EnrolledResponse
+    x-displayName: EnrolledResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/EnrolledResponse" />    
   - name: EncryptedMessage
     x-displayName: EncryptedMessage
     description: |
@@ -135,19 +157,27 @@ x-tagGroups:
       - NotifyEventRequest
       - UnSubscribeRequest
       - UnSubscribeResponse
+      - EnrollmentUpdatesRequest
+      - EnrollmentUpdatesResponse
+      - EnrolledRequest
+      - EnrolledResponse
       - TxnStatusRequest
       - TxnStatusResponse
       - EncryptedMessage
   - name: Status Codes
     tags:
       - SearchStatusReasonCode
-      - SubscribeStatusReasonCode
-      - UnSubscribeStatusReasonCode
 paths:
   /registry/search:
     post:
       summary: /registry/search
-      description: Search person(s) in registry using identifier or custom attributes
+      description: |-
+        The async search api will accept request and will send response to on-search endpoint. The IBR will implement /registry/search endpoint and the SP-System shall implement /registry/on-search to receive data from IBR.
+        The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The IBR will validate the request and will send response to on-search endpoint. 
+        Information for each field is given below.
+          - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+          - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+          - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
       operationId: post_reg_search
       tags:
         - Async
@@ -200,7 +230,10 @@ paths:
   /registry/on-search:
     post:
       summary: /registry/on-search
-      description: Search results through callback
+      description: |-
+        The /registry/on-search end point tobe implemented by SP-System to receive search results from IBR. 
+        The IBR will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in ibr/v1/Person.jsonld. 
+        Refer example json at github [link](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/1.-crvs/data/data-objects/person#example)
       operationId: post_reg_on-search
       tags:
         - Async
@@ -236,57 +269,6 @@ paths:
                     action:
                       enum:
                         - on-search
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/notify:
-    post:
-      summary: /registry/notify
-      description: Registry to notify an event to subscribers
-      operationId: post_reg_notify
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - notify
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -353,58 +335,109 @@ paths:
         - Authorization: []
       deprecated: false
   /registry/on-subscribe:
-    post: null
-    summary: /registry/on-subscribe
-    description: Subscribe results through callback
-    operationId: post_reg_on-subscribe
-    tags:
-      - Async
-    requestBody:
-      description: ''
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              signature:
-                $ref: '#/components/schemas/MsgSignature'
-              header:
-                allOf:
-                  - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                  - properties:
-                      action:
-                        enum:
-                          - on-subscribe
-              message:
-                type: object
-                description: Subscription information
-                oneOf:
-                  - $ref: '#/components/schemas/SubscribeResponse'
-                  - $ref: '#/components/schemas/EncryptedMessage'
-            required:
-              - header
-              - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: '#/components/schemas/FileInfo'
-              - properties:
-                  action:
-                    enum:
-                      - on-subscribe
-    responses:
-      '401':
-        $ref: '#/components/responses/HttpErrorResponse'
-      '403':
-        $ref: '#/components/responses/HttpErrorResponse'
-      '500':
-        $ref: '#/components/responses/HttpErrorResponse'
-      default:
-        $ref: '#/components/responses/Response'
-    security:
-      - Authorization: []
-    deprecated: false
+    post:
+      summary: /registry/on-subscribe
+      description: Subscribe results through callback
+      operationId: post_reg_on-subscribe
+      tags:
+        - Async
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - on-subscribe
+                message:
+                  type: object
+                  description: Subscription information
+                  oneOf:
+                    - $ref: '#/components/schemas/SubscribeResponse'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - on-subscribe
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/responses/Response'
+      security:
+        - Authorization: []
+      deprecated: false
+  /registry/notify:
+    post:
+      summary: /registry/notify
+      description: Registry to notify an event to subscribers
+      operationId: post_reg_notify
+      tags:
+        - Async
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/NotifyEventRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - notify
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/responses/Response'
+      security:
+        - Authorization: []
+      deprecated: false
   /registry/unsubscribe:
     post:
       summary: /registry/unsubscribe
@@ -513,7 +546,7 @@ paths:
   /registry/txn/status:
     post:
       summary: /registry/txn/status
-      description: The /registry/txn/status will be implemented by FR. This will check status of reach request using transaction_id and/or reference_id(s).
+      description: The /registry/txn/status will be implemented by IBR. This will check status of reach request using transaction_id and/or reference_id(s).
       operationId: post_reg_txnstatus
       tags:
         - Async
@@ -685,6 +718,114 @@ paths:
       security:
         - Authorization: []
       deprecated: false
+  /registry/sync/enrollment/updates:
+    post:
+      summary: /registry/sync/enrollment/updates
+      description: |-
+        The /registry/enrollments/updates endpoint will be implemented by IBR to receive details of beneficiaries enrolled in programs from SP-System.
+        The receipt_type and beneficiaries will be required to make request. 
+        Three receipt types are supported as of now, they are 
+          1) Enrolled beneficiaries 
+          2) Updated beneficiaries details
+        The beneficiaries will contain list of beneficiaries information for which enrollments updated to be generated.
+      operationId: post_reg_enrollments_updates
+      tags:
+        - Sync
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/EnrollmentUpdatesRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - notify
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/schemas/EnrollmentUpdatesResponse'
+      security:
+        - Authorization: []
+      deprecated: false
+  /registry/sync/enrolled:
+    post:
+      summary: /registry/sync/enrolled
+      description: search programmes person is enrolled in
+      operationId: post_reg_enrolled
+      tags:
+        - Sync
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - search
+                message:
+                  type: object
+                  description: The search data using which registry search to be performed
+                  oneOf:
+                    - $ref: '#/components/schemas/EnrolledRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - search
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/schemas/EnrolledResponse'
+      deprecated: false
   /registry/sync/txn/status:
     post:
       summary: /registry/sync/txn/status
@@ -778,23 +919,85 @@ components:
                   reg_event_type:
                     type: string
                     description: |
-                      The SP-System receives data from FR, usually the FR sends registration and updates events to SP-System
+                      The IBR receive data from SP system , it has to differenciate of details based on event type, Usually SP system sends enrollement and enrollement status change events to IBR
 
-                      1 : Register 
+                      1 : enrollement <br>
+                      2 : enrollement_status_change <br>
+                      3 : Deregister <br>  
                     enum:
-                      - REGISTER
-                    example: 'spdci-common:RegistryEventType:REGISTER'
+                      - enrollement
+                      - enrollement_status_change
+                    example: 'spdci-common:RegistryEventType:enrollement'
                   reg_record_type:
                     $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_record_type'
                   reg_records:
                     type: object
                     description: |
-                      The "group" object contains fields expected in response of search
-                      @context: https://schema.spdci.org/extensions/fr/v1/FRPerson.jsonld <br>
-                      @type: "FRPerson" <br>
+                      The "Member" object contains fields expected in response of search
+                      @context: https://schema.spdci.org/extensions/ibr/v1/Member.jsonld <br>
+                      @type: "Member" <br>
                       @container: "@set" <br> 
                     example:
-                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records/items'
+                      type: object
+                      description: |
+                        1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                        3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+
+                        @context: https://schema.spdci.org/core/v1/data/Member.jsonld <br>
+                        @type: "@context" <br>
+                      example:
+                        '@context':
+                          spdci: 'https://schema.spdci.org/core/v1/data'
+                          rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                          xsd: 'http://www.w3.org/2001/XMLSchema#'
+                          owl: 'http://www.w3.org/2002/07/owl#'
+                          common: 'https://schema.spdci.org/common/v1/'
+                        '@id': 'https://example.org/sr_person/847951632'
+                        '@type': 'spdci:member'
+                        member_identifier:
+                          - '@type': Identifier
+                            identifier_type: UIN
+                            identifier_value: '42343545654'
+                        demographic_info:
+                          '@type': SRPerson
+                          identifier:
+                            - '@type': Identifier
+                              identifier_type: NationalID
+                              identifier_value: '9876543210'
+                          name:
+                            '@type': Name
+                            surname: Smith
+                            given_name: Alice
+                            prefix: Ms.
+                            suffix: ''
+                          sex: female
+                          birth_date: '1985-05-20'
+                        related_person:
+                          - '@type': RelatedPerson
+                            relationship_type: spouse
+                            related_member:
+                              '@type': Member
+                              '@id': 'https://example.org/member/123456789'
+                              member_identifier: M123456789
+                          - '@type': RelatedPerson
+                            relationship_type: child
+                            related_member:
+                              '@type': Member
+                              '@id': 'https://example.org/member/987654322'
+                              'spdci:member_identifier': M987654322
+                        is_disabled: false
+                        marital_status: married
+                        employment_status: employed
+                        occupation: teacher
+                        income_level: middle
+                        language_code:
+                          - en
+                          - es
+                        education_level: bachelor
+                        additional_attributes:
+                          - extra_work: volunteer
+                        registration_date: '2022-01-10T08:00:00Z'
+                        last_updated: '2023-06-15T10:00:00Z'
                 required:
                   - reg_record_type
                   - reg_records
@@ -807,11 +1010,67 @@ components:
       required:
         - transaction_id
         - notify_event
+    EnrollmentUpdatesRequest:
+      type: object
+      description: Registry to notify a event to subscrbiers
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        enrolled_updates:
+          type: object
+          description: |
+            Receipt information contains receipt type and list of beneficiaries
+            1) Enrolled beneficiaries - It return the beneficiaries enrolled  into system.
+            2) Updated beneficiaries - If return updated status
+          properties:
+            beneficiaries:
+              type: array
+              description: |
+                1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                2. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+                @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
+                @type: "@context" <br>   
+              items:
+                $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records/items'
+      required:
+        - transaction_id
+        - enrolled_updates
+    EnrollmentUpdatesResponse:
+      type: object
+      description: Response to subscribe request.
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        correlation_id:
+          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
+        enrolled_response:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_id:
+                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
+              timestamp:
+                $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
+              status:
+                $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
+              status_reason_message:
+                description: Status reason code message. Helps actionanble messaging for systems/end users
+                type: string
+                maxLength: 999
+            required:
+              - reference_id
+              - timestamp
+              - status
+      required:
+        - transaction_id
+        - correlation_id
+        - enrolled_response
     SearchRequest:
       type: object
       description: |
         1. Functional registry specific extension to search.
-        2. Additional checks using conditioanl expressions is possible.
+        2. Additional checks using conditional expressions is possible.
         3. Allows Country/Registry specific implementation extensions using key/value pairs.
       properties:
         transaction_id:
@@ -825,7 +1084,7 @@ components:
         search_request:
           type: array
           description: |
-            1. Batch requests enabel multiple individual requests with respective consent/authorize codes
+            1. Batch requests enable multiple individual requests with respective consent/authorize codes
           items:
             type: object
             properties:
@@ -844,11 +1103,22 @@ components:
                   reg_record_type:
                     $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_record_type'
                   query_type:
-                    $ref: '#/components/schemas/SubscriptionInfo/properties/filter_type'
+                    type: string
+                    description: |
+                      1. Query format allow multiple ways to search registry
+                      2. Templatized query expressions with placeholder for conditional values
+                    enum:
+                      - idtype-value
+                      - expression
+                      - predicate
+                    example: expression
                   query:
                     description: |
                       1. Implementing systems can define schemas.
                       2. Based on context, pre defined named queries can also help as part of ExpTemplate construct.
+                      3. ExpressionWithConditionList is simple generic search query construct to solve for majority of search conditons. few examples: <br>
+                        - search or subscribe to update events; e.g any updates in postal_code 12345 between 1/jan/2020 and 31/dec/2020
+                        - search or subscribe to birth, death events; e.g any new birth in postal_code 12345 after 1/jan/2023
                     anyOf:
                       - type: object
                         description: Identifier type and value object
@@ -861,12 +1131,12 @@ components:
 
                               **Notes:**
                                 1. Query types that helps decode query expressions
-                                2. Sample query type enums: "expression", "predicate", "idtype-value" , "graphql"
+                                2. Sample query type enums: "graphql", "idtype-value", "expression"
                             example: 'ns:org:QueryType:expression'
                           value:
                             type: object
                             description: |
-                              @context: https://schema.spdci.org/v1/api-schemas/QueryExpression.jsonld <br>
+                              @context: https://schema.spdci.org/common/v1/api-schemas/QueryExpression.jsonld <br>
                               @type: "QueryExpression" <br>
 
                               **Notes:**
@@ -874,12 +1144,15 @@ components:
                                 2. Query expression as a template with placeholder to pass conditional search parameters
                             example:
                               expression:
+                                collection: Group
                                 query:
                                   $and:
-                                    - farm_info.location.geo.latitude:
-                                        $eq: 9.56
-                                    - farm_info.location.geo.longitude:
-                                        $eq: 100.0245
+                                    - poverty_score:
+                                        $lt: 5
+                                    - location:
+                                        $eq: central_region
+                                    - group_size:
+                                        $lt: 5
                       - $ref: '#/components/schemas/SubscriptionInfo/properties/filter/anyOf/1'
                       - $ref: '#/components/schemas/SubscriptionInfo/properties/filter/anyOf/2'
                   sort:
@@ -1012,149 +1285,92 @@ components:
                     type: string
                     description: |
                       @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
-                      @type: "@context" <br>
+                      @type: "RegistryType" <br>
 
                       **Notes:**
                         1. Registry type values defined as per implementation context.
                         2. Usually a list of **enum** values of all possible queryable functional registries 
-                        3. example: "ns:org:RegistryType:FR"
-                    example: 'ns:org:RegistryType:FR'
+                        3. example: "ns:org:RegistryType:IBR"
+                    example: 'ns:org:RegistryType:IBR'
                   reg_record_type:
                     type: string
                     description: |
-                      @context: https://schema.spdci.org/common/v1/api-schemas/RegistryType.jsonld <br>
+                      @context: https://schema.spdci.org/extensions/ibr/v1/Member.jsonld <br>
                       @type: "RegistryRecordType" <br>
 
                       **Notes:**
                         1. Registry record type values defined as per implementation context.
                         2. Usually a list of **enum** values of all possible queryable result sets 
                         3. Referenced in search_request and notify events
-                        4. example: "spdci-extensions-dci:Farmer" 
-                    example: 'spdci-extensions-dci:Farmer'
+                        4. example: "Member" 
+                    example: Member
                   reg_records:
-                    type: array
                     description: |
-                      The "Entity" object contains fields expected in response of search
-                      @context: https://schema.spdci.org/extensions/fr/v1/FRPerson.jsonld <br>
-                      @type: "FRPerson" <br>
+                      The "Beneficiary" object contains fields expected in response of search
+                      @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
+                      @type: "@context" <br>
                       @container: "@set" <br>
+                    type: array
                     items:
                       type: object
                       description: |
                         1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                        3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
 
-
-                        @context: https://schema.spdci.org/extensions/gr/v1/FRPerspn.jsonld <br>
+                        @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
                         @type: "@context" <br>
                       example:
-                        famer_personal_details:
-                          member_identifier:
-                            identifier_type: NationalID
-                            identifier_value: M123456
+                        '@context':
+                          '@vocab': 'https://schema.spdci.org/extensions/ibr/v1'
+                          xsd: 'http://www.w3.org/2001/XMLSchema#'
+                          schema: 'http://schema.org/'
+                          rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                          owl: 'http://www.w3.org/2002/07/owl#'
+                        '@id': Beneficiary
+                        '@type': Beneficiary
+                        assistance_unit: '1'
+                        member:
+                          member_identifier: HS0205202401
                           demographic_info:
-                            identifier:
-                              identifier_type: NationalID
-                              identifier_value: M123456
-                            name:
-                              first_name: John
-                              last_name: Doe
-                            date_of_birth: '1990-05-15T00:00:00Z'
-                            gender: Male
-                        family_details:
-                          group_identifier:
-                            - identifier_type: NationalID
-                              identifier_value: G9876543210
-                          group_type: family
-                          poverty_score: 45.2
-                          poverty_score_type: income-based
-                          group_head_info:
-                            member_identifier:
-                              - identifier_type: NationalID
-                                identifier_value: M123456
-                            demographic_info:
-                              identifier:
-                                identifier_type: NationalID
-                                identifier_value: M123456
+                            person:
+                              identifier_type: NID
+                              identifier_value: '0205202401'
                               name:
-                                first_name: John
-                                last_name: Doe
-                              date_of_birth: '1990-05-15T00:00:00Z'
-                              gender: Male
-                            is_disabled: false
-                            marital_status: married
-                            registration_date: '1990-06-10T08:00:00Z'
-                          group_size: 2
-                          member_list:
-                            - member_identifier:
-                                - '@type': Identifier
-                                  identifier_type: NationalID
-                                  identifier_value: M9876543210
-                              demographic_info:
-                                'spdci:identifier':
-                                  - '@type': Identifier
-                                    identifier_type: NationalID
-                                    identifier_value: '1234567890'
-                                name:
-                                  '@type': Name
-                                  surname: Doe
-                                  given_name: Jane
-                                  prefix: Mr.
-                                  suffix: ''
-                                sex: female
-                                birth_date: '1982-03-15T00:00:00Z'
-                                registration_date: '2022-01-10T08:00:00Z'
-                              is_disabled: false
-                              marital_status: married
-                              registration_date: '2022-01-10T08:00:00Z'
-                          registration_date: '2022-01-10T08:00:00Z'
-                          last_updated: '2023-06-15T10:00:00Z'
-                        farm_details:
-                          - place:
-                              name: Koh Samui
-                              geo:
-                                '@type': 'spdci:GeoLocation'
-                                latitude: 9.5604
-                                longitude: 100.0245
-                            farm_type: Small subsistence-oriented farms
-                            farming_activities:
-                              - crop_production:
-                                  - activity_group: perennial crops
-                                    crop_type: Fruit and nuts
-                                    variety: local
-                                    season: winter
-                                    end_use:
-                                      - Food for human consumption
-                                    irrigation: true
-                                    irrigation_water:
-                                      - Mixed surface water and groundwater
-                                    fertilizer_type:
-                                      - Organic fertilizers
-                                    registration_date: '2023-01-10T00:00:00Z'
-                                    last_updated: '2023-09-20T00:00:00Z'
-                                animal_production:
-                                  - type: Sheep and goats
-                                    count: 10
-                                    livestock_system: Mixed system
-                                    registration_date: '2023-01-10T00:00:00Z'
-                                    last_updated: '2023-09-20T00:00:00Z'
-                                mixed_farming: true
-                                agri_support_activities:
-                                  - Support activities for crop production
-                                aqua_support_activities: Support activities for fishing and aquaculture
-                                aqua_culture:
-                                  - Marine aquafarming
-                                registration_date: '2023-01-10T00:00:00Z'
-                                last_updated: '2023-09-20T00:00:00Z'
-                        machineries_details:
-                          - type: Machine powered equipment
-                            count: 2
-                            equipement_source: Provided by a cooperative
-                            registration_date: '2022-01-10T08:00:00Z'
-                            last_updated: '2023-06-15T10:00:00Z'
-                        registration_date: '2023-01-10T00:00:00Z'
-                        last_updated: '2023-09-20T00:00:00Z'
+                                first_name: Test
+                                second_name: Test2
+                                surname: Test3
+                              sex: F
+                              birth_date: 02.05.2004
+                              death_date: ''
+                              address: ''
+                              phone_number: ''
+                              email: ''
+                          relationship_head: ''
+                          related_person: ''
+                          is_disabled: '0'
+                          disability_info: ''
+                          marital_status: Single
+                          employment_status: employed
+                          occupation: Caregiver
+                          income_level: ''
+                          language_code: Eng
+                          education_level: Highschool
+                          additional_attributes: ''
+                          registration_date: 02.05.2024
+                          last_update: ''
+                          programme_identifier:
+                            programme:
+                              programme_identifier: DCI001
+                              programme_name: Test Programme
+                            enrolment_date: 02.02.2024
+                            enrolment_status: Active
+                            status_change_date: ''
+                            benefits:
+                              benefit_type: Cash
+                              benefit_date: 02.05.2024
+                              benefit_value: USD 50
+                              benefit_frequency: Monthly
                 required:
-                  - reg_record_type
                   - reg_records
               pagination:
                 description: 'Pagination definition, count starts with 1'
@@ -1615,14 +1831,13 @@ components:
               enum:
                 - search
                 - subscribe
-                - unsubscribe
+                - receipt
             attribute_type:
               type: string
               enum:
                 - transaction_id
                 - reference_id_list
                 - correlation_id
-                - subscription_code_list
             attribute_value:
               anyOf:
                 - $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
@@ -1630,7 +1845,6 @@ components:
                   items:
                     $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
                 - $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-                - $ref: '#/components/schemas/SubscriptionCodeList'
             locale:
               $ref: '#/components/schemas/SubscriptionInfo/properties/locale'
           required:
@@ -1658,132 +1872,22 @@ components:
               enum:
                 - search
                 - subscribe
-                - unsubscribe
+                - receipt
             txn_status:
               oneOf:
-                - $ref: '#/components/schemas/TxnStatusResponse/properties/txnstatus_response/example'
-                - $ref: '#/components/schemas/SubscribeResponse'
-                - $ref: '#/components/schemas/UnSubscribeResponse'
-          example:
-            type: object
-            description: Response to search request. Multiple repsonses for each page can be pushed to the caller as an implementation!
-            properties:
-              transaction_id:
-                $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-              correlation_id:
-                $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-              search_response:
-                type: array
-                items:
-                  type: object
+                - $ref: '#/components/schemas/SearchResponse'
+                - type: object
+                  description: Registry to notify a event to subscrbiers
                   properties:
-                    reference_id:
-                      $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
-                    timestamp:
-                      $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
-                    status:
-                      $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
-                    status_reason_code:
-                      $ref: '#/components/schemas/SearchStatusReasonCode'
-                    status_reason_message:
-                      description: Status reason code message. Helps actionanble messaging for systems/end users
-                      type: string
-                      maxLength: 999
-                    data:
-                      type: object
-                      description: |
-                        Search result record as an outcome of search/subscribe action
-                      properties:
-                        version:
-                          type: string
-                          default: 1.0.0
-                        reg_type:
-                          $ref: '#/components/schemas/SubscriptionInfo/properties/reg_type'
-                        reg_record_type:
-                          $ref: '#/components/schemas/SubscriptionInfo/properties/notify_record_type'
-                        reg_records:
-                          type: object
-                          description: |
-                            The "person" object contains fields expected in response of search
-                            @context: https://schema.spdci.org/core/v1/data/Member.jsonld <br>
-                            @type: "Person" <br>
-                            @container: "@set" <br> 
-                          example:
-                            type: object
-                            description: |
-                              1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-                              3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-
-                              @context: https://schema.spdci.org/core/v1/data/Member.jsonld <br>
-                              @type: "@context" <br>
-                            example:
-                              '@context':
-                                spdci: 'https://schema.spdci.org/core/v1/data'
-                                rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
-                                xsd: 'http://www.w3.org/2001/XMLSchema#'
-                                owl: 'http://www.w3.org/2002/07/owl#'
-                                common: 'https://schema.spdci.org/common/v1/'
-                              '@id': 'https://example.org/sr_person/847951632'
-                              '@type': 'spdci:member'
-                              member_identifier:
-                                - '@type': Identifier
-                                  identifier_type: UIN
-                                  identifier_value: '42343545654'
-                              demographic_info:
-                                '@type': SRPerson
-                                identifier:
-                                  - '@type': Identifier
-                                    identifier_type: NationalID
-                                    identifier_value: '9876543210'
-                                name:
-                                  '@type': Name
-                                  surname: Smith
-                                  given_name: Alice
-                                  prefix: Ms.
-                                  suffix: ''
-                                sex: female
-                                birth_date: '1985-05-20'
-                              related_person:
-                                - '@type': RelatedPerson
-                                  relationship_type: spouse
-                                  related_member:
-                                    '@type': Member
-                                    '@id': 'https://example.org/member/123456789'
-                                    member_identifier: M123456789
-                                - '@type': RelatedPerson
-                                  relationship_type: child
-                                  related_member:
-                                    '@type': Member
-                                    '@id': 'https://example.org/member/987654322'
-                                    'spdci:member_identifier': M987654322
-                              is_disabled: false
-                              marital_status: married
-                              employment_status: employed
-                              occupation: teacher
-                              income_level: middle
-                              language_code:
-                                - en
-                                - es
-                              education_level: bachelor
-                              additional_attributes:
-                                - extra_work: volunteer
-                              registration_date: '2022-01-10T08:00:00Z'
-                              last_updated: '2023-06-15T10:00:00Z'
-                      required:
-                        - reg_record_type
-                        - reg_records
-                    pagination:
-                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/pagination'
-                    locale:
-                      $ref: '#/components/schemas/SubscriptionInfo/properties/locale'
+                    transaction_id:
+                      $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+                    receipt_information:
+                      $ref: '#/components/schemas/EnrollmentUpdatesRequest/properties/enrolled_updates'
                   required:
-                    - reference_id
-                    - timestamp
-                    - status
-            required:
-              - transaction_id
-              - correlation_id
-              - search_response
+                    - transaction_id
+                    - receipt_information
+          example:
+            $ref: '#/components/schemas/SearchResponse'
           required:
             - txn_type
             - txn_status
@@ -1791,6 +1895,77 @@ components:
         - transaction_id
         - correlation_id
         - txnstatus_response
+    EnrolledRequest:
+      type: object
+      description: Registry to notify a event to subscribers
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        enrolled_criteria:
+          type: object
+          description: |
+            Enrolled query
+          properties:
+            query_type:
+              $ref: '#/components/schemas/SubscriptionInfo/properties/filter_type'
+              description: ''
+            response_entity:
+              example: Beneficiary
+              type: string
+              description: |
+                Define the type of response to have when executing the search
+              enum:
+                - Group
+                - Member
+            query:
+              type: object
+              description: Query expression for the enrolled query
+              example:
+                person_identifier:
+                  eq: ABC451123
+                programme_identifier.program.programme_identifier:
+                  eq: DCI001
+      required:
+        - transaction_id
+        - enrolled_criteria
+    EnrolledResponse:
+      type: object
+      description: Response to verify enrollment status request.
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        correlation_id:
+          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
+        enrolled_response:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_id:
+                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
+              timestamp:
+                $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
+              status:
+                $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
+              status_reason_message:
+                description: Status reason code message. Helps actionable messaging for systems/end users
+                type: string
+                maxLength: 999
+              enrolled_status:
+                description: Indicates whether the individual is registered as beneficiary ('yes') or not ('no').
+                type: string
+                enum:
+                  - 'yes'
+                  - 'no'
+            required:
+              - reference_id
+              - timestamp
+              - status
+              - enrolled_status
+      required:
+        - transaction_id
+        - correlation_id
+        - enrolled_response
     EncryptedMessage:
       description: Encrypted payload
       type: object
@@ -1901,17 +2076,7 @@ components:
         status:
           $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
         status_reason_code:
-          type: string
-          description: Message header related common status reason codes
-          enum:
-            - rjct.version.invalid
-            - rjct.message_id.duplicate
-            - rjct.message_ts.invalid
-            - rjct.action.invalid
-            - rjct.action.not_supported
-            - rjct.total_count.invalid
-            - rjct.total_count.limit_exceeded
-            - rjct.errors.too_many
+          $ref: '#/components/schemas/MsgHeaderStatusReasonCode'
         status_reason_message:
           description: 'Status reascon code message, if any, Helps actionable messaging for system/end users'
           type: string
@@ -1921,7 +2086,7 @@ components:
           type: integer
           example: 21800
         completed_count:
-          description: No of requests in completed state. Complete includes success and error requests due to funcational errors
+          description: No of requests in complteed state. Complete includes success and error requests due to funcational errors
           type: integer
           example: 50
         sender_id:
@@ -1929,7 +2094,7 @@ components:
             1. sender_id registered with the receiving system or gateway. 
             2. Used for authorization, encryption, digital sign verfication, etc., 
           type: string
-          example: fr.example.org
+          example: ibr.example.org
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.'
           type: string
@@ -1957,7 +2122,7 @@ components:
           description: |
             1. Unique message id to communicate between sender and receiver systems to realiable deliver the message over any transport layer i.e https, pub/sub, sftp etc.,
             2. The scope of message_id end with successful ack of the message by the receiver.
-            3. To realy the message between hops, underlying relying parties may consider to store and forward the message with integirty, ie Signature intact.
+            3. To relay the message between hops, underlying relying parties may consider to store and forward the message with integirty, ie Signature intact.
           type: string
           example: '123'
         message_ts:
@@ -1982,7 +2147,7 @@ components:
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.'
           type: string
-          example: farmer.example.org
+          example: ibr.example.org
         total_count:
           description: Total no of requests present in the message request
           type: integer
@@ -2007,6 +2172,18 @@ components:
         - action
         - sender_id
         - total_count
+    MsgHeaderStatusReasonCode:
+      type: string
+      description: Message header related common status reason codes
+      enum:
+        - rjct.version.invalid
+        - rjct.message_id.duplicate
+        - rjct.message_ts.invalid
+        - rjct.action.invalid
+        - rjct.action.not_supported
+        - rjct.total_count.invalid
+        - rjct.total_count.limit_exceeded
+        - rjct.errors.too_many
     MsgSignature:
       type: string
       description: 'Signature of {header}+{message} body verified using sender''s signing public key'
@@ -2060,7 +2237,7 @@ components:
                   - ack_status
                   - timestamp
                   - correlation_id
-  securitySchemes:
+  securitySchemas:
     Authorization:
       type: http
       scheme: bearer

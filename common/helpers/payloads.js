@@ -4,32 +4,10 @@
  * Creates domain-agnostic payloads using domain configuration.
  * All payload factories accept a domain parameter and use domain-specific
  * test data from the domain configuration registry.
- *
- * SIGNATURE HANDLING
- * ==================
- * All envelopes include a `signature` field. The value is determined by:
- *
- * 1. DCI_SIGNATURE environment variable (if set)
- * 2. Default stub value 'unsigned-stub' (for structure testing)
- *
- * For full compliance testing with signature validation:
- * - Set DCI_SIGNATURE to a valid cryptographic signature
- * - Use withInvalidSignature() from signature.js for negative testing
- * - See common/helpers/signature.js for detailed documentation
- *
- * Example:
- * ```bash
- * # Structure testing (default)
- * npm run test:social
- *
- * # With real signature
- * DCI_SIGNATURE="eyJhbGciOiJSUzI1NiJ9..." npm run test:social
- * ```
  */
 
 import { generateId, getTimestamp } from './envelope.js';
 import { getDomainConfig, getDefaultSenderUri, getReceiverId } from './domain-config.js';
-import { getSignature } from './signature.js';
 
 // ============================================
 // HEADER BUILDERS
@@ -98,11 +76,6 @@ export function createCallbackHeader(action, options = {}) {
 
 /**
  * Create a DCI envelope with signature
- *
- * The signature value comes from getSignature() which respects:
- * - DCI_SIGNATURE environment variable (for real signatures)
- * - Default stub 'unsigned-stub' (for structure testing)
- *
  * @param {string} action - The action
  * @param {object} message - The message payload
  * @param {object} options - Options including domain, totalCount
@@ -110,7 +83,7 @@ export function createCallbackHeader(action, options = {}) {
  */
 export function createEnvelope(action, message, options = {}) {
   return {
-    signature: getSignature(),
+    signature: process.env.DCI_SIGNATURE || 'unsigned-stub',
     header: createHeader(action, options),
     message: message,
   };
@@ -118,11 +91,6 @@ export function createEnvelope(action, message, options = {}) {
 
 /**
  * Create a DCI callback envelope with signature
- *
- * The signature value comes from getSignature() which respects:
- * - DCI_SIGNATURE environment variable (for real signatures)
- * - Default stub 'unsigned-stub' (for structure testing)
- *
  * @param {string} action - The action
  * @param {object} message - The message payload
  * @param {object} options - Options including status, totalCount, completedCount, domain
@@ -130,7 +98,7 @@ export function createEnvelope(action, message, options = {}) {
  */
 export function createCallbackEnvelope(action, message, options = {}) {
   return {
-    signature: getSignature(),
+    signature: process.env.DCI_SIGNATURE || 'unsigned-stub',
     header: createCallbackHeader(action, options),
     message: message,
   };

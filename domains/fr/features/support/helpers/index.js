@@ -40,17 +40,5 @@ export {
   waitForCallbackAction,
 } from '../../../../../common/helpers/callback-server.js';
 
-// Signature utilities
-export {
-  signatureConfig,
-  INVALID_SIGNATURES,
-  SIGNATURE_ERROR_CODES,
-  getSignature,
-  isSignatureValidationEnabled,
-  withInvalidSignature,
-  withSignature,
-  validateSignatureRejection,
-} from '../../../../../common/helpers/signature.js';
-
 // Re-export domain-specific helpers (endpoints, payloads, schemas)
 export * from './helpers.js';

@@ -1,9 +1,3 @@
-/**
- * Signature Validation Step Definitions for Farmer Registry
- *
- * Tests that FR implementations properly reject invalid message signatures.
- * See common/helpers/signature.js for detailed documentation on signature handling.
- */
 import chai from 'chai';
 import pkg from 'pactum';
 const { spec } = pkg;
@@ -17,9 +11,6 @@ import {
   asyncsearchEndpoint,
   searchEndpoint,
   createSearchRequestPayload,
-  withInvalidSignature,
-  validateSignatureRejection,
-  SIGNATURE_ERROR_CODES,
 } from './helpers/index.js';
 
 import { assertOpenApiRequest, assertOpenApiComponentResponse, assertHttpErrorResponse } from './helpers/index.js';
@@ -59,8 +50,9 @@ Given(/^A valid '([^']+)' request payload is prepared for signature testing$/, a
 });
 
 When(/^The request signature is set to an invalid value$/, async function () {
-  // Use the common helper to create an invalid signature variant
-  this.payload = withInvalidSignature(this.payload, 'malformed');
+  const payload = typeof structuredClone === 'function' ? structuredClone(this.payload) : JSON.parse(JSON.stringify(this.payload));
+  payload.signature = 'invalid-signature';
+  this.payload = payload;
 });
 
 When(/^The '([^']+)' request is sent with the invalid signature$/, async function (operationName) {
@@ -77,36 +69,34 @@ When(/^The '([^']+)' request is sent with the invalid signature$/, async functio
 Then(/^The request should be rejected due to invalid signature$/, async function () {
   chai.expect(this.response, 'Expected a response').to.exist;
 
+  const status = Number(this.response.statusCode);
   const requestPath = getRequestPath(this.endpoint);
 
-  // Use the common helper to validate the signature rejection response
-  const result = validateSignatureRejection(this.response);
-
-  if (!result.valid) {
-    // Fall back to detailed validation for better error messages
-    const status = Number(this.response.statusCode);
-    if (status >= 400 && status < 500) {
-      await assertHttpErrorResponse(this.response.body);
-    } else if (status === 200) {
-      await assertOpenApiComponentResponse('Response', this.response.body);
-      chai.expect(this.response.body?.message?.ack_status, 'Expected ACK ERR for invalid signature').to.equal('ERR');
-      const errorCode = this.response.body?.message?.error?.code;
-      chai.expect(
-        SIGNATURE_ERROR_CODES,
-        `Expected signature error code, got "${errorCode}"`
-      ).to.include(errorCode);
-    } else {
-      throw new Error(result.reason || `Expected HTTP 4xx or HTTP 200 with ACK ERR, got ${status}`);
-    }
+  let variant;
+  let errorCode;
+  if (status >= 400 && status < 500) {
+    await assertHttpErrorResponse(this.response.body);
+    variant = 'http_4xx';
+  } else if (status === 200) {
+    await assertOpenApiComponentResponse('Response', this.response.body);
+    chai.expect(this.response.body?.message?.ack_status, 'Expected ACK ERR for invalid signature').to.equal('ERR');
+    errorCode = this.response.body?.message?.error?.code;
+    chai.expect(
+      ['err.signature.missing', 'err.signature.invalid'],
+      `Expected signature error code, got "${errorCode}"`
+    ).to.include(errorCode);
+    variant = 'ack_err';
+  } else {
+    throw new Error(`Expected HTTP 4xx or HTTP 200 with ACK ERR, got ${status}`);
   }
 
   const record = {
     kind: 'interop-variant',
-    variant: result.variant,
-    status: result.statusCode,
+    variant,
+    status,
     operation: this.operation,
     path: requestPath,
-    errorCode: result.errorCode,
+    errorCode,
   };
 
   if (typeof this.attach === 'function') {

@@ -6,44 +6,45 @@ info:
     backgroundColor: '#FFFFFF'
     altText: Digital Convergence Initiative
   description: |-
-    The Farmer registry interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between Farmer registry and SP system.
+    The Disability Registry interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between Disability registry and SP system.
     You can now help us improve the API whether it's by making changes to the definition itself or to the code.
     That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
 
-    1. Search: The Search API provides functionality to search based on demographic, identifiers and custom query
-    2. Event subscription: The Event subscription APIs describe APIs useful to subscribe / unsubscribe events. When any event happens in farmer registry it sends event details on notify end point
+    1. Search: The Search API provides functionality to search disabled people based on demographic, identifiers and custom query
+    2. Event subscription: The Event subscription APIs describe APIs useful to subscribe / unsubscribe events. When any event happens in crvs registry it sends event details on notify end point
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
 
     Gitbook reference link:
-    - [FR - V1.0 ](https://standards.spdci.org/standards/wip-farmers-registry)
+    - [DR - V1.0 ](https://standards.spdci.org/standards/wip-disability-registry)
 
     Code directory links:
-    - [CropTypeEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.01-croptypeenum)
-    - [CropEndUse](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.02-cropsenduse)
-    - [LandTenureEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.03-landtenureenum)
-    - [MeasurementUnitEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.04-measurementunitenum)
-    - [FarmTypeEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.05-farmtypeenum)
-    - [MachineriesEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.06-machineriesenum)
-    - [AnimalsEnum](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.07-animalsenum)
-    - [AquaCulture](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.08-aquaculture)
-    - [AgriSupportActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.09-agrisupportactivities)
-    - [AquaSupportActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.10-aquasupportactivities)
-    - [FertiliserType](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.11-fertilisertype)
-    - [livestockSystem](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.12-livestocksystem)
-    - [EquipmentSource](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.13-equipmentsource)
-    - [IrrigationWater](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.14-irrigationwater)
-    - [CropActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.15-cropactivities)
-    - [ForestActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/code-directory/cd.fr.16-forestactivities)
+    - [Impairment Type](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.01-impairmenttype-functional-limitationtype)
+    - [Impairment Level](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.02-impairmentlevel-functional-limitationslevel)
+    - [Human Assistance Type](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.03-humanassistancetype)
+    - [Support Frequency](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.04-supportfrequency)   
+    - [Support Status](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.05-supportstatusenum)
+    - [Assistive Technology](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.06-assistivetechnologyenum)
+    - [Disability Status](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.07-disabilityonset)
+    - [Impairment Cause](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.08-impairmentcause)
+    - [Transport Requirement](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.9-transportrequirement)
+    - [Housing Type](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.10-housingtype)
+    - [Medical Care](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.11-medicalcareenum)
+    - [Housing Support](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.12-housingsupportenum)
+    - [Animal Assistance](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.13-animalassitanceenum)
+    - [Disability Status](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.14-disabilitystatus)
+    - [Disability Status Level](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.15-disabilitystatuslevel)
 
     Data Objects:
-    - [Farmer](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.01-farmer)
-    - [FarmInfo](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.02-farminfo)
-    - [FarmingActivities](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.03-farmingactivities)
-    - [CropDetails](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.04-cropdetails)
-    - [LiveStockDetails](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.05-livestockdetails)
-    - [Machinery](https://standards.spdci.org/standards/wip-farmers-registry/farmers-registry-and-sp-system-interface/1.-crvs/data/data-objects/do.fr.06-machinery)
-    - [Group](https://standards.spdci.org/standards/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.02-group) 
-    - [Member](https://standards.spdci.org/standards/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.03-member)
+    - [PWDPerson](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.01-pwdperson)
+    - [Disability Details](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.02-disabilitydetails)
+    - [Disability Support](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.03-disabilitysupport)
+    - [Human Assistance](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.04-humanassistance) 
+    - [Assistive Technology](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.05-assistivetechnology)
+    - [Medical Care](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.06-medicalcare)
+    - [Housing Support](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.07-housingsupport)
+    - [Animal Assistance](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.08-animalassistance)
+    - [Member](https://standards.spdci.org/standards/v/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.03-member)
+
 
 
     Each request is build up of three parts
@@ -93,10 +94,6 @@ tags:
     x-displayName: SubscribeStatusReasonCode
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
-  - name: NotifyEventRequest
-    x-displayName: NotifyEventRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
   - name: UnSubscribeRequest
     x-displayName: UnSubscribeRequest
     description: |
@@ -132,11 +129,8 @@ x-tagGroups:
       - SearchResponse
       - SubscribeRequest
       - SubscribeResponse
-      - NotifyEventRequest
       - UnSubscribeRequest
       - UnSubscribeResponse
-      - TxnStatusRequest
-      - TxnStatusResponse
       - EncryptedMessage
   - name: Status Codes
     tags:
@@ -147,7 +141,7 @@ paths:
   /registry/search:
     post:
       summary: /registry/search
-      description: Search person(s) in registry using identifier or custom attributes
+      description: Search members(s) in registry using identifier or custom attributes
       operationId: post_reg_search
       tags:
         - Async
@@ -248,57 +242,6 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/notify:
-    post:
-      summary: /registry/notify
-      description: Registry to notify an event to subscribers
-      operationId: post_reg_notify
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - notify
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
   /registry/subscribe:
     post:
       summary: /registry/subscribe
@@ -353,58 +296,109 @@ paths:
         - Authorization: []
       deprecated: false
   /registry/on-subscribe:
-    post: null
-    summary: /registry/on-subscribe
-    description: Subscribe results through callback
-    operationId: post_reg_on-subscribe
-    tags:
-      - Async
-    requestBody:
-      description: ''
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              signature:
-                $ref: '#/components/schemas/MsgSignature'
-              header:
-                allOf:
-                  - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                  - properties:
-                      action:
-                        enum:
-                          - on-subscribe
-              message:
-                type: object
-                description: Subscription information
-                oneOf:
-                  - $ref: '#/components/schemas/SubscribeResponse'
-                  - $ref: '#/components/schemas/EncryptedMessage'
-            required:
-              - header
-              - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: '#/components/schemas/FileInfo'
-              - properties:
-                  action:
-                    enum:
-                      - on-subscribe
-    responses:
-      '401':
-        $ref: '#/components/responses/HttpErrorResponse'
-      '403':
-        $ref: '#/components/responses/HttpErrorResponse'
-      '500':
-        $ref: '#/components/responses/HttpErrorResponse'
-      default:
-        $ref: '#/components/responses/Response'
-    security:
-      - Authorization: []
-    deprecated: false
+    post:
+      summary: /registry/on-subscribe
+      description: Subscribe results through callback
+      operationId: post_reg_on-subscribe
+      tags:
+        - Async
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - on-subscribe
+                message:
+                  type: object
+                  description: Subscription information
+                  oneOf:
+                    - $ref: '#/components/schemas/SubscribeResponse'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - on-subscribe
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/responses/Response'
+      security:
+        - Authorization: []
+      deprecated: false
+  /registry/notify:
+    post:
+      summary: /registry/notify
+      description: Registry to notify a life event to subscrbiers
+      operationId: post_reg_notify
+      tags:
+        - Async
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/NotifyEventRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - notify
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/responses/Response'
+      security:
+        - Authorization: []
+      deprecated: false
   /registry/unsubscribe:
     post:
       summary: /registry/unsubscribe
@@ -510,119 +504,10 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/txn/status:
-    post:
-      summary: /registry/txn/status
-      description: The /registry/txn/status will be implemented by FR. This will check status of reach request using transaction_id and/or reference_id(s).
-      operationId: post_reg_txnstatus
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - txn-status
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/TxnStatusRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-                - message
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - txn-status
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/txn/on-status:
-    post:
-      summary: /registry/txn/on-status
-      description: The /registry/txn/on-status will be implemented by SP-System. The response with information about request and in some case it may contain data as well.
-      operationId: post_reg_on-txnstatus
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - txn-on-status
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/TxnStatusResponse'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - txn-on-status
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
   /registry/sync/search:
     post:
       summary: /registry/sync/search
-      description: |-
-        The sync search api will accept request and will send response immediately
-        The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The IBR will validate the request and will send response to on-search endpoint. 
-        Information for each field is given below.
-          - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
-          - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
-          - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
+      description: Search person(s) in registry using identifier or custome attributes
       operationId: post_reg_sync_search
       tags:
         - Sync
@@ -685,11 +570,11 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/sync/txn/status:
+  /registry/sync/get-disability-support:
     post:
-      summary: /registry/sync/txn/status
-      description: The /registry/sync/txn/status will be implemented by IBR. This will check status of reach request using transaction_id and/or reference_id(s).
-      operationId: post_reg_sync_txnstatus
+      summary: /registry/sync/get-disability-support
+      description: check if member is registered as disabled
+      operationId: post_reg_get_disability_support
       tags:
         - Sync
       requestBody:
@@ -708,15 +593,24 @@ paths:
                     - properties:
                         action:
                           enum:
-                            - txn-status
+                            - search
                 message:
                   type: object
+                  description: The search data using which registry search to be performed
                   oneOf:
-                    - $ref: '#/components/schemas/TxnStatusRequest'
+                    - $ref: '#/components/schemas/GetDisabilitySupportRequest'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
                 - message
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - search
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -725,7 +619,7 @@ paths:
         '500':
           $ref: '#/components/responses/HttpErrorResponse'
         default:
-          description: Transaction status check response
+          description: support response
           content:
             application/json:
               schema:
@@ -739,17 +633,243 @@ paths:
                       - properties:
                           action:
                             enum:
-                              - txn-on-status
+                              - on-search
                   message:
                     type: object
                     oneOf:
-                      - $ref: '#/components/schemas/TxnStatusResponse'
+                      - $ref: '#/components/schemas/GetDisabilitySupportResponse'
+                      - $ref: '#/components/schemas/EncryptedMessage'
+                required:
+                  - header
+      deprecated: false
+  /registry/sync/get-disability-details:
+    post:
+      summary: /registry/sync/get-disability-details
+      description: check if member is registered as disabled
+      operationId: post_reg_get_disability_details
+      tags:
+        - Sync
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - search
+                message:
+                  type: object
+                  description: The search data using which registry search to be performed
+                  oneOf:
+                    - $ref: '#/components/schemas/GetDisabilitySupportRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - search
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          description: support response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signature:
+                    $ref: '#/components/schemas/MsgSignature'
+                  header:
+                    allOf:
+                      - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                      - properties:
+                          action:
+                            enum:
+                              - on-search
+                  message:
+                    type: object
+                    oneOf:
+                      - $ref: '#/components/schemas/GetDisabilityInfoResponse'
+                      - $ref: '#/components/schemas/EncryptedMessage'
+                required:
+                  - header
+      deprecated: false
+  /registry/sync/disabled:
+    post:
+      summary: /registry/sync/get-disability-status
+      description: check if member is registered as disabled
+      operationId: post_reg_disabled
+      tags:
+        - Sync
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - search
+                message:
+                  type: object
+                  description: The search data using which registry search to be performed
+                  oneOf:
+                    - $ref: '#/components/schemas/DisabledRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - search
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          description: support response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signature:
+                    $ref: '#/components/schemas/MsgSignature'
+                  header:
+                    allOf:
+                      - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                      - properties:
+                          action:
+                            enum:
+                              - on-search
+                  message:
+                    type: object
+                    oneOf:
+                      - $ref: '#/components/schemas/DisabledResponse'
                       - $ref: '#/components/schemas/EncryptedMessage'
                 required:
                   - header
       deprecated: false
 components:
   schemas:
+    RegistryQueries:
+      description: |
+        1. Implementing systems can define schemas.
+        2. Based on context, pre defined named queries can also help as part of ExpTemplate construct.
+      anyOf:
+        - $ref: '#/components/schemas/ExpTemplate'
+        - type: object
+          description: Identifier type and value object
+          properties:
+            type:
+              type: string
+              description: |
+                @type: "IdType" <br>
+
+                **Notes:**
+                  1. Identifier type values defined as per implementation context.
+                  2. Usually a list of **enum** values of all possible queryable identifiers.
+                  3. e.g: UIN, MOBILE, BRN, MRN, DRN, etc., 
+              example: UIN
+            value:
+              allOf:
+                - description: Identifier Value of the subject.
+                - oneOf:
+                    - type: string
+                    - type: integer
+                    - type: number
+                    - type: boolean
+                    - type: object
+                  example: '1980'
+              example: '12314567890'
+        - type: array
+          items:
+            type: object
+            properties:
+              seq_num:
+                description: Sequence number to help define precedence for evaluating a list of expression Predicates
+                type: number
+                example: 1
+              expression1:
+                type: object
+                description: Expression
+                properties:
+                  attribute_name:
+                    type: string
+                    description: |
+                      @context: https://schema.spdci.org/common/v1/api-schemas/QueryAttributes.jsonld <br>
+                      @type: "QueryAttributes" <br>
+
+                      **Notes:**
+                        1. Query attribute names defined as per implementation context.
+                        2. Usually a list of **enum** values of all possible queryable attribute names.
+                        3. e.g: UIN, YOB, DOB, age, mobile, area-code, pin-code, etc.,
+                    example: YOB
+                  operator:
+                    type: string
+                    description: Operator in an expression
+                    enum:
+                      - gt
+                      - lt
+                      - eq
+                      - ge
+                      - le
+                      - in
+                    example: eq
+                  attribute_value:
+                    $ref: '#/components/schemas/RegistryQueries/anyOf/1/properties/value/allOf/1'
+                required:
+                  - attribute_name
+                  - operator
+                  - attribute_value
+              condition:
+                type: string
+                description: Condition in an expression
+                enum:
+                  - and
+                  - or
+                  - not
+                example: and
+              expression2:
+                $ref: '#/components/schemas/RegistryQueries/anyOf/2/items/properties/expression1'
+            required:
+              - expression1
     NotifyEventRequest:
       type: object
       description: Registry to notify a event to subscrbiers
@@ -762,7 +882,7 @@ components:
             type: object
             properties:
               reference_id:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
+                $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/reference_id'
               timestamp:
                 $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
               data:
@@ -778,7 +898,7 @@ components:
                   reg_event_type:
                     type: string
                     description: |
-                      The SP-System receives data from FR, usually the FR sends registration and updates events to SP-System
+                      The SP-System receives data from Disability registry, usually the DR sends registration and updates events to SP-System
 
                       1 : Register 
                     enum:
@@ -787,14 +907,7 @@ components:
                   reg_record_type:
                     $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_record_type'
                   reg_records:
-                    type: object
-                    description: |
-                      The "group" object contains fields expected in response of search
-                      @context: https://schema.spdci.org/extensions/fr/v1/FRPerson.jsonld <br>
-                      @type: "FRPerson" <br>
-                      @container: "@set" <br> 
-                    example:
-                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records/items'
+                    $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records'
                 required:
                   - reg_record_type
                   - reg_records
@@ -830,7 +943,9 @@ components:
             type: object
             properties:
               reference_id:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
+                type: string
+                description: Unique reference_id set by txn initiating system for each request in a batch
+                example: '12345678901234567890'
               timestamp:
                 $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
               search_criteria:
@@ -846,42 +961,7 @@ components:
                   query_type:
                     $ref: '#/components/schemas/SubscriptionInfo/properties/filter_type'
                   query:
-                    description: |
-                      1. Implementing systems can define schemas.
-                      2. Based on context, pre defined named queries can also help as part of ExpTemplate construct.
-                    anyOf:
-                      - type: object
-                        description: Identifier type and value object
-                        properties:
-                          type:
-                            type: string
-                            description: |
-                              @context: https://schema.spdci.org/common/v1/api-schemas/QueryTypeEnum.jsonld <br>
-                              @type: "QueryType" <br>
-
-                              **Notes:**
-                                1. Query types that helps decode query expressions
-                                2. Sample query type enums: "expression", "predicate", "idtype-value" , "graphql"
-                            example: 'ns:org:QueryType:expression'
-                          value:
-                            type: object
-                            description: |
-                              @context: https://schema.spdci.org/v1/api-schemas/QueryExpression.jsonld <br>
-                              @type: "QueryExpression" <br>
-
-                              **Notes:**
-                                1. Query expression's syntax / format is determined based on query-type.
-                                2. Query expression as a template with placeholder to pass conditional search parameters
-                            example:
-                              expression:
-                                query:
-                                  $and:
-                                    - farm_info.location.geo.latitude:
-                                        $eq: 9.56
-                                    - farm_info.location.geo.longitude:
-                                        $eq: 100.0245
-                      - $ref: '#/components/schemas/SubscriptionInfo/properties/filter/anyOf/1'
-                      - $ref: '#/components/schemas/SubscriptionInfo/properties/filter/anyOf/2'
+                    $ref: '#/components/schemas/RegistryQueries'
                   sort:
                     type: array
                     items:
@@ -989,7 +1069,7 @@ components:
             type: object
             properties:
               reference_id:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
+                $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/reference_id'
               timestamp:
                 $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
               status:
@@ -1011,146 +1091,66 @@ components:
                   reg_type:
                     type: string
                     description: |
-                      @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
+                      @context: https://schema.spdci.org/common/v1/api-schemas/RegistryType.jsonld <br>
                       @type: "@context" <br>
 
                       **Notes:**
                         1. Registry type values defined as per implementation context.
                         2. Usually a list of **enum** values of all possible queryable functional registries 
-                        3. example: "ns:org:RegistryType:FR"
-                    example: 'ns:org:RegistryType:FR'
+                        3. example: "ns:org:RegistryType:DR"
+                    example: 'ns:org:RegistryType:DR'
                   reg_record_type:
                     type: string
                     description: |
-                      @context: https://schema.spdci.org/common/v1/api-schemas/RegistryType.jsonld <br>
+                      @context: https://schema.spdci.org/common/v1/api-schemas/RegistryRecordType.jsonld <br>
                       @type: "RegistryRecordType" <br>
 
                       **Notes:**
                         1. Registry record type values defined as per implementation context.
                         2. Usually a list of **enum** values of all possible queryable result sets 
                         3. Referenced in search_request and notify events
-                        4. example: "spdci-extensions-dci:Farmer" 
-                    example: 'spdci-extensions-dci:Farmer'
+                        4. example: "spdci-extensions-dci:DisabledPerson" 
+                    example: 'spdci-extensions-dci:DisabledPerson'
                   reg_records:
-                    type: array
+                    type: object
                     description: |
-                      The "Entity" object contains fields expected in response of search
-                      @context: https://schema.spdci.org/extensions/fr/v1/FRPerson.jsonld <br>
-                      @type: "FRPerson" <br>
-                      @container: "@set" <br>
-                    items:
+                      The "group" object contains fields expected in response of search
+                      @context: https://schema.spdci.org/extensions/dr/v1/DRPerson.jsonld <br>
+                      @type: "DisabledPerson" <br>
+                      @container: "@set" <br> 
+                    example:
                       type: object
                       description: |
                         1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
 
 
-                        @context: https://schema.spdci.org/extensions/gr/v1/FRPerspn.jsonld <br>
+                        @context: https://schema.spdci.org/extensions/dr/v1/DRPerson.jsonld <br>
                         @type: "@context" <br>
                       example:
-                        famer_personal_details:
-                          member_identifier:
-                            identifier_type: NationalID
-                            identifier_value: M123456
-                          demographic_info:
-                            identifier:
-                              identifier_type: NationalID
-                              identifier_value: M123456
-                            name:
-                              first_name: John
-                              last_name: Doe
-                            date_of_birth: '1990-05-15T00:00:00Z'
-                            gender: Male
-                        family_details:
-                          group_identifier:
-                            - identifier_type: NationalID
-                              identifier_value: G9876543210
-                          group_type: family
-                          poverty_score: 45.2
-                          poverty_score_type: income-based
-                          group_head_info:
-                            member_identifier:
-                              - identifier_type: NationalID
-                                identifier_value: M123456
-                            demographic_info:
-                              identifier:
-                                identifier_type: NationalID
-                                identifier_value: M123456
-                              name:
-                                first_name: John
-                                last_name: Doe
-                              date_of_birth: '1990-05-15T00:00:00Z'
-                              gender: Male
-                            is_disabled: false
-                            marital_status: married
-                            registration_date: '1990-06-10T08:00:00Z'
-                          group_size: 2
-                          member_list:
-                            - member_identifier:
-                                - '@type': Identifier
-                                  identifier_type: NationalID
-                                  identifier_value: M9876543210
-                              demographic_info:
-                                'spdci:identifier':
-                                  - '@type': Identifier
-                                    identifier_type: NationalID
-                                    identifier_value: '1234567890'
-                                name:
-                                  '@type': Name
-                                  surname: Doe
-                                  given_name: Jane
-                                  prefix: Mr.
-                                  suffix: ''
-                                sex: female
-                                birth_date: '1982-03-15T00:00:00Z'
-                                registration_date: '2022-01-10T08:00:00Z'
-                              is_disabled: false
-                              marital_status: married
-                              registration_date: '2022-01-10T08:00:00Z'
-                          registration_date: '2022-01-10T08:00:00Z'
-                          last_updated: '2023-06-15T10:00:00Z'
-                        farm_details:
-                          - place:
-                              name: Koh Samui
-                              geo:
-                                '@type': 'spdci:GeoLocation'
-                                latitude: 9.5604
-                                longitude: 100.0245
-                            farm_type: Small subsistence-oriented farms
-                            farming_activities:
-                              - crop_production:
-                                  - activity_group: perennial crops
-                                    crop_type: Fruit and nuts
-                                    variety: local
-                                    season: winter
-                                    end_use:
-                                      - Food for human consumption
-                                    irrigation: true
-                                    irrigation_water:
-                                      - Mixed surface water and groundwater
-                                    fertilizer_type:
-                                      - Organic fertilizers
-                                    registration_date: '2023-01-10T00:00:00Z'
-                                    last_updated: '2023-09-20T00:00:00Z'
-                                animal_production:
-                                  - type: Sheep and goats
-                                    count: 10
-                                    livestock_system: Mixed system
-                                    registration_date: '2023-01-10T00:00:00Z'
-                                    last_updated: '2023-09-20T00:00:00Z'
-                                mixed_farming: true
-                                agri_support_activities:
-                                  - Support activities for crop production
-                                aqua_support_activities: Support activities for fishing and aquaculture
-                                aqua_culture:
-                                  - Marine aquafarming
-                                registration_date: '2023-01-10T00:00:00Z'
-                                last_updated: '2023-09-20T00:00:00Z'
-                        machineries_details:
-                          - type: Machine powered equipment
-                            count: 2
-                            equipement_source: Provided by a cooperative
-                            registration_date: '2022-01-10T08:00:00Z'
-                            last_updated: '2023-06-15T10:00:00Z'
+                        personal_details:
+                          identifier: '123456'
+                          name:
+                            first_name: John
+                            last_name: Doe
+                          date_of_birth: '1990-05-15'
+                          gender: Male
+                        disability_status: Approved
+                        disability_level: Severe
+                        disability_details:
+                          - impairment_type: Physical and movement related functions
+                            impairment_level: Severe impairment or difficulty
+                            impairment_cause: Work Accident
+                            age_on_set: Working age
+                        disability_support:
+                          - human_assistance:
+                              frequency: Permanent
+                              type: mobility
+                              support_status: Required
+                        transport_requirement: Adaptable vehical
+                        housing_type: Social housing
+                        programs_enrollments:
+                          - programme_name: financial_assistance
+                            programme_identifier: AD234
                         registration_date: '2023-01-10T00:00:00Z'
                         last_updated: '2023-09-20T00:00:00Z'
                 required:
@@ -1210,7 +1210,7 @@ components:
             type: object
             properties:
               reference_id:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
+                $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/reference_id'
               timestamp:
                 $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
               subscribe_criteria:
@@ -1220,17 +1220,17 @@ components:
                     type: string
                     default: 1.0.0
                   reg_type:
-                    $ref: '#/components/schemas/SubscriptionInfo/properties/reg_type'
+                    $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_type'
                   reg_event_type:
-                    $ref: '#/components/schemas/SubscriptionInfo/properties/reg_event_type'
+                    $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/reg_event_type'
                   frequency:
                     $ref: '#/components/schemas/SubscriptionInfo/properties/frequency'
                   filter_type:
                     $ref: '#/components/schemas/SubscriptionInfo/properties/filter_type'
                   filter:
-                    $ref: '#/components/schemas/SubscriptionInfo/properties/filter'
+                    $ref: '#/components/schemas/RegistryQueries'
                   notify_record_type:
-                    $ref: '#/components/schemas/SubscriptionInfo/properties/notify_record_type'
+                    $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_record_type'
                   authorize:
                     $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/authorize'
                 required:
@@ -1260,7 +1260,7 @@ components:
             type: object
             properties:
               reference_id:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
+                $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/reference_id'
               timestamp:
                 $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
               status:
@@ -1274,7 +1274,35 @@ components:
               subscriptions:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SubscriptionInfo'
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                      default: 1.0.0
+                    code:
+                      $ref: '#/components/schemas/SubscriptionCode'
+                    status:
+                      $ref: '#/components/schemas/SubscriptionStatus'
+                    timestamp:
+                      $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
+                    reg_type:
+                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_type'
+                    reg_event_type:
+                      $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/reg_event_type'
+                    frequency:
+                      $ref: '#/components/schemas/SubscriptionInfo/properties/frequency'
+                    filter_type:
+                      $ref: '#/components/schemas/SubscriptionInfo/properties/filter_type'
+                    filter:
+                      $ref: '#/components/schemas/RegistryQueries'
+                    notify_record_type:
+                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_record_type'
+                    locale:
+                      $ref: '#/components/schemas/SubscriptionInfo/properties/locale'
+                  required:
+                    - code
+                    - status
+                    - timestamp
               pagination:
                 $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/pagination'
               locale:
@@ -1426,82 +1454,8 @@ components:
                           }
                         }
                       }
-            - type: object
-              description: Identifier type and value object
-              properties:
-                type:
-                  type: string
-                  description: |
-                    @type: "IdType" <br>
-
-                    **Notes:**
-                      1. Identifier type values defined as per implementation context.
-                      2. Usually a list of **enum** values of all possible queryable identifiers.
-                      3. e.g: UIN, MOBILE, BRN, MRN, DRN, etc., 
-                  example: UIN
-                value:
-                  allOf:
-                    - description: Identifier Value of the subject.
-                    - oneOf:
-                        - type: string
-                        - type: integer
-                        - type: number
-                        - type: boolean
-                        - type: object
-                      example: '1980'
-                  example: '12314567890'
-            - type: array
-              items:
-                type: object
-                properties:
-                  seq_num:
-                    description: Sequence number to help define precedence for evaluating a list of expression Predicates
-                    type: number
-                    example: 1
-                  expression1:
-                    type: object
-                    description: Expression
-                    properties:
-                      attribute_name:
-                        type: string
-                        description: |
-                          @context: https://schema.spdci.org/common/v1/api-schemas/QueryAttributes.jsonld <br>
-                          @type: "QueryAttributes" <br>
-
-                          **Notes:**
-                            1. Query attribute names defined as per implementation context.
-                            2. Usually a list of **enum** values of all possible queryable attribute names.
-                            3. e.g: UIN, YOB, DOB, age, mobile, area-code, pin-code, etc.,
-                        example: YOB
-                      operator:
-                        type: string
-                        description: Operator in an expression
-                        enum:
-                          - gt
-                          - lt
-                          - eq
-                          - ge
-                          - le
-                          - in
-                        example: eq
-                      attribute_value:
-                        $ref: '#/components/schemas/SubscriptionInfo/properties/filter/anyOf/1/properties/value/allOf/1'
-                    required:
-                      - attribute_name
-                      - operator
-                      - attribute_value
-                  condition:
-                    type: string
-                    description: Condition in an expression
-                    enum:
-                      - and
-                      - or
-                      - not
-                    example: and
-                  expression2:
-                    $ref: '#/components/schemas/SubscriptionInfo/properties/filter/anyOf/2/items/properties/expression1'
-                required:
-                  - expression1
+            - $ref: '#/components/schemas/RegistryQueries/anyOf/1'
+            - $ref: '#/components/schemas/RegistryQueries/anyOf/2'
         notify_record_type:
           type: string
           description: |
@@ -1596,201 +1550,224 @@ components:
         - rjct.subscription_code.invalid
         - rjct.requester.invalid
         - rjct.event.already_unsubscribed
-    TxnStatusRequest:
+    GetDisabilitySupportRequest:
       type: object
-      description: Request to fetch txn status on various service requests
+      description: gets all disabilities information about a member
       properties:
         transaction_id:
           $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        txnstatus_request:
-          type: object
-          properties:
-            reference_id:
-              type: string
-              description: Unique reference_id set by txn initiating system for each request in a batch
-              example: '12345678901234567890'
-            txn_type:
-              type: string
-              description: txn type to fetch status
-              enum:
-                - search
-                - subscribe
-                - unsubscribe
-            attribute_type:
-              type: string
-              enum:
-                - transaction_id
-                - reference_id_list
-                - correlation_id
-                - subscription_code_list
-            attribute_value:
-              anyOf:
-                - $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-                - type: array
-                  items:
-                    $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
-                - $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-                - $ref: '#/components/schemas/SubscriptionCodeList'
-            locale:
-              $ref: '#/components/schemas/SubscriptionInfo/properties/locale'
-          required:
-            - reference_id
-            - txn_type
-            - attribute_type
-            - attribute_value
+        disabled_criteria:
+          $ref: '#/components/schemas/DisabledRequest/properties/disabled_criteria'
       required:
         - transaction_id
-        - txnstatus_request
-    TxnStatusResponse:
+        - disabled_criteria
+    GetDisabilitySupportResponse:
       type: object
-      description: txn status info on various service requests
+      description: Response to search request. Multiple repsonses for each page can be pushed to the caller as an implementation!
       properties:
         transaction_id:
           $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
         correlation_id:
           $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-        txnstatus_response:
-          type: object
-          properties:
-            txn_type:
-              type: string
-              description: txn type to fetch status
-              enum:
-                - search
-                - subscribe
-                - unsubscribe
-            txn_status:
-              oneOf:
-                - $ref: '#/components/schemas/TxnStatusResponse/properties/txnstatus_response/example'
-                - $ref: '#/components/schemas/SubscribeResponse'
-                - $ref: '#/components/schemas/UnSubscribeResponse'
-          example:
+        search_response:
+          type: array
+          items:
             type: object
-            description: Response to search request. Multiple repsonses for each page can be pushed to the caller as an implementation!
             properties:
-              transaction_id:
-                $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-              correlation_id:
-                $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-              search_response:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    reference_id:
-                      $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
-                    timestamp:
-                      $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
-                    status:
-                      $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
-                    status_reason_code:
-                      $ref: '#/components/schemas/SearchStatusReasonCode'
-                    status_reason_message:
-                      description: Status reason code message. Helps actionanble messaging for systems/end users
-                      type: string
-                      maxLength: 999
-                    data:
-                      type: object
+              reference_id:
+                $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/reference_id'
+              timestamp:
+                $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
+              status:
+                $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
+              status_reason_code:
+                $ref: '#/components/schemas/SearchStatusReasonCode'
+              status_reason_message:
+                description: Status reason code message. Helps actionable messaging for systems/end users
+                type: string
+                maxLength: 999
+              data:
+                type: object
+                description: |
+                  Search result record as an outcome of search/subscribe action
+                properties:
+                  version:
+                    type: string
+                    default: 1.0.0
+                  reg_records:
+                    description: |
+                      The "Disabled" object contains fields expected in response of search
+                      @context: https://schema.spdci.org/extensions/dr/v1/DisabilitySupport.jsonld <br>
+                      @type: "@context" <br>
+                      @container: "@set" <br>
+                    type: array
+                    items:
+                      type: array
                       description: |
-                        Search result record as an outcome of search/subscribe action
-                      properties:
-                        version:
-                          type: string
-                          default: 1.0.0
-                        reg_type:
-                          $ref: '#/components/schemas/SubscriptionInfo/properties/reg_type'
-                        reg_record_type:
-                          $ref: '#/components/schemas/SubscriptionInfo/properties/notify_record_type'
-                        reg_records:
-                          type: object
-                          description: |
-                            The "person" object contains fields expected in response of search
-                            @context: https://schema.spdci.org/core/v1/data/Member.jsonld <br>
-                            @type: "Person" <br>
-                            @container: "@set" <br> 
-                          example:
-                            type: object
-                            description: |
-                              1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-                              3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-
-                              @context: https://schema.spdci.org/core/v1/data/Member.jsonld <br>
-                              @type: "@context" <br>
-                            example:
-                              '@context':
-                                spdci: 'https://schema.spdci.org/core/v1/data'
-                                rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
-                                xsd: 'http://www.w3.org/2001/XMLSchema#'
-                                owl: 'http://www.w3.org/2002/07/owl#'
-                                common: 'https://schema.spdci.org/common/v1/'
-                              '@id': 'https://example.org/sr_person/847951632'
-                              '@type': 'spdci:member'
-                              member_identifier:
-                                - '@type': Identifier
-                                  identifier_type: UIN
-                                  identifier_value: '42343545654'
-                              demographic_info:
-                                '@type': SRPerson
-                                identifier:
-                                  - '@type': Identifier
-                                    identifier_type: NationalID
-                                    identifier_value: '9876543210'
-                                name:
-                                  '@type': Name
-                                  surname: Smith
-                                  given_name: Alice
-                                  prefix: Ms.
-                                  suffix: ''
-                                sex: female
-                                birth_date: '1985-05-20'
-                              related_person:
-                                - '@type': RelatedPerson
-                                  relationship_type: spouse
-                                  related_member:
-                                    '@type': Member
-                                    '@id': 'https://example.org/member/123456789'
-                                    member_identifier: M123456789
-                                - '@type': RelatedPerson
-                                  relationship_type: child
-                                  related_member:
-                                    '@type': Member
-                                    '@id': 'https://example.org/member/987654322'
-                                    'spdci:member_identifier': M987654322
-                              is_disabled: false
-                              marital_status: married
-                              employment_status: employed
-                              occupation: teacher
-                              income_level: middle
-                              language_code:
-                                - en
-                                - es
-                              education_level: bachelor
-                              additional_attributes:
-                                - extra_work: volunteer
-                              registration_date: '2022-01-10T08:00:00Z'
-                              last_updated: '2023-06-15T10:00:00Z'
-                      required:
-                        - reg_record_type
-                        - reg_records
-                    pagination:
-                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/pagination'
-                    locale:
-                      $ref: '#/components/schemas/SubscriptionInfo/properties/locale'
-                  required:
-                    - reference_id
-                    - timestamp
-                    - status
+                        1. List of a member disability info related to the person we are searching for.
+                        @context: https://schema.spdci.org/extensions/dr/v1/DRPerson.jsonld <br>
+                        @type: "@context" <br>
+                      example:
+                        - human_assistance:
+                            type: mobility
+                            frequency: Daily
+                            support_status: Needed
+                            caregiver:
+                              id: Person_001
+                              name: John Doe
+                              identifier: '12345'
+                            relationship: Parent
+                            registration_date: '2024-01-15T10:00:00Z'
+                            last_updated: '2024-09-20T12:30:00Z'
+                          assistive_technology: []
+                          housing_support: []
+                          medical_care: []
+                          animal_assistance: []
+                          registration_date: '2023-05-20T09:00:00Z'
+                          last_updated: '2024-10-01T11:15:00Z'
+                required:
+                  - reg_records
+              pagination:
+                $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/pagination'
+              locale:
+                $ref: '#/components/schemas/SubscriptionInfo/properties/locale'
             required:
-              - transaction_id
-              - correlation_id
-              - search_response
-          required:
-            - txn_type
-            - txn_status
+              - reference_id
+              - timestamp
+              - status
       required:
         - transaction_id
         - correlation_id
-        - txnstatus_response
+        - search_response
+    GetDisabilityInfoResponse:
+      type: object
+      description: Response to search request. Multiple repsonses for each page can be pushed to the caller as an implementation!
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        correlation_id:
+          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
+        search_response:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_id:
+                $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/reference_id'
+              timestamp:
+                $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
+              status:
+                $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
+              status_reason_code:
+                $ref: '#/components/schemas/SearchStatusReasonCode'
+              status_reason_message:
+                description: Status reason code message. Helps actionable messaging for systems/end users
+                type: string
+                maxLength: 999
+              data:
+                type: object
+                description: |
+                  Search result record as an outcome of search/subscribe action
+                properties:
+                  version:
+                    type: string
+                    default: 1.0.0
+                  reg_records:
+                    description: |
+                      The "Disabled" object contains fields expected in response of search
+                      @context: https://schema.spdci.org/extensions/dr/v1/DRPerson.jsonld <br>
+                      @type: "@context" <br>
+                      @container: "@set" <br>
+                    type: array
+                    items:
+                      type: object
+                      description: |
+                        1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+
+
+                        @context: https://schema.spdci.org/extensions/dr/v1/DisabledPerson.jsonld <br>
+                        @type: "@context" <br>
+                      example:
+                        disability_details:
+                          - impairment_type: Physical and movement related functions
+                            impairment_level: Severe impairment or difficulty
+                            impairment_cause: Work Accident
+                            age_on_set: Working age
+                required:
+                  - reg_records
+              pagination:
+                $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/pagination'
+              locale:
+                $ref: '#/components/schemas/SubscriptionInfo/properties/locale'
+            required:
+              - reference_id
+              - timestamp
+              - status
+      required:
+        - transaction_id
+        - correlation_id
+        - search_response
+    DisabledRequest:
+      type: object
+      description: Verifies is registered member is disabled
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        disabled_criteria:
+          type: object
+          description: |
+            Disabled query
+          properties:
+            query_type:
+              $ref: '#/components/schemas/SubscriptionInfo/properties/filter_type'
+              description: ''
+            query:
+              type: object
+              description: Query expression for the disabled query
+              example:
+                member.member_identifier:
+                  eq: ABC451123
+      required:
+        - transaction_id
+        - disabled_criteria
+    DisabledResponse:
+      type: object
+      description: Response to verify disability status request.
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        correlation_id:
+          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
+        disabled_response:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_id:
+                $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/reference_id'
+              timestamp:
+                $ref: '#/components/schemas/SubscriptionInfo/properties/timestamp'
+              status:
+                $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
+              status_reason_message:
+                description: Status reason code message. Helps actionable messaging for systems/end users
+                type: string
+                maxLength: 999
+              disabled_status:
+                description: Indicates whether the individual is disabled ('yes') or not ('no').
+                type: string
+                enum:
+                  - 'yes'
+                  - 'no'
+            required:
+              - reference_id
+              - timestamp
+              - status
+              - disabled_status
+      required:
+        - transaction_id
+        - correlation_id
+        - disabled_response
     EncryptedMessage:
       description: Encrypted payload
       type: object
@@ -1859,6 +1836,37 @@ components:
           type: string
           description: message to describe above error code
           maxLength: 999
+    ExpTemplate:
+      type: object
+      description: Identifier type and value object
+      properties:
+        type:
+          type: string
+          description: |
+            @context: https://schema.spdci.org/common/v1/api-schemas/QueryTypeEnum.jsonld <br>
+            @type: "QueryType" <br>
+
+            **Notes:**
+              1. Query types that helps decode query expressions
+              2. Sample query type enums: "GraphQl", "Sql", "NoSql"
+          example: 'ns:org:QueryType:NoSql'
+        value:
+          type: object
+          description: |
+            @context: https://schema.spdci.org/v1/api-schemas/QueryExpression.jsonld <br>
+            @type: "QueryExpression" <br>
+
+            **Notes:**
+              1. Query expression's syntax / format is determined based on query-type.
+              2. Query expression as a template with placeholder to pass conditional search parameters
+          example:
+            expression:
+              query:
+                $and:
+                  - disability_status:
+                      $eq: Approved
+                  - location:
+                      $eq: central_region
     FileInfo:
       type: object
       description: File info. Used in file upload feature using HTTPS
@@ -1901,17 +1909,7 @@ components:
         status:
           $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
         status_reason_code:
-          type: string
-          description: Message header related common status reason codes
-          enum:
-            - rjct.version.invalid
-            - rjct.message_id.duplicate
-            - rjct.message_ts.invalid
-            - rjct.action.invalid
-            - rjct.action.not_supported
-            - rjct.total_count.invalid
-            - rjct.total_count.limit_exceeded
-            - rjct.errors.too_many
+          $ref: '#/components/schemas/MsgHeaderStatusReasonCode'
         status_reason_message:
           description: 'Status reascon code message, if any, Helps actionable messaging for system/end users'
           type: string
@@ -1921,7 +1919,7 @@ components:
           type: integer
           example: 21800
         completed_count:
-          description: No of requests in completed state. Complete includes success and error requests due to funcational errors
+          description: No of requests in complteed state. Complete includes success and error requests due to funcational errors
           type: integer
           example: 50
         sender_id:
@@ -1929,7 +1927,7 @@ components:
             1. sender_id registered with the receiving system or gateway. 
             2. Used for authorization, encryption, digital sign verfication, etc., 
           type: string
-          example: fr.example.org
+          example: dr.example.org
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.'
           type: string
@@ -1982,7 +1980,7 @@ components:
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.'
           type: string
-          example: farmer.example.org
+          example: dr.example.org
         total_count:
           description: Total no of requests present in the message request
           type: integer
@@ -2007,6 +2005,18 @@ components:
         - action
         - sender_id
         - total_count
+    MsgHeaderStatusReasonCode:
+      type: string
+      description: Message header related common status reason codes
+      enum:
+        - rjct.version.invalid
+        - rjct.message_id.duplicate
+        - rjct.message_ts.invalid
+        - rjct.action.invalid
+        - rjct.action.not_supported
+        - rjct.total_count.invalid
+        - rjct.total_count.limit_exceeded
+        - rjct.errors.too_many
     MsgSignature:
       type: string
       description: 'Signature of {header}+{message} body verified using sender''s signing public key'
