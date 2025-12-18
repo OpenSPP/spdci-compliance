@@ -5,14 +5,22 @@
   "type": "module",
   "scripts": {
     "test": "cucumber-js",
-    "test:social": "cucumber-js --tags '@profile=sr-registry'",
-    "test:crvs": "cucumber-js --tags '@domain=crvs'",
-    "test:dr": "cucumber-js --tags '@domain=dr'",
-    "test:fr": "cucumber-js --tags '@domain=fr'",
-    "test:ibr": "cucumber-js --tags '@domain=ibr'",
+    "test:social": "DOMAIN=social cucumber-js --tags '@profile=sr-registry'",
+    "test:crvs": "DOMAIN=crvs cucumber-js --tags '@profile=crvs-registry'",
+    "test:dr": "DOMAIN=dr cucumber-js --tags '@profile=dr-registry'",
+    "test:fr": "DOMAIN=fr cucumber-js --tags '@profile=fr-registry'",
+    "test:ibr": "DOMAIN=ibr cucumber-js --tags '@profile=ibr-registry'",
     "test:core": "cucumber-js --tags '@tier=core'",
     "test:smoke": "cucumber-js --tags '@smoke'",
-    "mock-server": "node common/mock-server/server.mjs"
+    "mock-server": "node common/mock-server/server.mjs",
+    "mock-server:social": "DOMAIN=social node common/mock-server/server.mjs",
+    "mock-server:crvs": "DOMAIN=crvs node common/mock-server/server.mjs",
+    "mock-server:fr": "DOMAIN=fr node common/mock-server/server.mjs",
+    "mock-server:dr": "DOMAIN=dr node common/mock-server/server.mjs",
+    "mock-server:ibr": "DOMAIN=ibr node common/mock-server/server.mjs",
+    "test:mock:social": "DOMAIN=social node common/mock-server/server.mjs & SERVER_PID=$!; sleep 2; API_BASE_URL=http://127.0.0.1:3335/ npm run test:social; EXIT_CODE=$?; kill $SERVER_PID 2>/dev/null; exit $EXIT_CODE",
+    "test:mock:crvs": "DOMAIN=crvs node common/mock-server/server.mjs & SERVER_PID=$!; sleep 2; API_BASE_URL=http://127.0.0.1:3335/ npm run test:crvs; EXIT_CODE=$?; kill $SERVER_PID 2>/dev/null; exit $EXIT_CODE",
+    "test:mock:fr": "DOMAIN=fr node common/mock-server/server.mjs & SERVER_PID=$!; sleep 2; API_BASE_URL=http://127.0.0.1:3335/ npm run test:fr; EXIT_CODE=$?; kill $SERVER_PID 2>/dev/null; exit $EXIT_CODE"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.1",

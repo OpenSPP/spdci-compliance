@@ -7,12 +7,10 @@ Unified compliance testing framework for SPDCI (Social Protection Digital Conver
 | Domain | Spec | Status |
 |--------|------|--------|
 | Social Registry (SR) | `social_api_v1.0.0.yaml` | **Complete** |
-| Civil Registration (CRVS) | `crvs_api_v1.0.0.yaml` | Not Implemented |
+| Civil Registration (CRVS) | `crvs_api_v1.0.0.yaml` | **Complete** |
 | Disbursement Registry (DR) | `dr_api_v1.0.0.yaml` | Not Implemented |
-| Functional Registry (FR) | `fr_api_v1.0.0.yaml` | Not Implemented |
+| Functional Registry (FR) | `fr_api_v1.0.0.yaml` | **Complete** |
 | ID & Beneficiary Registry (IBR) | `ibr_api_v1.0.0.yaml` | Not Implemented |
-
-> **Note**: Only the Social Registry domain is currently implemented. Other domains have placeholder folders for future implementation.
 
 ## Project Structure
 
@@ -41,9 +39,13 @@ spdci-compliance/
 │   │   ├── payloads/          # SR-specific data generators
 │   │   ├── requirements.json  # SR-specific requirements (SR-*)
 │   │   └── config.js          # SR endpoints, record types
-│   ├── crvs/                  # Civil Registration (not implemented)
+│   ├── crvs/                  # Civil Registration (implemented)
+│   │   ├── features/          # CRVS-specific scenarios
+│   │   └── requirements.json  # CRVS-specific requirements
 │   ├── dr/                    # Disbursement Registry (not implemented)
-│   ├── fr/                    # Functional Registry (not implemented)
+│   ├── fr/                    # Functional Registry (implemented)
+│   │   ├── features/          # FR-specific scenarios
+│   │   └── requirements.json  # FR-specific requirements
 │   └── ibr/                   # ID & Beneficiary Registry (not implemented)
 ├── spec/                       # OpenAPI specifications
 └── cucumber.cjs                # Cucumber configuration
@@ -80,8 +82,20 @@ npm test
 ```bash
 npm run test:social
 npm run test:crvs
-npm run test:dr
+npm run test:fr
 ```
+
+### Run tests against the mock server
+
+These scripts automatically start the mock server, run the tests, and shut down the server:
+
+```bash
+npm run test:mock:social   # Social registry tests against mock
+npm run test:mock:crvs     # CRVS tests against mock
+npm run test:mock:fr       # FR tests against mock
+```
+
+The mock server runs on `http://127.0.0.1:3335/` and the correct `DOMAIN` env var is set automatically.
 
 ### Run by tier
 ```bash
@@ -151,8 +165,14 @@ API_BASE_URL=http://sr-server:8080 DOMAIN=social npm run test:social
 Test that an SPMIS client correctly sends requests to registries:
 
 ```bash
-# 1. Start the mock registry server
-npm run mock-server
+# Option 1: Use the combined test scripts (recommended)
+npm run test:mock:social   # Starts mock server + runs tests
+npm run test:mock:crvs
+npm run test:mock:fr
+
+# Option 2: Manual setup
+# 1. Start the mock registry server for a specific domain
+npm run mock-server:social   # or mock-server:crvs, mock-server:fr
 
 # 2. Configure your client to use http://localhost:3335
 
@@ -167,6 +187,15 @@ The mock server:
 - Provides admin API for test control
 
 See [common/mock-server/README.md](common/mock-server/README.md) for details.
+
+## Spec Issues and Local Fixes
+
+During test development, we found inconsistencies in the SPDCI OpenAPI specifications. These have been fixed locally in the `spec/` directory and reported upstream.
+
+See [SPEC_ISSUES_REPORT.md](SPEC_ISSUES_REPORT.md) for details on:
+- Typo: `sunscription_codes` → `subscription_codes` (CRVS, FR)
+- Schema: `oneOf` → `anyOf` for `attribute_value` (CRVS, FR)
+- Type: `reg_records` object → array (FR)
 
 ## Acknowledgments
 

@@ -50,6 +50,23 @@ const specFiles = {
 const specPath = process.env.OPENAPI_SPEC_PATH ||
   path.resolve(__dirname, `../../spec/${specFiles[domain] || specFiles.social}`);
 
+// Domain-specific record types
+const domainRecordTypes = {
+  social: 'Person',
+  crvs: 'CRVSPerson',
+  fr: 'Farmer',
+  dr: 'DisasterRecord',
+  ibr: 'IBRRecord',
+};
+
+const domainRegistryTypes = {
+  social: 'ns:org:RegistryType:Social',
+  crvs: 'ns:org:RegistryType:CRVS',
+  fr: 'ns:org:RegistryType:FR',
+  dr: 'ns:org:RegistryType:DR',
+  ibr: 'ns:org:RegistryType:IBR',
+};
+
 // Response configuration
 let responseConfig = {
   defaultDelay: 0,
@@ -312,12 +329,27 @@ function searchResponseMessage({ transactionId, correlationId }) {
         status: 'succ',
         data: {
           version: '1.0.0',
-          reg_type: 'ns:org:RegistryType:Social',
-          reg_record_type: 'Person',
+          reg_type: domainRegistryTypes[domain] || domainRegistryTypes.social,
+          reg_record_type: domainRecordTypes[domain] || domainRecordTypes.social,
           reg_records: [],
         },
       },
     ],
+  };
+}
+
+function txnStatusResponseMessage({ transactionId, correlationId }) {
+  return {
+    transaction_id: transactionId,
+    correlation_id: correlationId,
+    txnstatus_response: {
+      txn_type: 'search',
+      txn_status: {
+        transaction_id: transactionId,
+        correlation_id: correlationId,
+        search_response: [],
+      },
+    },
   };
 }
 
@@ -527,12 +559,31 @@ async function handleRegistryEndpoint(req, res, urlPath, body) {
     return;
   }
 
+  if (urlPath === '/registry/txn/status') {
+    json(res, 202, ackResponse(correlationId));
+    scheduleCallback(senderUri, {
+      signature: 'unsigned-mock',
+      header: callbackHeader('txn-on-status', { senderId, receiverId }),
+      message: txnStatusResponseMessage({ transactionId, correlationId }),
+    }, record.id);
+    return;
+  }
+
   // Sync endpoints
   if (urlPath === '/registry/sync/search') {
     json(res, 200, {
       signature: 'unsigned-mock',
       header: callbackHeader('on-search', { senderId, receiverId }),
       message: searchResponseMessage({ transactionId, correlationId }),
+    });
+    return;
+  }
+
+  if (urlPath === '/registry/sync/txn/status') {
+    json(res, 200, {
+      signature: 'unsigned-mock',
+      header: callbackHeader('txn-on-status', { senderId, receiverId }),
+      message: txnStatusResponseMessage({ transactionId, correlationId }),
     });
     return;
   }
