@@ -158,8 +158,31 @@ function isQueryStructureValidForType(body) {
 /**
  * Filter out known false-positive validation errors caused by ambiguous oneOf schemas.
  *
- * The SPDCI spec has overlapping schemas in the query field's oneOf.
- * Since query_type serves as the actual discriminator, we filter these out.
+ * FIXME: TEMPORARY WORKAROUND FOR SPDCI SPEC AMBIGUITY
+ * =====================================================
+ * This function works around an issue in SPDCI OpenAPI specs (v1.0.0) where the
+ * `oneOf` schemas for the search query field overlap, causing AJV validation to
+ * fail even for correctly structured requests.
+ *
+ * PROBLEM: The spec defines `query` as oneOf [IdTypeValue, Expression, Predicate]
+ * but these schemas share common properties (like `type`, `value`), causing AJV
+ * to report "must match exactly one schema in oneOf" errors for valid payloads.
+ *
+ * WORKAROUND: We use `query_type` as a discriminator to determine which schema
+ * the request intends to use, then filter out oneOf errors if the payload
+ * structurally matches the intended schema.
+ *
+ * REMOVAL CRITERIA: This workaround should be removed when either:
+ * 1. SPDCI spec adds a proper discriminator to the query oneOf schema
+ * 2. SPDCI spec changes oneOf to anyOf for the query field
+ * 3. SPDCI spec restructures query schemas to be mutually exclusive
+ *
+ * Affected specs: social_api_v1.0.0.yaml, fr_api_v1.0.0.yaml, crvs_api_v1.0.0.yaml
+ * Related: SPEC_ISSUES_REPORT.md documents this and other spec issues
+ *
+ * @param {Array} errors - AJV validation errors
+ * @param {object} body - Request body being validated
+ * @returns {Array} Filtered errors with false positives removed
  */
 function filterAmbiguousOneOfErrors(errors, body) {
   if (!errors || errors.length === 0) return errors;

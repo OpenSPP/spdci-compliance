@@ -5,6 +5,21 @@
  * Configure authentication via environment variables:
  *   - AUTH_TOKEN: Bearer token value (will be prefixed with "Bearer " if needed)
  *   - EXTRA_HEADERS_JSON: JSON object/array of additional headers
+ *
+ * INTEROPERABILITY NOTE: Header Matching Behavior
+ * ------------------------------------------------
+ * This module uses CASE-INSENSITIVE matching for both header names AND values.
+ *
+ * - Header NAMES: Case-insensitive per HTTP/1.1 spec (RFC 7230 Section 3.2)
+ * - Header VALUES: Case-insensitive as an INTEROPERABILITY ACCOMMODATION
+ *
+ * While HTTP header values are technically case-sensitive for most headers,
+ * SPDCI implementations vary in how they format values like Content-Type
+ * (e.g., "application/json" vs "Application/JSON"). This relaxed matching
+ * prevents false test failures due to cosmetic differences.
+ *
+ * For headers where case sensitivity is critical (e.g., Authorization tokens,
+ * ETags), implementations should use exact string comparison outside this module.
  */
 
 /**
@@ -53,7 +68,16 @@ function getDefaultAuthorization() {
 }
 
 /**
- * Check if a header exists and optionally matches a value (case-insensitive)
+ * Check if a header exists and optionally matches a value.
+ *
+ * INTEROPERABILITY: Both header name and value matching are case-insensitive.
+ * Value matching uses .includes() to handle variations like charset parameters.
+ * See module-level documentation for rationale.
+ *
+ * @param {string[]} rawHeaders - Raw headers array from response (alternating name/value)
+ * @param {string} headerName - Header name to find (case-insensitive)
+ * @param {string|null} expectedValue - Expected value to match (case-insensitive, partial match)
+ * @returns {{ok: boolean, actualValue: string|null, reason?: string}}
  */
 export function checkHeader(rawHeaders, headerName, expectedValue = null) {
   // rawHeaders is an array like ['Content-Type', 'application/json', ...]

@@ -74,6 +74,18 @@ export {
   waitForCallbackAction,
 } from './callback-server.js';
 
+// Signature utilities
+export {
+  signatureConfig,
+  INVALID_SIGNATURES,
+  SIGNATURE_ERROR_CODES,
+  getSignature,
+  isSignatureValidationEnabled,
+  withInvalidSignature,
+  withSignature,
+  validateSignatureRejection,
+} from './signature.js';
+
 // Utility functions
 export function getBaseUrl() {
   return process.env.API_BASE_URL || 'http://localhost:8080';
