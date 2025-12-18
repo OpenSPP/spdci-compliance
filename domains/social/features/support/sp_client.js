@@ -245,11 +245,6 @@ Then(/^The message should include transaction_id$/, function () {
   chai.expect(this.payload.message.transaction_id, 'Message should have transaction_id').to.exist;
 });
 
-Then(/^The Content-Type header should be "([^"]*)"$/, function (expectedContentType) {
-  const actual = this.headers[contentTypeHeader.key] || this.headers['Content-Type'];
-  chai.expect(actual).to.include(expectedContentType);
-});
-
 Then(/^The Authorization header should be present$/, function () {
   const hasAuth = Object.keys(this.headers).some(k => k.toLowerCase() === 'authorization');
   chai.expect(hasAuth, 'Authorization header should be present').to.be.true;
