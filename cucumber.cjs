@@ -1,5 +1,7 @@
 const domain = process.env.DOMAIN || 'social';
 
+const stepTimeout = parseInt(process.env.CUCUMBER_STEP_TIMEOUT_MS || '30000', 10);
+
 module.exports = {
   default: {
     paths: [
@@ -7,7 +9,10 @@ module.exports = {
       `domains/${domain}/features/**/*.feature`,
     ],
     import: [
-      'common/features/support/**/*.js',
+      // Import common support (world, hooks, etc.) but NOT common/features/support/steps/
+      // which are utility modules for domain step definitions to import as needed
+      'common/features/support/*.js',
+      'common/features/support/helpers/**/*.js',
       `domains/${domain}/features/support/**/*.js`,
     ],
     format: [
@@ -18,5 +23,7 @@ module.exports = {
     formatOptions: {
       snippetInterface: 'async-await',
     },
+    // Increase step timeout for async callback workflows
+    timeout: stepTimeout,
   },
 };

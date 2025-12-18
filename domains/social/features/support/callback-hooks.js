@@ -1,6 +1,10 @@
-import { AfterAll, Before, BeforeAll } from '@cucumber/cucumber';
+import { AfterAll, Before, BeforeAll, setDefaultTimeout } from '@cucumber/cucumber';
 
 import { resetCallbacks, startCallbackServer, stopCallbackServer } from './helpers/callback-server.js';
+
+// Increase step timeout for async callback workflows (default 5000ms is too short)
+const stepTimeout = parseInt(process.env.CUCUMBER_STEP_TIMEOUT_MS || '60000', 10);
+setDefaultTimeout(stepTimeout);
 
 const enabled = String(process.env.CALLBACK_SERVER_ENABLED || '').toLowerCase() === 'true';
 

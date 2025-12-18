@@ -1,11 +1,26 @@
-# FR (Functional Registry) - Not Implemented
+# FR (Farmer Registry) Tests
 
-This domain is planned but not yet implemented.
+Tests for SPDCI-compliant Farmer Registry implementations.
 
-## Spec
-- `fr_api_v1.0.0.yaml`
+## Tests
 
-## To implement
-- [ ] Domain config
-- [ ] Payloads
-- [ ] Domain-specific features
+- **Core Registry Tests**: Async/sync search, subscribe, unsubscribe, txn status
+- **Negative Tests**: Schema-invalid request handling
+
+## Running Tests
+
+```bash
+# Run all FR tests
+npm run test:fr
+
+# Run only smoke tests
+DOMAIN=fr npm test -- --tags '@profile=fr-registry and @smoke'
+```
+
+## Configuration
+
+Set these environment variables to configure the test target:
+
+- `API_BASE_URL`: Target FR server (default: `http://127.0.0.1:3333/`)
+- `DCI_AUTH_TOKEN`: Bearer token for authentication
+- `CALLBACK_SERVER_BASE_URL`: Callback server URL for async workflows

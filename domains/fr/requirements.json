@@ -1,0 +1,77 @@
+{
+  "spec": "fr_api_v1.0.0.yaml",
+  "requirements": [
+    {
+      "id": "FR-CORE-RG-ASYNC-SEARCH-01",
+      "tier": "core",
+      "profile": "fr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "happy",
+      "description": "Async search accepts a spec-valid request and returns a valid Response envelope."
+    },
+    {
+      "id": "FR-CORE-RG-SUBSCRIBE-01",
+      "tier": "core",
+      "profile": "fr-registry",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "happy",
+      "description": "Subscribe accepts a spec-valid request and returns a valid Response envelope."
+    },
+    {
+      "id": "FR-CORE-RG-UNSUBSCRIBE-01",
+      "tier": "core",
+      "profile": "fr-registry",
+      "method": "POST",
+      "path": "/registry/unsubscribe",
+      "kind": "happy",
+      "description": "Unsubscribe accepts a spec-valid request and returns a valid Response envelope."
+    },
+    {
+      "id": "FR-CORE-RG-TXN-STATUS-01",
+      "tier": "core",
+      "profile": "fr-registry",
+      "method": "POST",
+      "path": "/registry/txn/status",
+      "kind": "happy",
+      "description": "Txn status accepts a spec-valid request and returns a valid Response envelope."
+    },
+    {
+      "id": "FR-CORE-RG-SYNC-SEARCH-01",
+      "tier": "core",
+      "profile": "fr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "happy",
+      "description": "Sync search accepts a spec-valid request and returns a spec-valid SearchResponse message."
+    },
+    {
+      "id": "FR-CORE-RG-ASYNC-SEARCH-NEG-01",
+      "tier": "core",
+      "profile": "fr-registry",
+      "method": "POST",
+      "path": "/registry/search",
+      "kind": "negative",
+      "description": "Async search rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "FR-CORE-RG-SUBSCRIBE-NEG-01",
+      "tier": "core",
+      "profile": "fr-registry",
+      "method": "POST",
+      "path": "/registry/subscribe",
+      "kind": "negative",
+      "description": "Subscribe rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    },
+    {
+      "id": "FR-CORE-RG-SYNC-SEARCH-NEG-01",
+      "tier": "core",
+      "profile": "fr-registry",
+      "method": "POST",
+      "path": "/registry/sync/search",
+      "kind": "negative",
+      "description": "Sync search rejects a schema-invalid request (HTTP 4xx or ACK ERR)."
+    }
+  ]
+}
