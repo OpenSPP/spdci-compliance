@@ -195,7 +195,7 @@ When(/^A POST request to sync search is sent with predicate query$/, async funct
 // SYNC SEARCH EXTRA VALIDATION
 // ============================================
 
-Given(/^System wants to sync search for person in CRVS$/, function () {
+Given(/^System wants to validate sync search response in CRVS$/, function () {
   specSyncPredicateSearch = spec();
 });
 
