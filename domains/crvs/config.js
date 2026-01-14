@@ -26,9 +26,9 @@ export const config = {
   // Identifier types for idtype-value queries
   identifierTypes: [
     'UIN',              // Unique Identification Number
-    'BIRTH_REG_NO',     // Birth Registration Number
-    'DEATH_REG_NO',     // Death Registration Number
-    'MARRIAGE_REG_NO',  // Marriage Registration Number
+    'BRN',     // Birth Registration Number
+    'DRN',     // Death Registration Number
+    'MRN',  // Marriage Registration Number
     'NIN',              // National ID Number
   ],
 
