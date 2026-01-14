@@ -170,8 +170,8 @@ const domainConfigs = {
     recordTypes: ['Person', 'CRVSPerson'],
     defaultRecordType: 'Person',
 
-    identifierTypes: ['BIRTH_REG_NO', 'DEATH_REG_NO', 'MARRIAGE_REG_NO', 'NIN'],
-    defaultIdentifierType: 'BIRTH_REG_NO',
+    identifierTypes: ['BRN', 'DRN', 'MRN', 'NIN'],
+    defaultIdentifierType: 'BRN',
 
     eventTypes: ['BIRTH', 'DEATH', 'MARRIAGE', 'DIVORCE'],
     defaultEventType: 'BIRTH',
