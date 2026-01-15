@@ -35,23 +35,20 @@ const domainConfigs = {
 
     // Default test values for payloads
     testData: {
-      // idtype-value query
+      // idtype-value query - strictly validated
       idTypeValue: {
         type: 'UIN',
         value: 'TEST-001',
       },
-      // Expression query
+      // Expression query - envelope only validation per DCI spec
+      // The DCI spec intentionally leaves expression query format implementation-specific.
+      // We only validate the envelope structure { type, value }, not the value contents.
+      // Implementations may use MongoDB-style, GraphQL, or custom query languages.
       expression: {
-        collection: 'Group',
-        query: {
-          '$and': [
-            { 'poverty_score': { '$lt': 5 } },
-            { 'location': { '$eq': 'central_region' } },
-            { 'group_size': { '$lt': 5 } },
-          ],
-        },
+        sample_field: 'implementation-specific-query',
       },
-      // Predicate query
+      // Predicate query - strictly validated per DCI ExpPredicateWithCondition spec
+      // Operators MUST be: gt, lt, eq, ge, le, in (per ExpOperator.yaml)
       predicate: [{
         seq_num: 1,
         expression1: { attribute_name: 'age', operator: 'lt', attribute_value: '25' },
@@ -114,18 +111,15 @@ const domainConfigs = {
         type: 'FARMER_ID',
         value: 'FARMER-TEST-001',
       },
+      // Expression query - envelope only validation (implementation-specific)
       expression: {
-        collection: 'Farmer',
-        query: {
-          '$and': [
-            { 'farm_size': { '$gte': 10 } },
-            { 'crop_type': { '$eq': 'maize' } },
-          ],
-        },
+        sample_field: 'implementation-specific-query',
       },
+      // Predicate query - strictly validated per DCI spec
+      // Operators: gt, lt, eq, ge, le, in (NOT gte/lte)
       predicate: [{
         seq_num: 1,
-        expression1: { attribute_name: 'farm_size', operator: 'gte', attribute_value: '5' },
+        expression1: { attribute_name: 'farm_size', operator: 'ge', attribute_value: '5' },
         condition: 'and',
         expression2: { attribute_name: 'irrigation_type', operator: 'eq', attribute_value: 'drip' },
       }],
@@ -181,20 +175,17 @@ const domainConfigs = {
         type: 'BIRTH_REG_NO',
         value: 'BIRTH-TEST-001',
       },
+      // Expression query - envelope only validation (implementation-specific)
       expression: {
-        collection: 'Person',
-        query: {
-          '$and': [
-            { 'date_of_birth': { '$gte': '2000-01-01' } },
-            { 'place_of_birth': { '$eq': 'central_hospital' } },
-          ],
-        },
+        sample_field: 'implementation-specific-query',
       },
+      // Predicate query - strictly validated per DCI spec
+      // Operators: gt, lt, eq, ge, le, in (NOT gte/lte)
       predicate: [{
         seq_num: 1,
-        expression1: { attribute_name: 'registration_date', operator: 'gte', attribute_value: '2020-01-01' },
+        expression1: { attribute_name: 'registration_date', operator: 'ge', attribute_value: '2020-01-01' },
         condition: 'and',
-        expression2: { attribute_name: 'gender', operator: 'eq', attribute_value: 'male' },
+        expression2: { attribute_name: 'sex', operator: 'eq', attribute_value: 'male' },
       }],
       subscribeFilter: {
         type: 'BIRTH_REG_NO',

@@ -434,12 +434,12 @@ export const onsearchRequestSchema = {
             properties: {
               reference_id: { type: 'string' },
               timestamp: { type: 'string' },
-              status: { type: 'string', enum: ['rcvd', 'processed', 'failed', 'succ', 'rjct', 'part'] },
+              status: { type: 'string', enum: ['rcvd', 'pdng', 'succ', 'rjct'] },
               status_reason_code: { type: 'string' },
               status_reason_message: { type: 'string' },
               data: { type: 'object' },
               pagination: { type: 'object' },
-              locale: { type: 'string', enum: ['en', 'fr', 'ar'] },
+              locale: { type: 'string' },  // Removed enum - spec uses 3-letter ISO codes (e.g., 'eng')
             },
           },
         },

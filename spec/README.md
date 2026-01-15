@@ -80,15 +80,34 @@ the registry.
 |-------------------|---------|
 | `sub-test-001` | Unsubscribe tests, on-unsubscribe callback tests |
 
+### Query Type Validation Levels
+
+The DCI spec defines different query types with different levels of structure:
+
+| Query Type | Validation Level | Description |
+|------------|------------------|-------------|
+| `idtype-value` | **Strict** | Validates `{ type, value }` structure |
+| `predicate` | **Strict** | Validates `ExpPredicateWithConditionList` structure per DCI spec. Operators must be: `gt`, `lt`, `eq`, `ge`, `le`, `in` |
+| `expression` | **Envelope only** | Validates `{ type, value }` envelope exists, but `value` contents are NOT validated (implementation-specific) |
+| `graphql` | **Envelope only** | Validates `{ type, value }` envelope, `value` is a GraphQL string |
+
+**Important:** The `expression` query type is intentionally free-form per DCI spec. Implementations may use
+MongoDB-style (`$and`, `$lt`), SQL-like, GraphQL, or custom query languages. The compliance tool does NOT
+enforce any specific syntax within the `value` field.
+
+For **interoperable** structured queries (like date ranges), use `predicate` query type with the
+`ExpPredicateWithConditionList` format defined in the DCI spec.
+
 ### Query Test Data
 
-For expression and predicate query tests to return results, the registry should
-contain records matching these criteria:
+For predicate query tests to return results, the registry should contain records
+matching these criteria:
 
 | Query Type | Criteria | Description |
 |------------|----------|-------------|
-| Expression | `poverty_score < 5`, `location = "central_region"`, `group_size < 5` | Group records with these attributes |
 | Predicate | `age < 25`, `poverty_score < 2.5` | Person records matching these conditions |
+
+**Note:** Expression query tests only validate envelope structure, not query results.
 
 ### Environment Variables for Test Configuration
 

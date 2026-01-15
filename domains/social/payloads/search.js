@@ -5,7 +5,6 @@
  */
 
 import { createEnvelope, generateId, getTimestamp } from '../../../common/helpers/index.js';
-import config from '../config.js';
 
 /**
  * Create a search request with idtype-value query
@@ -31,8 +30,12 @@ export function createIdTypeSearchPayload(idType = 'UIN', idValue = 'TEST-001') 
 
 /**
  * Create a search request with expression query
+ *
+ * NOTE: Per DCI spec, expression query uses { type, value: { expression: ... } } structure.
+ * The expression content format is implementation-specific (MongoDB-style, GraphQL, etc.).
  */
 export function createExpressionSearchPayload(expression = null) {
+  // Default expression matches DCI Social Registry spec example (MongoDB-style query)
   const defaultExpression = {
     collection: 'Group',
     query: {
