@@ -8,7 +8,7 @@ Unified compliance testing framework for SPDCI (Social Protection Digital Conver
 |--------|------|--------|
 | Social Registry (SR) | `social_api_v1.0.0.yaml` | **Complete** |
 | Civil Registration (CRVS) | `crvs_api_v1.0.0.yaml` | **Complete** |
-| Disbursement Registry (DR) | `dr_api_v1.0.0.yaml` | Not Implemented |
+| Disability Registry (DR) | `dr_api_v1.0.0.yaml` | Not Implemented |
 | Functional Registry (FR) | `fr_api_v1.0.0.yaml` | **Complete** |
 | ID & Beneficiary Registry (IBR) | `ibr_api_v1.0.0.yaml` | Not Implemented |
 
@@ -42,7 +42,7 @@ spdci-compliance/
 │   ├── crvs/                  # Civil Registration (implemented)
 │   │   ├── features/          # CRVS-specific scenarios
 │   │   └── requirements.json  # CRVS-specific requirements
-│   ├── dr/                    # Disbursement Registry (not implemented)
+│   ├── dr/                    # Disability Registry (not implemented)
 │   ├── fr/                    # Functional Registry (implemented)
 │   │   ├── features/          # FR-specific scenarios
 │   │   └── requirements.json  # FR-specific requirements
