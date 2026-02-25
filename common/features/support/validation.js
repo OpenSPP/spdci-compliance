@@ -103,7 +103,7 @@ function createSubscribePayload() {
       timestamp: getTimestamp(),
       subscribe_criteria: {
         reg_event_type: config.defaultEventType,
-        filter: { type: config.defaultIdentifierType, value: 'TEST-001' },
+        filter: { type: config.defaultIdentifierType, value: config.testData.subscribeFilter.value },
         notify_record_type: config.defaultRecordType,
       },
     }],
@@ -114,10 +114,11 @@ function createSubscribePayload() {
  * Create a generic unsubscribe request payload
  */
 function createUnsubscribePayload() {
+  const config = getDomainConfig();
   return createEnvelope('unsubscribe', {
     transaction_id: generateId(),
     timestamp: getTimestamp(),
-    subscription_codes: ['sub-test-001'],
+    subscription_codes: config.testData.subscriptionCodes,
   });
 }
 

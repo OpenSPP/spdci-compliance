@@ -9,6 +9,7 @@ export * from './envelope.js';
 export * from './headers.js';
 
 // Domain configuration (comprehensive)
+import { getEndpoint as _getEndpoint } from './domain-config.js';
 export {
   getDomainConfig,
   getEndpoint,
@@ -80,6 +81,5 @@ export function getBaseUrl() {
 }
 
 export function getFullUrl(endpointName, domain) {
-  const { getEndpoint } = require('./domain-config.js');
-  return getBaseUrl() + '/' + getEndpoint(endpointName, domain);
+  return getBaseUrl() + '/' + _getEndpoint(endpointName, domain);
 }
