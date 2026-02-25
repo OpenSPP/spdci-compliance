@@ -1,49 +1,43 @@
 # OpenAPI Specifications
 
-This folder contains OpenAPI specifications used for compliance testing.
+This folder contains OpenAPI specifications used for compliance testing. The specs
+are synced from [spdci/api-standards](https://github.com/spdci/api-standards)
+`release/yaml/` with minimal local fixes applied.
 
-## Social Registry (`social_api_v1.0.0.yaml`)
+## Spec Sync Status
 
-The Social Registry specification is based on the official SPDCI specification from
-[spdci/api-standards](https://github.com/spdci/api-standards) with the following
-modifications to fix known issues:
+Last synced: Feb 25, 2026 (upstream commit `954f0c9`)
 
-### Typo Fixes
+| Spec | Status |
+|------|--------|
+| `social_api_v1.0.0.yaml` | Synced, no local fixes needed |
+| `crvs_api_v1.0.0.yaml` | Synced, no local fixes needed |
+| `fr_api_v1.0.0.yaml` | Synced + local fix for `reg_records` type in NotifyEventRequest |
+| `dr_api_v1.0.0.yaml` | Synced (tests not yet implemented) |
+| `ibr_api_v1.0.0.yaml` | Synced (tests not yet implemented) |
 
-| Location | Original | Fixed |
-|----------|----------|-------|
-| UnsubscribeRequest.timestamp | `timesstamp` | `timestamp` |
-| UnsubscribeRequest.subscription_codes | `sunscription_codes` | `subscription_codes` |
-| UnSubscribeResponse.timestamp | `timesatmp` | `timestamp` |
-| TxnStatusRequest.txn_type enum | `subscibe` | `subscribe` |
-| TxnStatusResponse.txn_type enum | `subscibe` | `subscribe` |
+## Local Fixes
 
-### Schema Corrections
+### FR: `reg_records` type in NotifyEventRequest
 
-These changes fix inconsistencies between the OpenAPI spec and the JSON-LD schemas:
+The FR spec defines `reg_records` as `type: object` in the NotifyEventRequest
+schema, but `type: array` in the SearchResponse schema. The Social and CRVS specs
+both use `type: array` consistently. We fix the NotifyEventRequest to use
+`type: array` with `items: { type: object }` for consistency.
 
-| Location | Change | Reason |
-|----------|--------|--------|
-| SubscriptionInfo.required | Changed from `[subscription_code, timestamp, subscribe_criteria]` to `[code, status, timestamp]` | Original spec had incorrect field names that don't exist in the schema. The actual schema uses `code` and `status` fields. |
-| SubscriptionInfo.notify_record_type | Removed nested `required` block | The nested required array was incorrectly placed under a `$ref` property |
+See `SPEC_ISSUES_REPORT.md` for full details and upstream status.
 
-### Workarounds for Upstream Issues
+## Validation Workarounds
 
-These changes work around known issues in the upstream spec pending fixes:
+Some validation issues are handled in code rather than spec modifications. See
+`common/helpers/openapi-validator.js`:
 
-| Location | Change | Upstream Issue | Reason |
-|----------|--------|----------------|--------|
-| TxnStatusRequest.attribute_value | `oneOf` → `anyOf` | [#46](https://github.com/spdci/api-standards/issues/46) | `transaction_id` and `correlation_id` schemas are structurally identical (both `string, maxLength: 99`), causing valid requests to fail oneOf validation. The `attribute_type` field serves as semantic discriminator but OpenAPI validators cannot use it. |
+| Function | Description |
+|----------|-------------|
+| `filterAmbiguousOneOfErrors()` | Filters false-positive oneOf errors for the `query` field where `expression` and `idtype-value` schemas overlap. Uses `query_type` as semantic discriminator. |
+| `getFallbackResponseSchema()` | Falls back to the shared `Response` component when an endpoint's response has no inline schema (common in upstream-regenerated specs). |
 
-### Validation Workarounds
-
-Some validation issues are handled in code rather than spec modifications. See `common/helpers/openapi-validator.js`:
-
-| Function | Upstream Issue | Description |
-|----------|----------------|-------------|
-| `filterAmbiguousOneOfErrors()` | [#45](https://github.com/spdci/api-standards/issues/45) | Filters false-positive oneOf errors for the `query` field where `expression` and `idtype-value` schemas overlap. Uses `query_type` as semantic discriminator since OpenAPI validators cannot. |
-
-### Upstream Issues
+## Upstream Issues
 
 These issues have been reported to the SPDCI team:
 - [api-standards#45](https://github.com/spdci/api-standards/issues/45) - Ambiguous oneOf schema for query field
@@ -51,38 +45,20 @@ These issues have been reported to the SPDCI team:
 - [api-standards#47](https://github.com/spdci/api-standards/issues/47) - Ambiguous oneOf schema for SubscriptionInfo.filter field
 - [api-standards#49](https://github.com/spdci/api-standards/issues/49) - DR spec missing txn/status endpoints
 
-## Other Specifications
-
-The following specifications are not yet included:
-
-- `crvs_api_v1.0.0.yaml` - Civil Registration and Vital Statistics
-- `dr_api_v1.0.0.yaml` - Disbursement Registry
-- `fr_api_v1.0.0.yaml` - Functional Registry
-- `ibr_api_v1.0.0.yaml` - ID & Beneficiary Registry
-
-These will be added when their respective domain tests are implemented.
-
 ## Test Data Requirements
 
-For the compliance tests to pass, the Social Registry under test must be populated
-with specific test data. The tests use hard-coded identifiers that must exist in
-the registry.
+For compliance tests to pass, the registry under test must be populated with
+specific test data. See `docs/testing-your-registry.md` for the full guide.
 
-### Required Registry Records
+### Required Records Per Domain
 
-| Identifier Type | Value | Used By |
-|-----------------|-------|---------|
-| UIN | `TEST-001` | Search tests (idtype-value queries) |
-
-### Required Subscriptions
-
-| Subscription Code | Used By |
-|-------------------|---------|
-| `sub-test-001` | Unsubscribe tests, on-unsubscribe callback tests |
+| Domain | Identifier Type | Value | Subscription Code |
+|--------|-----------------|-------|-------------------|
+| Social | `UIN` | `TEST-001` | `sub-test-001` |
+| CRVS | `BRN` | `BIRTH-TEST-001` | `sub-crvs-test-001` |
+| FR | `FARMER_ID` | `FARMER-TEST-001` | `sub-fr-test-001` |
 
 ### Query Type Validation Levels
-
-The DCI spec defines different query types with different levels of structure:
 
 | Query Type | Validation Level | Description |
 |------------|------------------|-------------|
@@ -91,81 +67,12 @@ The DCI spec defines different query types with different levels of structure:
 | `expression` | **Envelope only** | Validates `{ type, value }` envelope exists, but `value` contents are NOT validated (implementation-specific) |
 | `graphql` | **Envelope only** | Validates `{ type, value }` envelope, `value` is a GraphQL string |
 
-**Important:** The `expression` query type is intentionally free-form per DCI spec. Implementations may use
-MongoDB-style (`$and`, `$lt`), SQL-like, GraphQL, or custom query languages. The compliance tool does NOT
-enforce any specific syntax within the `value` field.
-
-For **interoperable** structured queries (like date ranges), use `predicate` query type with the
-`ExpPredicateWithConditionList` format defined in the DCI spec.
-
-### Query Test Data
-
-For predicate query tests to return results, the registry should contain records
-matching these criteria:
-
-| Query Type | Criteria | Description |
-|------------|----------|-------------|
-| Predicate | `age < 25`, `poverty_score < 2.5` | Person records matching these conditions |
-
-**Note:** Expression query tests only validate envelope structure, not query results.
-
-### Environment Variables for Test Configuration
-
-Tests use environment variables to configure identifiers. Override these to use
-different test data:
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `DCI_SENDER_ID` | `test-client` | Sender identifier in message headers |
-| `DCI_RECEIVER_ID` | `sr-server` | Receiver identifier in message headers |
-| `DCI_SENDER_URI` | Auto-generated | Callback URL for async operations |
-| `DCI_AUTH_TOKEN` | None | Bearer token for authentication |
-| `API_BASE_URL` | `http://127.0.0.1:3333/` | Base URL of the SR under test |
-| `CALLBACK_SERVER_BASE_URL` | None | Base URL for callback server |
-| `RESPONSE_TIME_THRESHOLD_MS` | `15000` | Maximum response time threshold |
-
-### Seed Data Script
-
-Implementations should provide a seed script that creates the required test data.
-Example structure for OpenSPP:
-
-```python
-# Create test person with UIN
-partner = env['res.partner'].create({
-    'name': 'Test Person 001',
-    'spp_id_type': 'UIN',
-    'spp_id_value': 'TEST-001',
-})
-
-# Create test subscription
-subscription = env['spp.subscription'].create({
-    'code': 'sub-test-001',
-    'status': 'subscribe',
-    ...
-})
-```
-
-## Out of Scope Features
-
-The following features are **NOT specified** in the SPDCI API standards and are therefore
-not included in the compliance test suite:
-
-| Feature | Reason |
-|---------|--------|
-| Rate Limiting | Not defined in spec - implementation-specific |
-| Version Negotiation | Not defined in spec - all endpoints use header.version field |
-| Idempotency | Not defined in spec - no idempotency key header |
-| CORS Headers | Not defined in spec - deployment-specific |
-| Compression | Not defined in spec - HTTP transport layer concern |
-| Concurrent Request Handling | Not defined in spec - implementation-specific |
-
-These features may be important for production deployments but are outside the scope
-of SPDCI API compliance testing.
-
 ## Updating Specifications
 
-When updating a specification:
+When syncing from upstream:
 
-1. Document any modifications in this README
-2. Prefer validation workarounds over spec modifications when possible
-3. Report issues upstream to [spdci/api-standards](https://github.com/spdci/api-standards)
+1. Copy files from `spdci-api-standards/release/yaml/` into this directory
+2. Re-apply any local fixes listed above
+3. Run mock tests (`npm run test:mock:social`, etc.) to verify
+4. Update the sync date and status table in this README
+5. Update `SPEC_ISSUES_REPORT.md` if any fixes are no longer needed
