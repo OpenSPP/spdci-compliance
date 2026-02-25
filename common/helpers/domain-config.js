@@ -26,11 +26,11 @@ const domainConfigs = {
     defaultRecordType: 'Member',
 
     // Identifier types for search queries
-    identifierTypes: ['UIN', 'NIN', 'HOUSEHOLD_ID'],
+    identifierTypes: ['UIN', 'MOBILE', 'EMAIL', 'NIN', 'HOUSEHOLD_ID'],
     defaultIdentifierType: 'UIN',
 
-    // Event types for subscriptions
-    eventTypes: ['REGISTER', 'UPDATE', 'DEREGISTER'],
+    // Event types for subscriptions (per social_api_v1.0.0.yaml RegistryEventType enum)
+    eventTypes: ['REGISTER', 'NewHouseHoldMember'],
     defaultEventType: 'REGISTER',
 
     // Default test values for payloads
@@ -100,11 +100,13 @@ const domainConfigs = {
     recordTypes: ['Farmer'],
     defaultRecordType: 'Farmer',
 
-    identifierTypes: ['FARMER_ID', 'FARM_REG_NO', 'NIN'],
+    identifierTypes: ['FARMER_ID', 'FARM_ID', 'NIN'],
     defaultIdentifierType: 'FARMER_ID',
 
-    eventTypes: ['REGISTER', 'UPDATE', 'DEREGISTER'],
-    defaultEventType: 'REGISTER',
+    // Event types for subscriptions (per fr_api_v1.0.0.yaml RegistryEventType enum)
+    // Note: the spec defines lowercase 'register', not uppercase
+    eventTypes: ['register'],
+    defaultEventType: 'register',
 
     testData: {
       idTypeValue: {
@@ -164,15 +166,19 @@ const domainConfigs = {
     recordTypes: ['Person', 'CRVSPerson'],
     defaultRecordType: 'Person',
 
-    identifierTypes: ['BRN', 'DRN', 'MRN', 'NIN'],
+    identifierTypes: ['UIN', 'BRN', 'DRN', 'MRN', 'NIN'],
     defaultIdentifierType: 'BRN',
 
+    // The CRVS spec does not define an enum for reg_event_type (free-form string).
+    // These short-form values are practical conventions. The spec examples use a
+    // namespaced form (e.g., "spdci-common:RegistryEventType:LiveBirth") which may
+    // be preferred for interoperability.
     eventTypes: ['BIRTH', 'DEATH', 'MARRIAGE', 'DIVORCE'],
     defaultEventType: 'BIRTH',
 
     testData: {
       idTypeValue: {
-        type: 'BIRTH_REG_NO',
+        type: 'BRN',
         value: 'BIRTH-TEST-001',
       },
       // Expression query - envelope only validation (implementation-specific)
@@ -188,7 +194,7 @@ const domainConfigs = {
         expression2: { attribute_name: 'sex', operator: 'eq', attribute_value: 'male' },
       }],
       subscribeFilter: {
-        type: 'BIRTH_REG_NO',
+        type: 'BRN',
         value: 'BIRTH-TEST-001',
       },
       notifyRecordType: 'Person',

@@ -30,6 +30,10 @@ import {
   assertHttpErrorResponse,
 } from '../../helpers/openapi-validator.js';
 
+import {
+  getDomainConfig,
+} from '../../helpers/domain-config.js';
+
 // ============================================
 // CONFIGURATION
 // ============================================
@@ -73,6 +77,7 @@ function applyHeaders(request) {
  * Create a generic search request payload (works for all SPDCI domains)
  */
 function createSearchPayload() {
+  const config = getDomainConfig();
   return createEnvelope('search', {
     transaction_id: generateId(),
     search_request: [{
@@ -80,7 +85,7 @@ function createSearchPayload() {
       timestamp: getTimestamp(),
       search_criteria: {
         query_type: 'idtype-value',
-        query: { type: 'UIN', value: 'TEST-001' },
+        query: { type: config.testData.idTypeValue.type, value: config.testData.idTypeValue.value },
       },
     }],
   });
@@ -90,15 +95,16 @@ function createSearchPayload() {
  * Create a generic subscribe request payload
  */
 function createSubscribePayload() {
+  const config = getDomainConfig();
   return createEnvelope('subscribe', {
     transaction_id: generateId(),
     subscribe_request: [{
       reference_id: `ref-${generateId()}`,
       timestamp: getTimestamp(),
       subscribe_criteria: {
-        reg_event_type: 'REGISTER',
-        filter: { type: 'UIN', value: 'TEST-001' },
-        notify_record_type: 'Member',
+        reg_event_type: config.defaultEventType,
+        filter: { type: config.defaultIdentifierType, value: 'TEST-001' },
+        notify_record_type: config.defaultRecordType,
       },
     }],
   });
