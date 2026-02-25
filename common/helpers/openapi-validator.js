@@ -109,6 +109,16 @@ function getJsonSchemaFromResponse(op, statusCode) {
   return chosen?.content?.['application/json']?.schema || null;
 }
 
+/**
+ * Fallback response schema from components/responses/Response.
+ * Some upstream spec versions omit inline response schemas on endpoints,
+ * using only a description. The ACK schema in components/responses/Response
+ * applies to all async SPDCI endpoints.
+ */
+function getFallbackResponseSchema(openApi) {
+  return openApi.components?.responses?.Response?.content?.['application/json']?.schema || null;
+}
+
 async function getValidator(params) {
   const { openApi, ajv, validators } = await loadOpenApi(params.domain);
   const resolvedPath = resolveSpecPath(openApi, params.path);
@@ -118,9 +128,15 @@ async function getValidator(params) {
   if (existing) return { validate: existing, ajv };
 
   const op = getOperation(openApi, resolvedPath, params.method);
-  const schema = params.direction === 'request'
+  let schema = params.direction === 'request'
     ? getJsonSchemaFromRequest(op)
     : getJsonSchemaFromResponse(op, params.statusCode);
+
+  // Fall back to the shared Response component when an endpoint's response
+  // has no inline schema (common in upstream-regenerated specs).
+  if (!schema && params.direction === 'response') {
+    schema = getFallbackResponseSchema(openApi);
+  }
 
   if (!schema) {
     throw new Error(`OpenAPI: missing schema for ${params.direction} ${params.method.toUpperCase()} ${resolvedPath}`);
