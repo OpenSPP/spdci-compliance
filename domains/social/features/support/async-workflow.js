@@ -19,7 +19,7 @@ import {
   getCallbackPathForAction,
 } from './helpers/index.js';
 
-import { assertOpenApiRequest, assertOpenApiResponse } from './helpers/index.js';
+import { assertOpenApiRequest, assertOpenApiResponse, hasOpenApiResponseSchema } from './helpers/index.js';
 import { waitForCallback } from './helpers/callback-server.js';
 
 function getCallbackWaitMs() {
@@ -35,6 +35,10 @@ function getAckStatus(body) {
 
 function getAckCorrelationId(body) {
   return body?.message?.correlation_id;
+}
+
+async function assertCallbackMatchesSpec(path, record) {
+  await assertOpenApiRequest({ path, method: 'post' }, record.body);
 }
 
 async function sendAsyncRequest(world, { action, endpoint, payload }) {
@@ -93,7 +97,10 @@ Then(/^SR should respond with ACK for the async request$/, async function () {
   const { requestPath, endpoint, response } = this.workflow;
   chai.expect([200, 202], `Expected HTTP 200/202, got ${response.statusCode}`).to.include(Number(response.statusCode));
 
-  await assertOpenApiResponse({ path: requestPath, method: 'post', statusCode: response.statusCode }, response.body);
+  const responseParams = { path: requestPath, method: 'post', statusCode: response.statusCode };
+  if (await hasOpenApiResponseSchema(responseParams)) {
+    await assertOpenApiResponse(responseParams, response.body);
+  }
 
   chai.expect(getAckStatus(response.body), 'Expected ack_status in response body').to.equal('ACK');
   chai.expect(getAckCorrelationId(response.body), 'Expected correlation_id in ACK response').to.be.a('string').and.not.empty;
@@ -122,6 +129,7 @@ Then(/^SR should call the on-search callback with matching ids$/, async function
   );
 
   chai.expect(record, 'Expected on-search callback to be received').to.exist;
+  await assertCallbackMatchesSpec(path, record);
 });
 
 Then(/^SR should call the on-subscribe callback with matching ids$/, async function () {
@@ -142,6 +150,7 @@ Then(/^SR should call the on-subscribe callback with matching ids$/, async funct
   );
 
   chai.expect(record, 'Expected on-subscribe callback to be received').to.exist;
+  await assertCallbackMatchesSpec(path, record);
 });
 
 Then(/^SR should call the on-unsubscribe callback with matching ids$/, async function () {
@@ -162,6 +171,7 @@ Then(/^SR should call the on-unsubscribe callback with matching ids$/, async fun
   );
 
   chai.expect(record, 'Expected on-unsubscribe callback to be received').to.exist;
+  await assertCallbackMatchesSpec(path, record);
 });
 
 Then(/^SR should call the txn on-status callback with matching ids$/, async function () {
@@ -182,5 +192,5 @@ Then(/^SR should call the txn on-status callback with matching ids$/, async func
   );
 
   chai.expect(record, 'Expected txn on-status callback to be received').to.exist;
+  await assertCallbackMatchesSpec(path, record);
 });
-

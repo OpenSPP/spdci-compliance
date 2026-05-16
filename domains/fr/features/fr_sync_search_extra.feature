@@ -7,7 +7,7 @@ for Farmer Registry implementations.
   @smoke @req=FR-CORE-RG-SYNC-SEARCH-EXTRA-01
   Scenario: Sync search response contains reg_records
     Given System wants to sync search for farmer in FR
-    When A POST request to sync search is sent
-    Then The sync search response should be received
-    And The sync search response should have status 200 or 202
+    When A POST request to FR sync search is sent
+    Then The response from the FR sync search should be received
+    And The FR sync search response should have status 200
     And The sync search response should contain reg_records array

@@ -30,5 +30,6 @@ Before(function () {
 
 AfterAll(async function () {
   if (!enabled) return;
+  await new Promise(resolve => setTimeout(resolve, 50));
   await stopCallbackServer();
 });

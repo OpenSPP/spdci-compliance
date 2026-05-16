@@ -1,7 +1,7 @@
-@profile=fr-registry @tier=core @method=POST @endpoint=registry/notify
+@profile=fr-subscriber @tier=core @method=POST @endpoint=registry/notify
 Feature: FR notify callback receiver
 
-This feature validates that a Farmer Registry implementation
+This feature validates that an SPMIS subscriber implementation
 can receive notify callbacks.
 
   @smoke @req=FR-CORE-RG-NOTIFY-01

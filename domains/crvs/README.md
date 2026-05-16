@@ -6,6 +6,7 @@ Tests for SPDCI-compliant Civil Registration and Vital Statistics registries.
 
 - **Core Registry Tests**: Async/sync search, subscribe, unsubscribe, txn status
 - **Negative Tests**: Schema-invalid request handling
+- **Subscriber Tests**: Callback receiver and notify scenarios under `@profile=crvs-subscriber`
 
 ## Running Tests
 
@@ -16,6 +17,8 @@ npm run test:crvs
 # Run only smoke tests
 DOMAIN=crvs npm test -- --tags '@profile=crvs-registry and @smoke'
 ```
+
+`npm run test:crvs` runs the CRVS registry profile. Use `@profile=crvs-subscriber` explicitly for subscriber callback receiver surfaces.
 
 ## Configuration
 

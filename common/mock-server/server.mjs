@@ -71,6 +71,10 @@ const domainRegistryTypes = {
 let responseConfig = {
   defaultDelay: 0,
   callbackDelay: 20,
+  enforceOpenApiValidation: process.env.MOCK_ENFORCE_OPENAPI_VALIDATION !== 'false',
+  enforceAuthorization: process.env.MOCK_ENFORCE_AUTH !== 'false',
+  enforceSignature: process.env.MOCK_ENFORCE_SIGNATURE !== 'false',
+  enforceContentType: process.env.MOCK_ENFORCE_CONTENT_TYPE !== 'false',
   endpoints: {},
   callbacks: {
     enabled: true,
@@ -103,6 +107,17 @@ function json(res, statusCode, body) {
   res.statusCode = statusCode;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.end(JSON.stringify(body, null, 2));
+}
+
+function httpErrorResponse(code, message) {
+  return {
+    code,
+    message,
+    errors: [{
+      code,
+      message,
+    }],
+  };
 }
 
 function readJson(req) {
@@ -160,6 +175,21 @@ function getRequestSchema(openApi, path, method) {
   return operation?.requestBody?.content?.['application/json']?.schema || null;
 }
 
+function getOperation(openApi, path, method) {
+  const pathItem = openApi.paths?.[path];
+  if (!pathItem) return null;
+  return pathItem[method.toLowerCase()] || null;
+}
+
+function operationRequiresAuthorization(openApi, path, method) {
+  const operation = getOperation(openApi, path, method);
+  if (!operation) return false;
+  const security = operation.security ?? openApi.security ?? [];
+  return Array.isArray(security) && security.some(requirement =>
+    requirement && Object.prototype.hasOwnProperty.call(requirement, 'Authorization')
+  );
+}
+
 /**
  * Check if query structure is valid based on query_type (for filtering false-positive oneOf errors)
  */
@@ -172,6 +202,7 @@ function isQueryStructureValidForType(body) {
     const query = req?.search_criteria?.query;
 
     if (queryType === 'expression' && query?.type && query?.value) return true;
+    if (queryType === 'graphql' && query?.type && query?.value) return true;
     if (queryType === 'predicate' && Array.isArray(query)) return true;
     if (queryType === 'idtype-value' && query?.type && query?.value !== undefined) return true;
   }
@@ -206,14 +237,14 @@ function filterAmbiguousOneOfErrors(errors, body) {
 async function validateRequest(path, method, body) {
   const cache = await loadOpenApi();
   if (!cache) {
-    return { valid: true, errors: [], warning: 'OpenAPI spec not loaded' };
+    return { valid: false, errors: [{ path: '(root)', message: 'OpenAPI spec not loaded' }] };
   }
 
   const { openApi, ajv, validators } = cache;
   const schema = getRequestSchema(openApi, path, method);
 
   if (!schema) {
-    return { valid: true, errors: [], warning: `No schema found for ${method} ${path}` };
+    return { valid: false, errors: [{ path: '(root)', message: `No schema found for ${method} ${path}` }] };
   }
 
   const cacheKey = `${method}:${path}`;
@@ -224,16 +255,39 @@ async function validateRequest(path, method, body) {
   }
 
   const rawValid = validate(body);
-  let errors = rawValid ? [] : validate.errors.map(e => ({
+  const filteredErrors = rawValid ? [] : filterAmbiguousOneOfErrors(validate.errors, body);
+  const errors = filteredErrors.map(e => ({
     path: e.instancePath || '(root)',
     message: e.message,
     keyword: e.keyword,
+    params: e.params,
   }));
-
-  errors = filterAmbiguousOneOfErrors(errors, body);
   const valid = errors.length === 0;
 
   return { valid, errors };
+}
+
+async function requiresAuthorization(path, method) {
+  const cache = await loadOpenApi();
+  if (!cache) return false;
+  return operationRequiresAuthorization(cache.openApi, path, method);
+}
+
+function hasBearerAuthorization(headers) {
+  const value = headers?.authorization;
+  return typeof value === 'string' && /^Bearer\s+\S+/i.test(value) && !/invalid/i.test(value);
+}
+
+function hasJsonContentType(headers) {
+  const value = headers?.['content-type'];
+  return typeof value === 'string' && value.toLowerCase().split(';')[0].trim() === 'application/json';
+}
+
+function hasInvalidSignature(body) {
+  const signature = body?.signature;
+  if (signature === undefined || signature === null) return false;
+  const value = String(signature);
+  return value === '' || value === 'invalid-signature' || value === '!@#$%^&*()' || value === 'abc';
 }
 
 // ============================================
@@ -560,6 +614,10 @@ async function handleAdmin(req, res, urlPath) {
     responseConfig = {
       defaultDelay: 0,
       callbackDelay: 20,
+      enforceOpenApiValidation: process.env.MOCK_ENFORCE_OPENAPI_VALIDATION !== 'false',
+      enforceAuthorization: process.env.MOCK_ENFORCE_AUTH !== 'false',
+      enforceSignature: process.env.MOCK_ENFORCE_SIGNATURE !== 'false',
+      enforceContentType: process.env.MOCK_ENFORCE_CONTENT_TYPE !== 'false',
       endpoints: {},
       callbacks: { enabled: true, failRate: 0 },
     };
@@ -599,13 +657,32 @@ async function handleRegistryEndpoint(req, res, urlPath, body) {
   const delay = endpointConfig.delay ?? responseConfig.defaultDelay;
   if (delay > 0) await sleep(delay);
 
-  if (!validation.valid && endpointConfig.strictValidation) {
-    json(res, 200, errResponse(correlationId, 'err.request.invalid', 'Validation failed'));
+  const shouldEnforceValidation = endpointConfig.strictValidation ?? responseConfig.enforceOpenApiValidation;
+  if (!validation.valid && shouldEnforceValidation) {
+    json(res, 400, httpErrorResponse('err.request.bad', 'Validation failed'));
     return;
   }
 
   if (endpointConfig.status === 'error') {
     json(res, 200, errResponse(correlationId, endpointConfig.errorCode || 'err.server', endpointConfig.errorMessage || 'Configured error'));
+    return;
+  }
+
+  const shouldEnforceContentType = endpointConfig.enforceContentType ?? responseConfig.enforceContentType;
+  if (shouldEnforceContentType && !hasJsonContentType(req.headers)) {
+    json(res, 415, httpErrorResponse('err.request.bad', 'Content-Type must be application/json'));
+    return;
+  }
+
+  const shouldEnforceAuth = endpointConfig.enforceAuthorization ?? responseConfig.enforceAuthorization;
+  if (shouldEnforceAuth && await requiresAuthorization(urlPath, 'POST') && !hasBearerAuthorization(req.headers)) {
+    json(res, 401, httpErrorResponse('err.request.unauthorized', 'Missing or invalid Authorization header'));
+    return;
+  }
+
+  const shouldEnforceSignature = endpointConfig.enforceSignature ?? responseConfig.enforceSignature;
+  if (shouldEnforceSignature && hasInvalidSignature(body)) {
+    json(res, 400, httpErrorResponse('err.signature.invalid', 'Invalid signature'));
     return;
   }
 

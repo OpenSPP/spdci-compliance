@@ -2,7 +2,7 @@
 Feature: CRVS search query types
 
 This feature validates that a CRVS implementation
-supports different query types: expression and predicate.
+supports different query types: expression, predicate, and GraphQL.
 
   @smoke @req=CRVS-CORE-RG-SEARCH-EXPRESSION-01
   Scenario: Async search with expression query
@@ -24,6 +24,16 @@ supports different query types: expression and predicate.
     And The predicate search response should be returned in a timely manner
     And The predicate search response should match the expected JSON schema
 
+  @smoke @req=CRVS-CORE-RG-SEARCH-GRAPHQL-01
+  Scenario: Async search with GraphQL query
+    Given System wants to search CRVS using GraphQL query
+    When A POST request to async search is sent with GraphQL query
+    Then The GraphQL search response should be received
+    And The GraphQL search response should have status 200 or 202
+    And The GraphQL search response should have "content-type": "application/json" header
+    And The GraphQL search response should be returned in a timely manner
+    And The GraphQL search response should match the expected JSON schema
+
   @smoke @req=CRVS-CORE-RG-SYNC-SEARCH-EXPRESSION-01
   Scenario: Sync search with expression query
     Given System wants to sync search CRVS using expression query
@@ -38,6 +48,16 @@ supports different query types: expression and predicate.
   Scenario: Sync search with predicate query
     Given System wants to sync search CRVS using predicate query
     When A POST request to sync search is sent with predicate query
+    Then The sync search response should be received
+    And The sync search response should have status 200 or 202
+    And The sync search response should have "content-type": "application/json" header
+    And The sync search response should be returned in a timely manner
+    And The sync search response should match the expected JSON schema
+
+  @smoke @req=CRVS-CORE-RG-SYNC-SEARCH-GRAPHQL-01
+  Scenario: Sync search with GraphQL query
+    Given System wants to sync search CRVS using GraphQL query
+    When A POST request to sync search is sent with GraphQL query
     Then The sync search response should be received
     And The sync search response should have status 200 or 202
     And The sync search response should have "content-type": "application/json" header

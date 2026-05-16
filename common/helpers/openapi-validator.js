@@ -109,6 +109,13 @@ function getJsonSchemaFromResponse(op, statusCode) {
   return chosen?.content?.['application/json']?.schema || null;
 }
 
+export async function hasOpenApiResponseSchema({ path: opPath, method, statusCode, domain }) {
+  const { openApi } = await loadOpenApi(domain);
+  const resolvedPath = resolveSpecPath(openApi, opPath);
+  const op = getOperation(openApi, resolvedPath, method);
+  return Boolean(getJsonSchemaFromResponse(op, statusCode));
+}
+
 async function getValidator(params) {
   const { openApi, ajv, validators } = await loadOpenApi(params.domain);
   const resolvedPath = resolveSpecPath(openApi, params.path);
@@ -149,6 +156,7 @@ function isQueryStructureValidForType(body) {
     const query = req?.search_criteria?.query;
 
     if (queryType === 'expression' && query?.type && query?.value) return true;
+    if (queryType === 'graphql' && query?.type && query?.value) return true;
     if (queryType === 'predicate' && Array.isArray(query)) return true;
     if (queryType === 'idtype-value' && query?.type && query?.value !== undefined) return true;
   }

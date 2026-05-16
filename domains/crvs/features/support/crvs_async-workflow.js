@@ -37,6 +37,10 @@ function getAckCorrelationId(body) {
   return body?.message?.correlation_id;
 }
 
+async function assertCallbackMatchesSpec(path, record) {
+  await assertOpenApiRequest({ path, method: 'post', domain: 'crvs' }, record.body);
+}
+
 async function sendAsyncRequest(world, { action, endpoint, payload }) {
   const url = localhost + endpoint;
   const requestPath = getRequestPath(endpoint);
@@ -121,6 +125,7 @@ Then(/^CRVS should call the on-search callback with matching ids$/, async functi
   );
 
   chai.expect(record, 'Expected on-search callback to be received').to.exist;
+  await assertCallbackMatchesSpec(path, record);
 });
 
 Then(/^CRVS should call the on-subscribe callback with matching ids$/, async function () {
@@ -141,6 +146,7 @@ Then(/^CRVS should call the on-subscribe callback with matching ids$/, async fun
   );
 
   chai.expect(record, 'Expected on-subscribe callback to be received').to.exist;
+  await assertCallbackMatchesSpec(path, record);
 });
 
 Then(/^CRVS should call the on-unsubscribe callback with matching ids$/, async function () {
@@ -161,6 +167,7 @@ Then(/^CRVS should call the on-unsubscribe callback with matching ids$/, async f
   );
 
   chai.expect(record, 'Expected on-unsubscribe callback to be received').to.exist;
+  await assertCallbackMatchesSpec(path, record);
 });
 
 Then(/^CRVS should call the txn on-status callback with matching ids$/, async function () {
@@ -181,4 +188,5 @@ Then(/^CRVS should call the txn on-status callback with matching ids$/, async fu
   );
 
   chai.expect(record, 'Expected txn on-status callback to be received').to.exist;
+  await assertCallbackMatchesSpec(path, record);
 });

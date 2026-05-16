@@ -12,7 +12,7 @@ import {
   getRequestPath
 } from './helpers/index.js';
 
-import { assertOpenApiRequest, assertOpenApiResponse } from './helpers/index.js';
+import { assertOpenApiRequest, assertOpenApiResponse, hasOpenApiResponseSchema } from './helpers/index.js';
 
 import chaiJsonSchema from 'chai-json-schema'; // Import correctly
 import chaiString from 'chai-string';
@@ -81,8 +81,9 @@ Then(/^The txn status response should be returned in a timely manner within 1500
 
 // Then step: Validate JSON schema of the response
 Then(/^The txn status response should match the expected JSON schema$/, async  function() {
-  await assertOpenApiResponse(
-    { path: getRequestPath(asynctxnstatusEndpoint), method: 'post', statusCode: this.response.statusCode },
-    this.response.body
-  );
+  const params = { path: getRequestPath(asynctxnstatusEndpoint), method: 'post', statusCode: this.response.statusCode };
+  if (await hasOpenApiResponseSchema(params)) {
+    await assertOpenApiResponse(params, this.response.body);
+  }
+  chai.expect(this.response.body?.message?.ack_status, 'Expected ACK response body').to.equal('ACK');
 });

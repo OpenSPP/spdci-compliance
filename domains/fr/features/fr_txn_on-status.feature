@@ -1,7 +1,7 @@
-@profile=fr-registry @tier=core @method=POST @endpoint=registry/txn/on-status
+@profile=fr-subscriber @tier=core @method=POST @endpoint=registry/txn/on-status
 Feature: FR txn on-status callback receiver
 
-This feature validates that a Farmer Registry implementation
+This feature validates that an SPMIS subscriber implementation
 can receive txn on-status callbacks.
 
   @smoke @req=FR-CORE-RG-TXN-ON-STATUS-01

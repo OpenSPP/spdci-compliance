@@ -13,12 +13,12 @@ Domain-specific compliance tests for SPDCI Social Registry API (`social_api_v1.0
 | `sr_unsubscribe.feature` | Unsubscribe operations |
 | `sr_txn_status.feature` | Transaction status queries |
 | `sr_async_workflow.feature` | End-to-end async workflows |
-| `sr_on-*.feature` | Callback endpoint tests |
+| `sr_on-*.feature` | Subscriber callback endpoint tests (`@profile=spmis-subscriber`) |
 | `sr_negative.feature` | Schema validation (negative tests) |
 | `sr_security_*.feature` | Auth and signature validation |
-| `sr_notify.feature` | Event notification |
-| `sp_client.feature` | SPMIS client compliance |
-| `sp_negative.feature` | Client-side negative tests |
+| `sr_notify.feature` | Subscriber event notification tests (`@profile=spmis-subscriber`) |
+| `sp_client.feature` | SPMIS client compliance profile |
+| `sp_negative.feature` | Subscriber-side negative tests |
 
 ## Running
 
@@ -28,6 +28,8 @@ npm run test:social
 # Or with tags
 npx cucumber-js --tags '@profile=sr-registry and @smoke'
 ```
+
+`npm run test:social` runs the SR registry profile. Use `@profile=spmis-subscriber` or `@profile=spmis-client` explicitly for subscriber/client surfaces.
 
 ## Requirements
 

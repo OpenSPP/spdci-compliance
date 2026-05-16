@@ -1,7 +1,7 @@
-@profile=fr-registry @tier=core @method=POST @endpoint=registry/on-subscribe
+@profile=fr-subscriber @tier=core @method=POST @endpoint=registry/on-subscribe
 Feature: FR on-subscribe callback receiver
 
-This feature validates that a Farmer Registry implementation
+This feature validates that an SPMIS subscriber implementation
 can receive on-subscribe callbacks.
 
   @smoke @req=FR-CORE-RG-ON-SUBSCRIBE-01

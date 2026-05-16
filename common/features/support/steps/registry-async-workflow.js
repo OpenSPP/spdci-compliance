@@ -39,6 +39,10 @@ function getAckCorrelationId(body) {
   return body?.message?.correlation_id;
 }
 
+async function assertCallbackMatchesSpec(world, path, record) {
+  await assertOpenApiRequest({ path, method: 'post', domain: world.domain }, record.body);
+}
+
 async function sendAsyncRequest(world, { action, endpointName, payloadFactory }) {
   const endpoint = world.getEndpoint(endpointName);
   const url = world.baseUrl + endpoint;
@@ -144,6 +148,7 @@ Then(/^(?:The registry|SR|FR|CRVS) should call the on-search callback with match
   );
 
   chai.expect(record, 'Expected on-search callback to be received').to.exist;
+  await assertCallbackMatchesSpec(this, path, record);
 });
 
 Then(/^(?:The registry|SR|FR|CRVS) should call the on-subscribe callback with matching ids$/, async function () {
@@ -164,6 +169,7 @@ Then(/^(?:The registry|SR|FR|CRVS) should call the on-subscribe callback with ma
   );
 
   chai.expect(record, 'Expected on-subscribe callback to be received').to.exist;
+  await assertCallbackMatchesSpec(this, path, record);
 });
 
 Then(/^(?:The registry|SR|FR|CRVS) should call the on-unsubscribe callback with matching ids$/, async function () {
@@ -184,6 +190,7 @@ Then(/^(?:The registry|SR|FR|CRVS) should call the on-unsubscribe callback with 
   );
 
   chai.expect(record, 'Expected on-unsubscribe callback to be received').to.exist;
+  await assertCallbackMatchesSpec(this, path, record);
 });
 
 Then(/^(?:The registry|SR|FR|CRVS) should call the txn on-status callback with matching ids$/, async function () {
@@ -204,4 +211,5 @@ Then(/^(?:The registry|SR|FR|CRVS) should call the txn on-status callback with m
   );
 
   chai.expect(record, 'Expected txn on-status callback to be received').to.exist;
+  await assertCallbackMatchesSpec(this, path, record);
 });

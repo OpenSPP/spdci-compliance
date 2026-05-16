@@ -1,7 +1,7 @@
-@profile=crvs-registry @tier=core @method=POST @endpoint=registry/on-search
+@profile=crvs-subscriber @tier=core @method=POST @endpoint=registry/on-search
 Feature: CRVS on-search callback receiver
 
-This feature validates that a CRVS implementation
+This feature validates that an SPMIS subscriber implementation
 can receive on-search callbacks.
 
   @smoke @req=CRVS-CORE-RG-ON-SEARCH-01

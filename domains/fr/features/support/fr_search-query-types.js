@@ -209,11 +209,10 @@ When(/^A POST request to sync search is sent$/, async function () {
 
 Then(/^The sync search response should contain reg_records array$/, async function() {
   const response = this.syncExpressionResponse || this.syncPredicateResponse || this.response;
+  chai.expect(Number(response.statusCode), `Expected sync search HTTP 200, got ${response.statusCode}`).to.equal(200);
   const searchResponse = response.body?.message?.search_response;
-  if (Array.isArray(searchResponse) && searchResponse.length > 0) {
-    const data = searchResponse[0]?.data;
-    if (data) {
-      chai.expect(data).to.have.property('reg_records');
-    }
-  }
+  chai.expect(searchResponse, 'Expected message.search_response').to.be.an('array').and.not.empty;
+  const data = searchResponse[0]?.data;
+  chai.expect(data, 'Expected search_response[0].data').to.be.an('object');
+  chai.expect(data.reg_records, 'Expected data.reg_records').to.be.an('array');
 });

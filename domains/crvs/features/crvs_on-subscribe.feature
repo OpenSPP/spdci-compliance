@@ -1,7 +1,7 @@
-@profile=crvs-registry @tier=core @method=POST @endpoint=registry/on-subscribe
+@profile=crvs-subscriber @tier=core @method=POST @endpoint=registry/on-subscribe
 Feature: CRVS on-subscribe callback receiver
 
-This feature validates that a CRVS implementation
+This feature validates that an SPMIS subscriber implementation
 can receive on-subscribe callbacks.
 
   @smoke @req=CRVS-CORE-RG-ON-SUBSCRIBE-01

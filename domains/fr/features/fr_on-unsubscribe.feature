@@ -1,7 +1,7 @@
-@profile=fr-registry @tier=core @method=POST @endpoint=registry/on-unsubscribe
+@profile=fr-subscriber @tier=core @method=POST @endpoint=registry/on-unsubscribe
 Feature: FR on-unsubscribe callback receiver
 
-This feature validates that a Farmer Registry implementation
+This feature validates that an SPMIS subscriber implementation
 can receive on-unsubscribe callbacks.
 
   @smoke @req=FR-CORE-RG-ON-UNSUBSCRIBE-01

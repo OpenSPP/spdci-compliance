@@ -6,6 +6,7 @@ Tests for SPDCI-compliant Farmer Registry implementations.
 
 - **Core Registry Tests**: Async/sync search, subscribe, unsubscribe, txn status
 - **Negative Tests**: Schema-invalid request handling
+- **Subscriber Tests**: Callback receiver and notify scenarios under `@profile=fr-subscriber`
 
 ## Running Tests
 
@@ -16,6 +17,8 @@ npm run test:fr
 # Run only smoke tests
 DOMAIN=fr npm test -- --tags '@profile=fr-registry and @smoke'
 ```
+
+`npm run test:fr` runs the FR registry profile. Use `@profile=fr-subscriber` explicitly for subscriber callback receiver surfaces.
 
 ## Configuration
 

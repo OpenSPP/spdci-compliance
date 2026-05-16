@@ -25,6 +25,7 @@ export {
   assertOpenApiResponse,
   assertOpenApiComponentResponse,
   assertHttpErrorResponse,
+  hasOpenApiResponseSchema,
   getOpenApiSpec,
 } from '../../../../../common/helpers/openapi-validator.js';
 

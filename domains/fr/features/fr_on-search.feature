@@ -1,7 +1,7 @@
-@profile=fr-registry @tier=core @method=POST @endpoint=registry/on-search
+@profile=fr-subscriber @tier=core @method=POST @endpoint=registry/on-search
 Feature: FR on-search callback receiver
 
-This feature validates that a Farmer Registry implementation
+This feature validates that an SPMIS subscriber implementation
 can receive on-search callbacks.
 
   @smoke @req=FR-CORE-RG-ON-SEARCH-01

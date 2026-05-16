@@ -4,7 +4,8 @@ Domain-agnostic mock server for testing SPMIS client compliance against SPDCI re
 
 ## Features
 
-- **OpenAPI Validation**: Validates incoming requests against the configured domain spec
+- **OpenAPI Validation**: Enforces incoming request validation against the configured domain spec by default
+- **Security Checks**: Enforces bearer Authorization for secured OpenAPI operations and rejects known invalid signatures by default
 - **Request Recording**: Records all requests with timestamps, headers, and validation results
 - **Configurable Responses**: Configure success/error responses, delays, callback behavior
 - **Admin API**: REST API for test control and assertions
@@ -72,6 +73,10 @@ POST /admin/reset
 | `PORT` | 3335 | Server port |
 | `DOMAIN` | social | Domain to load spec for |
 | `OPENAPI_SPEC_PATH` | Auto | Path to OpenAPI spec |
+| `MOCK_ENFORCE_OPENAPI_VALIDATION` | true | Set to `false` to record validation errors without rejecting |
+| `MOCK_ENFORCE_AUTH` | true | Set to `false` to skip bearer Authorization checks |
+| `MOCK_ENFORCE_SIGNATURE` | true | Set to `false` to skip known invalid signature checks |
+| `MOCK_ENFORCE_CONTENT_TYPE` | true | Set to `false` to skip JSON Content-Type checks |
 
 ## Recording Structure
 

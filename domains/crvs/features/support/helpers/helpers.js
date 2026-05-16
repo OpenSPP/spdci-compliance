@@ -21,6 +21,7 @@ import {
   createSearchRequestPayload as commonCreateSearchRequestPayload,
   createSearchRequestPayloadWithExpressionQuery as commonCreateSearchRequestPayloadWithExpressionQuery,
   createSearchRequestPayloadWithPredicateQuery as commonCreateSearchRequestPayloadWithPredicateQuery,
+  createSearchRequestPayloadWithGraphqlQuery as commonCreateSearchRequestPayloadWithGraphqlQuery,
   createSubscribeRequestPayload as commonCreateSubscribeRequestPayload,
   createUnsubscribeRequestPayload as commonCreateUnsubscribeRequestPayload,
   createTxnStatusRequestPayload as commonCreateTxnStatusRequestPayload,
@@ -167,6 +168,10 @@ export function createSearchRequestPayloadWithExpressionQuery() {
 
 export function createSearchRequestPayloadWithPredicateQuery() {
   return commonCreateSearchRequestPayloadWithPredicateQuery(DOMAIN);
+}
+
+export function createSearchRequestPayloadWithGraphqlQuery() {
+  return commonCreateSearchRequestPayloadWithGraphqlQuery(DOMAIN);
 }
 
 export function createSubscribeRequestPayload() {

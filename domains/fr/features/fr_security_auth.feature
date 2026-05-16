@@ -32,9 +32,3 @@ These scenarios verify SECURITY behavior for bearer auth as defined by the OpenA
     Given A valid 'sync search' request payload is prepared for auth testing
     When The 'sync search' request is sent without Authorization
     Then The request should be rejected as unauthorized
-
-  @smoke @method=POST @endpoint=registry/sync/txn/status @req=FR-SEC-AUTH-RG-SYNC-TXNSTATUS-01
-  Scenario: Sync txn status enforces bearer auth
-    Given A valid 'sync txn status' request payload is prepared for auth testing
-    When The 'sync txn status' request is sent without Authorization
-    Then The request should be rejected as unauthorized

@@ -1,7 +1,7 @@
-@profile=crvs-registry @tier=core @method=POST @endpoint=registry/notify
+@profile=crvs-subscriber @tier=core @method=POST @endpoint=registry/notify
 Feature: CRVS notify callback receiver
 
-This feature validates that a CRVS implementation
+This feature validates that an SPMIS subscriber implementation
 can receive notify callbacks.
 
   @smoke @req=CRVS-CORE-RG-NOTIFY-01

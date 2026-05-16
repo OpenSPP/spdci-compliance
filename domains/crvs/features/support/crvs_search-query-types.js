@@ -9,6 +9,7 @@ import {
   searchEndpoint,
   createSearchRequestPayloadWithExpressionQuery,
   createSearchRequestPayloadWithPredicateQuery,
+  createSearchRequestPayloadWithGraphqlQuery,
   applyCommonHeaders,
   checkHeader,
   getRequestPath
@@ -120,6 +121,56 @@ Then(/^The predicate search response should match the expected JSON schema$/, as
 });
 
 // ============================================
+// ASYNC SEARCH - GRAPHQL QUERY
+// ============================================
+
+let specGraphqlSearch;
+
+Given(/^System wants to search CRVS using GraphQL query$/, function () {
+  specGraphqlSearch = spec();
+});
+
+When(/^A POST request to async search is sent with GraphQL query$/, async function () {
+  applyCommonHeaders(specGraphqlSearch.post(asyncBaseUrl));
+  const payload = createSearchRequestPayloadWithGraphqlQuery();
+  await assertOpenApiRequest({ path: getRequestPath(asyncsearchEndpoint), method: 'post' }, payload, 'crvs');
+  const response = await specGraphqlSearch.withJson(payload);
+  this.graphqlResponse = response;
+});
+
+Then(/^The GraphQL search response should be received$/, async function () {
+  chai.expect(this.graphqlResponse).to.exist;
+});
+
+Then(/^The GraphQL search response should have status (\d+) or (\d+)$/, async function(statusA, statusB) {
+  const allowed = [Number(statusA), Number(statusB)];
+  chai.expect(
+    allowed,
+    `Expected status ${statusA} or ${statusB}, got ${this.graphqlResponse.statusCode}`
+  ).to.include(Number(this.graphqlResponse.statusCode));
+});
+
+Then(/^The GraphQL search response should have "([^"]*)": "([^"]*)" header$/, async function(key, value) {
+  const { ok, actualValue, reason } = checkHeader(this.graphqlResponse.rawHeaders, key, value);
+  const msg = reason === 'missing'
+    ? `Expected header "${key}" to be present`
+    : `Expected header "${key}" to be "${value}", got "${actualValue}"`;
+  chai.expect(ok, msg).to.be.true;
+});
+
+Then(/^The GraphQL search response should be returned in a timely manner$/, async function() {
+  chai.expect(this.graphqlResponse.responseTime).to.be.lessThan(defaultExpectedResponseTime);
+});
+
+Then(/^The GraphQL search response should match the expected JSON schema$/, async function() {
+  await assertOpenApiResponse(
+    { path: getRequestPath(asyncsearchEndpoint), method: 'post', statusCode: this.graphqlResponse.statusCode },
+    this.graphqlResponse.body,
+    'crvs'
+  );
+});
+
+// ============================================
 // SYNC SEARCH - EXPRESSION QUERY
 // ============================================
 
@@ -138,11 +189,11 @@ When(/^A POST request to sync search is sent with expression query$/, async func
 });
 
 Then(/^The sync search response should be received$/, async function () {
-  chai.expect(this.syncExpressionResponse || this.syncPredicateResponse || this.response).to.exist;
+  chai.expect(this.syncExpressionResponse || this.syncPredicateResponse || this.syncGraphqlResponse || this.response).to.exist;
 });
 
 Then(/^The sync search response should have status (\d+) or (\d+)$/, async function(statusA, statusB) {
-  const response = this.syncExpressionResponse || this.syncPredicateResponse || this.response;
+  const response = this.syncExpressionResponse || this.syncPredicateResponse || this.syncGraphqlResponse || this.response;
   const allowed = [Number(statusA), Number(statusB)];
   chai.expect(
     allowed,
@@ -151,7 +202,7 @@ Then(/^The sync search response should have status (\d+) or (\d+)$/, async funct
 });
 
 Then(/^The sync search response should have "([^"]*)": "([^"]*)" header$/, async function(key, value) {
-  const response = this.syncExpressionResponse || this.syncPredicateResponse || this.response;
+  const response = this.syncExpressionResponse || this.syncPredicateResponse || this.syncGraphqlResponse || this.response;
   const { ok, actualValue, reason } = checkHeader(response.rawHeaders, key, value);
   const msg = reason === 'missing'
     ? `Expected header "${key}" to be present`
@@ -160,12 +211,12 @@ Then(/^The sync search response should have "([^"]*)": "([^"]*)" header$/, async
 });
 
 Then(/^The sync search response should be returned in a timely manner$/, async function() {
-  const response = this.syncExpressionResponse || this.syncPredicateResponse || this.response;
+  const response = this.syncExpressionResponse || this.syncPredicateResponse || this.syncGraphqlResponse || this.response;
   chai.expect(response.responseTime).to.be.lessThan(defaultExpectedResponseTime);
 });
 
 Then(/^The sync search response should match the expected JSON schema$/, async function() {
-  const response = this.syncExpressionResponse || this.syncPredicateResponse || this.response;
+  const response = this.syncExpressionResponse || this.syncPredicateResponse || this.syncGraphqlResponse || this.response;
   await assertOpenApiResponse(
     { path: getRequestPath(searchEndpoint), method: 'post', statusCode: response.statusCode },
     response.body,
@@ -192,6 +243,24 @@ When(/^A POST request to sync search is sent with predicate query$/, async funct
 });
 
 // ============================================
+// SYNC SEARCH - GRAPHQL QUERY
+// ============================================
+
+let specSyncGraphqlSearch;
+
+Given(/^System wants to sync search CRVS using GraphQL query$/, function () {
+  specSyncGraphqlSearch = spec();
+});
+
+When(/^A POST request to sync search is sent with GraphQL query$/, async function () {
+  applyCommonHeaders(specSyncGraphqlSearch.post(syncBaseUrl));
+  const payload = createSearchRequestPayloadWithGraphqlQuery();
+  await assertOpenApiRequest({ path: getRequestPath(searchEndpoint), method: 'post' }, payload, 'crvs');
+  const response = await specSyncGraphqlSearch.withJson(payload);
+  this.syncGraphqlResponse = response;
+});
+
+// ============================================
 // SYNC SEARCH EXTRA VALIDATION
 // ============================================
 
@@ -209,11 +278,10 @@ When(/^A POST request to sync search is sent$/, async function () {
 
 Then(/^The sync search response should contain reg_records array$/, async function() {
   const response = this.syncExpressionResponse || this.syncPredicateResponse || this.response;
+  chai.expect(Number(response.statusCode), `Expected sync search HTTP 200, got ${response.statusCode}`).to.equal(200);
   const searchResponse = response.body?.message?.search_response;
-  if (Array.isArray(searchResponse) && searchResponse.length > 0) {
-    const data = searchResponse[0]?.data;
-    if (data) {
-      chai.expect(data).to.have.property('reg_records');
-    }
-  }
+  chai.expect(searchResponse, 'Expected message.search_response').to.be.an('array').and.not.empty;
+  const data = searchResponse[0]?.data;
+  chai.expect(data, 'Expected search_response[0].data').to.be.an('object');
+  chai.expect(data.reg_records, 'Expected data.reg_records').to.be.an('array');
 });

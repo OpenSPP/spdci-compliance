@@ -6,12 +6,13 @@ Unified compliance testing framework for SPDCI (Social Protection Digital Conver
 
 | Domain | Spec | Status |
 |--------|------|--------|
-| Social Registry (SR) | `social_api_v1.0.0.yaml` | **Complete** |
-| Civil Registration (CRVS) | `crvs_api_v1.0.0.yaml` | **Complete** |
+| Social Registry (SR) | `social_api_v1.0.0.yaml` | **Registry Profile** |
+| Civil Registration (CRVS) | `crvs_api_v1.0.0.yaml` | **Registry Profile** |
 | Disability Registry (DR) | `dr_api_v1.0.0.yaml` | **Core Happy Path** |
-| Farmer Registry (FR) | `fr_api_v1.0.0.yaml` | **Complete** |
+| Farmer Registry (FR) | `fr_api_v1.0.0.yaml` | **Registry Profile** |
 | ID & Beneficiary Registry (IBR) | `ibr_api_v1.0.0.yaml` | Not Implemented |
 
+SR, CRVS, and FR registry profiles cover the registry server endpoints and async callback workflows. Subscriber/client profiles are separate and are not included in `npm run test:<domain>`.
 DR coverage includes core happy-path registry workflows and DR-specific sync endpoints. Negative, security, and client-trigger parity with SR, CRVS, and FR is not yet implemented.
 
 ## Project Structure
@@ -25,7 +26,7 @@ spdci-compliance/
 │   │   ├── headers.js         # Header builders and validators
 │   │   ├── openapi-validator.js
 │   │   └── callback-server.js # Callback server for async testing
-│   ├── features/              # Shared test scenarios (apply to ALL domains)
+│   ├── features/              # Shared test scenarios reusable across domains
 │   │   ├── validation_format.feature   # Timestamp, locale format tests
 │   │   ├── validation_boundary.feature # String length boundary tests
 │   │   ├── pagination.feature          # Pagination parameter tests
@@ -169,8 +170,8 @@ API_BASE_URL=http://sr-server:8080 DOMAIN=social npm run test:social
 Test that an SPMIS client correctly sends requests to registries:
 
 ```bash
-# Option 1: Use the combined test scripts (recommended)
-npm run test:mock:social   # Starts mock server + runs tests
+# Option 1: Verify registry profiles against the mock server
+npm run test:mock:social
 npm run test:mock:crvs
 npm run test:mock:fr
 
@@ -180,12 +181,13 @@ npm run mock-server:social   # or mock-server:crvs, mock-server:fr
 
 # 2. Configure your client to use http://localhost:3335
 
-# 3. Run client compliance tests (requires client trigger API)
+# 3. Run client compliance tests (requires client trigger API and client-profile steps)
 PROFILE=spmis-client CLIENT_TRIGGER_URL=http://your-client:8080/test/trigger npm test
 ```
 
 The mock server:
-- Validates incoming requests against the OpenAPI spec
+- Enforces OpenAPI request validation by default
+- Enforces Authorization for endpoints secured in the OpenAPI spec by default
 - Records all requests for assertion
 - Sends async callbacks to client's `sender_uri`
 - Provides admin API for test control

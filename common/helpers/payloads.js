@@ -65,8 +65,8 @@ export function createCallbackHeader(action, options = {}) {
     status: status,
     total_count: totalCount,
     completed_count: completedCount,
-    sender_id: process.env.DCI_SENDER_ID || 'test-client',
-    receiver_id: getReceiverId(domain),
+    sender_id: process.env.DCI_CALLBACK_SENDER_ID || getReceiverId(domain),
+    receiver_id: process.env.DCI_CALLBACK_RECEIVER_ID || process.env.DCI_SENDER_ID || 'test-client',
   };
 }
 
@@ -174,6 +174,33 @@ export function createSearchRequestPayloadWithPredicateQuery(domain = process.en
       search_criteria: {
         query_type: 'predicate',
         query: testData.predicate,
+      },
+    }],
+  }, { domain });
+}
+
+/**
+ * Create a search request payload with GraphQL query
+ * @param {string} domain - Domain identifier
+ * @returns {object} Search request envelope
+ */
+export function createSearchRequestPayloadWithGraphqlQuery(domain = process.env.DOMAIN || 'social') {
+  const config = getDomainConfig(domain);
+  const testData = config.testData;
+
+  return createEnvelope('search', {
+    transaction_id: generateId(),
+    search_request: [{
+      reference_id: `ref-${generateId()}`,
+      timestamp: getTimestamp(),
+      search_criteria: {
+        query_type: 'graphql',
+        query: {
+          type: 'ns:org:QueryType:graphql',
+          value: testData.graphql || {
+            query: '{ registry { id } }',
+          },
+        },
       },
     }],
   }, { domain });

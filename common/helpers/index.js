@@ -30,6 +30,7 @@ export {
   createSearchRequestPayload,
   createSearchRequestPayloadWithExpressionQuery,
   createSearchRequestPayloadWithPredicateQuery,
+  createSearchRequestPayloadWithGraphqlQuery,
   createSubscribeRequestPayload,
   createUnsubscribeRequestPayload,
   createTxnStatusRequestPayload,
@@ -61,6 +62,7 @@ export {
 export {
   assertOpenApiRequest,
   assertOpenApiResponse,
+  hasOpenApiResponseSchema,
   getOpenApiSpec,
 } from './openapi-validator.js';
 
