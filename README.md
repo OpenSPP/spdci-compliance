@@ -8,9 +8,11 @@ Unified compliance testing framework for SPDCI (Social Protection Digital Conver
 |--------|------|--------|
 | Social Registry (SR) | `social_api_v1.0.0.yaml` | **Complete** |
 | Civil Registration (CRVS) | `crvs_api_v1.0.0.yaml` | **Complete** |
-| Disability Registry (DR) | `dr_api_v1.0.0.yaml` | Not Implemented |
+| Disability Registry (DR) | `dr_api_v1.0.0.yaml` | **Core Happy Path** |
 | Functional Registry (FR) | `fr_api_v1.0.0.yaml` | **Complete** |
 | ID & Beneficiary Registry (IBR) | `ibr_api_v1.0.0.yaml` | Not Implemented |
+
+DR coverage includes core happy-path registry workflows and DR-specific sync endpoints. Negative, security, and client-trigger parity with SR, CRVS, and FR is not yet implemented.
 
 ## Project Structure
 
@@ -42,7 +44,7 @@ spdci-compliance/
 │   ├── crvs/                  # Civil Registration (implemented)
 │   │   ├── features/          # CRVS-specific scenarios
 │   │   └── requirements.json  # CRVS-specific requirements
-│   ├── dr/                    # Disability Registry (not implemented)
+│   ├── dr/                    # Disability Registry
 │   ├── fr/                    # Functional Registry (implemented)
 │   │   ├── features/          # FR-specific scenarios
 │   │   └── requirements.json  # FR-specific requirements
@@ -66,7 +68,7 @@ All SPDCI specs share:
 ### Domain-Specific (domains/)
 
 Each registry has:
-- **Record types**: Person, Group, BirthCertificate, Disbursement, etc.
+- **Record types**: Person, Group, BirthCertificate, DisabledPerson, etc.
 - **Query attributes**: Domain-specific searchable fields
 - **Event types**: Domain-specific subscription events
 - **Validation rules**: Domain-specific business logic
@@ -82,6 +84,7 @@ npm test
 ```bash
 npm run test:social
 npm run test:crvs
+npm run test:dr
 npm run test:fr
 ```
 
@@ -93,6 +96,7 @@ These scripts automatically start the mock server, run the tests, and shut down 
 npm run test:mock:social   # Social registry tests against mock
 npm run test:mock:crvs     # CRVS tests against mock
 npm run test:mock:fr       # FR tests against mock
+npm run test:mock:dr       # Disability Registry tests against mock
 ```
 
 The mock server runs on `http://127.0.0.1:3335/` and the correct `DOMAIN` env var is set automatically.

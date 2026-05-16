@@ -237,6 +237,47 @@ export function createTxnStatusRequestPayload(domain = process.env.DOMAIN || 'so
   }, { domain });
 }
 
+/**
+ * Create a Disability Registry status request payload.
+ * @param {string} domain - Domain identifier
+ * @returns {object} Disabled request envelope
+ */
+export function createDisabledRequestPayload(domain = process.env.DOMAIN || 'social') {
+  const config = getDomainConfig(domain);
+  const disabledCriteria = config.testData.disabledCriteria || {
+    query_type: 'expression',
+    query: {
+      'member.member_identifier': {
+        eq: 'TEST-MEMBER-001',
+      },
+    },
+  };
+
+  return createEnvelope('search', {
+    transaction_id: generateId(),
+    disabled_criteria: disabledCriteria,
+  }, { domain });
+}
+
+/**
+ * Create a Disability Registry support request payload.
+ * @param {string} domain - Domain identifier
+ * @returns {object} GetDisabilitySupport request envelope
+ */
+export function createGetDisabilitySupportRequestPayload(domain = process.env.DOMAIN || 'social') {
+  return createDisabledRequestPayload(domain);
+}
+
+/**
+ * Create a Disability Registry details request payload.
+ * The OpenAPI spec currently reuses GetDisabilitySupportRequest for this endpoint.
+ * @param {string} domain - Domain identifier
+ * @returns {object} GetDisabilityInfo request envelope
+ */
+export function createGetDisabilityDetailsRequestPayload(domain = process.env.DOMAIN || 'social') {
+  return createDisabledRequestPayload(domain);
+}
+
 // ============================================
 // CALLBACK PAYLOAD FACTORIES
 // ============================================
@@ -248,6 +289,7 @@ export function createTxnStatusRequestPayload(domain = process.env.DOMAIN || 'so
  */
 export function createOnSearchPayload(domain = process.env.DOMAIN || 'social') {
   const config = getDomainConfig(domain);
+  const regRecords = domain === 'dr' ? {} : [];
 
   return createCallbackEnvelope('on-search', {
     transaction_id: generateId(),
@@ -259,7 +301,7 @@ export function createOnSearchPayload(domain = process.env.DOMAIN || 'social') {
       data: {
         version: '1.0.0',
         reg_record_type: config.defaultRecordType,
-        reg_records: [],
+        reg_records: regRecords,
       },
     }],
   }, { domain });

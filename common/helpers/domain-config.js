@@ -216,11 +216,95 @@ const domainConfigs = {
       'txn-status': '/registry/txn/on-status',
     },
   },
+
+  dr: {
+    name: 'Disability Registry',
+    shortName: 'DR',
+    spec: 'dr_api_v1.0.0.yaml',
+
+    envPrefix: 'DR',
+    defaultReceiverId: 'dr-server',
+
+    recordTypes: ['DisabledPerson', 'DRPerson', 'DisabilitySupport'],
+    defaultRecordType: 'DisabledPerson',
+
+    identifierTypes: ['UIN', 'NIN', 'DISABILITY_ID', 'MEMBER_ID'],
+    defaultIdentifierType: 'DISABILITY_ID',
+
+    eventTypes: ['register'],
+    defaultEventType: 'register',
+
+    testData: {
+      idTypeValue: {
+        type: 'DISABILITY_ID',
+        value: 'DR-TEST-001',
+      },
+      expression: {
+        query: {
+          $and: [
+            { disability_status: { $eq: 'Approved' } },
+            { 'disability_details.impairment_type': { $eq: 'Mobility' } },
+          ],
+        },
+      },
+      predicate: [{
+        seq_num: 1,
+        expression1: { attribute_name: 'disability_status', operator: 'eq', attribute_value: 'Approved' },
+        condition: 'and',
+        expression2: { attribute_name: 'disability_details.impairment_type', operator: 'eq', attribute_value: 'Mobility' },
+      }],
+      subscribeFilter: {
+        type: 'ns:org:QueryType:NoSql',
+        value: {
+          expression: {
+            query: {
+              disability_status: { $eq: 'Approved' },
+            },
+          },
+        },
+      },
+      disabledCriteria: {
+        query_type: 'expression',
+        query: {
+          'personal_details.member_identifier': {
+            eq: 'DR-MEMBER-001',
+          },
+        },
+      },
+      notifyRecordType: 'DisabledPerson',
+      subscriptionCodes: ['sub-dr-test-001'],
+    },
+
+    endpoints: {
+      syncSearch: 'registry/sync/search',
+      asyncSearch: 'registry/search',
+      onSearch: 'registry/on-search',
+      subscribe: 'registry/subscribe',
+      onSubscribe: 'registry/on-subscribe',
+      unsubscribe: 'registry/unsubscribe',
+      onUnsubscribe: 'registry/on-unsubscribe',
+      // DR OpenAPI defines async txn status only.
+      syncTxnStatus: null,
+      asyncTxnStatus: 'registry/txn/status',
+      onTxnStatus: 'registry/txn/on-status',
+      notify: 'registry/notify',
+      syncDisabled: 'registry/sync/disabled',
+      getDisabilityDetails: 'registry/sync/get-disability-details',
+      getDisabilitySupport: 'registry/sync/get-disability-support',
+    },
+
+    callbackPaths: {
+      search: '/registry/on-search',
+      subscribe: '/registry/on-subscribe',
+      unsubscribe: '/registry/on-unsubscribe',
+      'txn-status': '/registry/txn/on-status',
+    },
+  },
 };
 
 /**
  * Get domain configuration
- * @param {string} domain - Domain identifier (social, fr, crvs)
+ * @param {string} domain - Domain identifier (social, fr, crvs, dr)
  * @returns {object} Domain configuration
  */
 export function getDomainConfig(domain = process.env.DOMAIN || 'social') {
@@ -239,6 +323,11 @@ export function getDomainConfig(domain = process.env.DOMAIN || 'social') {
  */
 export function getEndpoint(endpointName, domain = process.env.DOMAIN || 'social') {
   const config = getDomainConfig(domain);
+  const configuredEndpoint = config.endpoints[endpointName];
+  if (configuredEndpoint === null) {
+    throw new Error(`Endpoint "${endpointName}" is not supported for domain "${domain}"`);
+  }
+
   const envVarName = `${config.envPrefix}_${endpointName.replace(/([A-Z])/g, '_$1').toUpperCase()}_ENDPOINT`;
   const envPrefix = process.env[`${config.envPrefix}_ENDPOINT_PREFIX`] ?? 'registry/';
 
@@ -249,7 +338,7 @@ export function getEndpoint(endpointName, domain = process.env.DOMAIN || 'social
   }
 
   // Return default endpoint
-  return config.endpoints[endpointName] || `${envPrefix}${endpointName}`;
+  return configuredEndpoint || `${envPrefix}${endpointName}`;
 }
 
 /**

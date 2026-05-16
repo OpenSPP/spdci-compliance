@@ -18,6 +18,7 @@ DOMAIN=social node common/mock-server/server.mjs
 
 # Start for a different domain
 DOMAIN=crvs node common/mock-server/server.mjs
+DOMAIN=dr node common/mock-server/server.mjs
 ```
 
 Default port: 3335 (configurable via `PORT` env var)

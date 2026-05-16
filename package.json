@@ -20,7 +20,8 @@
     "mock-server:ibr": "DOMAIN=ibr node common/mock-server/server.mjs",
     "test:mock:social": "DOMAIN=social node common/mock-server/server.mjs & SERVER_PID=$!; sleep 2; API_BASE_URL=http://127.0.0.1:3335/ npm run test:social; EXIT_CODE=$?; kill $SERVER_PID 2>/dev/null; exit $EXIT_CODE",
     "test:mock:crvs": "DOMAIN=crvs node common/mock-server/server.mjs & SERVER_PID=$!; sleep 2; API_BASE_URL=http://127.0.0.1:3335/ npm run test:crvs; EXIT_CODE=$?; kill $SERVER_PID 2>/dev/null; exit $EXIT_CODE",
-    "test:mock:fr": "DOMAIN=fr node common/mock-server/server.mjs & SERVER_PID=$!; sleep 2; API_BASE_URL=http://127.0.0.1:3335/ npm run test:fr; EXIT_CODE=$?; kill $SERVER_PID 2>/dev/null; exit $EXIT_CODE"
+    "test:mock:fr": "DOMAIN=fr node common/mock-server/server.mjs & SERVER_PID=$!; sleep 2; API_BASE_URL=http://127.0.0.1:3335/ npm run test:fr; EXIT_CODE=$?; kill $SERVER_PID 2>/dev/null; exit $EXIT_CODE",
+    "test:mock:dr": "DOMAIN=dr node common/mock-server/server.mjs & SERVER_PID=$!; sleep 2; CALLBACK_SERVER_ENABLED=true CALLBACK_SERVER_BASE_URL=http://127.0.0.1:3336/ CALLBACK_HOST=127.0.0.1 API_BASE_URL=http://127.0.0.1:3335/ npm run test:dr; EXIT_CODE=$?; kill $SERVER_PID 2>/dev/null; exit $EXIT_CODE"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.1",

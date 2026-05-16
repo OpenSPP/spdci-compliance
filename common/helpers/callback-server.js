@@ -71,11 +71,17 @@ export async function startCallbackServer() {
           callbacks.push(callback);
           console.log(`[callback-server] Recorded callback: ${callback.action || 'unknown'}`);
 
-          // Resolve any waiters
-          while (waitResolvers.length > 0) {
-            const resolver = waitResolvers.shift();
-            resolver(callback);
+          // Resolve matching waiters
+          const pending = [];
+          for (const waiter of waitResolvers) {
+            if (waiter.matcher(callback)) {
+              clearTimeout(waiter.timeout);
+              waiter.resolve(callback);
+            } else {
+              pending.push(waiter);
+            }
           }
+          waitResolvers = pending;
 
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
@@ -155,18 +161,27 @@ export function clearCallbacks() {
 /**
  * Wait for a callback to be received (with timeout)
  */
-export function waitForCallback(timeoutMs = 5000) {
+export function waitForCallback(filterOrTimeout = 5000, maybeTimeoutMs) {
+  const hasFilter = typeof filterOrTimeout === 'object' && filterOrTimeout !== null;
+  const timeoutMs = hasFilter ? (maybeTimeoutMs || 5000) : filterOrTimeout;
+  const filter = hasFilter ? filterOrTimeout : {};
+  const matcher = (callback) => {
+    if (filter.path && callback.path !== filter.path) return false;
+    if (typeof filter.predicate === 'function' && !filter.predicate(callback)) return false;
+    return true;
+  };
+
+  const existing = callbacks.find(matcher);
+  if (existing) return Promise.resolve(existing);
+
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
-      const index = waitResolvers.indexOf(resolve);
+      const index = waitResolvers.findIndex(waiter => waiter.resolve === resolve);
       if (index > -1) waitResolvers.splice(index, 1);
       reject(new Error(`Callback timeout after ${timeoutMs}ms`));
     }, timeoutMs);
 
-    waitResolvers.push((callback) => {
-      clearTimeout(timeout);
-      resolve(callback);
-    });
+    waitResolvers.push({ matcher, resolve, timeout });
   });
 }
 

@@ -55,7 +55,7 @@ const domainRecordTypes = {
   social: 'Person',
   crvs: 'CRVSPerson',
   fr: 'Farmer',
-  dr: 'DisasterRecord',
+  dr: 'DisabledPerson',
   ibr: 'IBRRecord',
 };
 
@@ -319,6 +319,8 @@ function callbackHeader(action, { senderId, receiverId, status = 'succ' } = {}) 
 }
 
 function searchResponseMessage({ transactionId, correlationId }) {
+  const regRecords = domain === 'dr' ? {} : [];
+
   return {
     transaction_id: transactionId,
     correlation_id: correlationId,
@@ -331,7 +333,7 @@ function searchResponseMessage({ transactionId, correlationId }) {
           version: '1.0.0',
           reg_type: domainRegistryTypes[domain] || domainRegistryTypes.social,
           reg_record_type: domainRecordTypes[domain] || domainRecordTypes.social,
-          reg_records: [],
+          reg_records: regRecords,
         },
       },
     ],
@@ -377,6 +379,95 @@ function unsubscribeResponseMessage({ transactionId, correlationId }) {
     timestamp: nowIso(),
     status: 'succ',
     subscription_status: [{ code: 'sub-test-001', status: 'unsubscribe' }],
+  };
+}
+
+function disabledStatusResponseMessage({ transactionId, correlationId }) {
+  return {
+    transaction_id: transactionId,
+    correlation_id: correlationId,
+    disabled_response: [
+      {
+        reference_id: `ref-${generateId()}`,
+        timestamp: nowIso(),
+        status: 'succ',
+        status_reason_message: 'Disability status found',
+        disabled_status: 'yes',
+      },
+    ],
+  };
+}
+
+function disabilityDetailsResponseMessage({ transactionId, correlationId }) {
+  return {
+    transaction_id: transactionId,
+    correlation_id: correlationId,
+    search_response: [
+      {
+        reference_id: `ref-${generateId()}`,
+        timestamp: nowIso(),
+        status: 'succ',
+        data: {
+          version: '1.0.0',
+          reg_records: [
+            {
+              disability_details: [
+                {
+                  impairment_type: 'Mobility',
+                  impairment_level: 'Severe',
+                  impairment_cause: 'Work Accident',
+                  age_on_set: 'Working age',
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  };
+}
+
+function disabilitySupportResponseMessage({ transactionId, correlationId }) {
+  return {
+    transaction_id: transactionId,
+    correlation_id: correlationId,
+    search_response: [
+      {
+        reference_id: `ref-${generateId()}`,
+        timestamp: nowIso(),
+        status: 'succ',
+        data: {
+          version: '1.0.0',
+          reg_records: [
+            {
+              disabilities: [
+                {
+                  human_assistance: {
+                    type: 'mobility',
+                    frequency: 'Daily',
+                    support_status: 'Needed',
+                    caregiver: {
+                      id: 'Person_001',
+                      name: 'John Doe',
+                      identifier: '12345',
+                    },
+                    relationship: 'Parent',
+                    registration_date: '2024-01-15T10:00:00.000Z',
+                    last_updated: '2024-09-20T12:30:00.000Z',
+                  },
+                  assistive_technology: [],
+                  housing_support: [],
+                  medical_care: [],
+                  animal_assistance: [],
+                  registration_date: '2023-05-20T09:00:00.000Z',
+                  last_updated: '2024-10-01T11:15:00.000Z',
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
   };
 }
 
@@ -528,6 +619,17 @@ async function handleRegistryEndpoint(req, res, urlPath, body) {
     return;
   }
 
+  if ([
+    '/registry/on-search',
+    '/registry/on-subscribe',
+    '/registry/on-unsubscribe',
+    '/registry/txn/on-status',
+    '/registry/notify',
+  ].includes(urlPath)) {
+    json(res, 200, ackResponse(correlationId));
+    return;
+  }
+
   // Async endpoints
   if (urlPath === '/registry/search') {
     json(res, 202, ackResponse(correlationId));
@@ -579,11 +681,38 @@ async function handleRegistryEndpoint(req, res, urlPath, body) {
     return;
   }
 
-  if (urlPath === '/registry/sync/txn/status') {
+  if (urlPath === '/registry/sync/txn/status' && domain !== 'dr') {
     json(res, 200, {
       signature: 'unsigned-mock',
       header: callbackHeader('txn-on-status', { senderId, receiverId }),
       message: txnStatusResponseMessage({ transactionId, correlationId }),
+    });
+    return;
+  }
+
+  if (urlPath === '/registry/sync/disabled' && domain === 'dr') {
+    json(res, 200, {
+      signature: 'unsigned-mock',
+      header: callbackHeader('on-search', { senderId, receiverId }),
+      message: disabledStatusResponseMessage({ transactionId, correlationId }),
+    });
+    return;
+  }
+
+  if (urlPath === '/registry/sync/get-disability-details' && domain === 'dr') {
+    json(res, 200, {
+      signature: 'unsigned-mock',
+      header: callbackHeader('on-search', { senderId, receiverId }),
+      message: disabilityDetailsResponseMessage({ transactionId, correlationId }),
+    });
+    return;
+  }
+
+  if (urlPath === '/registry/sync/get-disability-support' && domain === 'dr') {
+    json(res, 200, {
+      signature: 'unsigned-mock',
+      header: callbackHeader('on-search', { senderId, receiverId }),
+      message: disabilitySupportResponseMessage({ transactionId, correlationId }),
     });
     return;
   }
