@@ -9,7 +9,7 @@ Unified compliance testing framework for SPDCI (Social Protection Digital Conver
 | Social Registry (SR) | `social_api_v1.0.0.yaml` | **Complete** |
 | Civil Registration (CRVS) | `crvs_api_v1.0.0.yaml` | **Complete** |
 | Disability Registry (DR) | `dr_api_v1.0.0.yaml` | **Core Happy Path** |
-| Functional Registry (FR) | `fr_api_v1.0.0.yaml` | **Complete** |
+| Farmer Registry (FR) | `fr_api_v1.0.0.yaml` | **Complete** |
 | ID & Beneficiary Registry (IBR) | `ibr_api_v1.0.0.yaml` | Not Implemented |
 
 DR coverage includes core happy-path registry workflows and DR-specific sync endpoints. Negative, security, and client-trigger parity with SR, CRVS, and FR is not yet implemented.
@@ -45,7 +45,7 @@ spdci-compliance/
 │   │   ├── features/          # CRVS-specific scenarios
 │   │   └── requirements.json  # CRVS-specific requirements
 │   ├── dr/                    # Disability Registry
-│   ├── fr/                    # Functional Registry (implemented)
+│   ├── fr/                    # Farmer Registry (implemented)
 │   │   ├── features/          # FR-specific scenarios
 │   │   └── requirements.json  # FR-specific requirements
 │   └── ibr/                   # ID & Beneficiary Registry (not implemented)

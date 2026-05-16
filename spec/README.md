@@ -57,7 +57,7 @@ The following specifications are included for compliance testing:
 - `social_api_v1.0.0.yaml` - Social Registry
 - `crvs_api_v1.0.0.yaml` - Civil Registration and Vital Statistics
 - `dr_api_v1.0.0.yaml` - Disability Registry
-- `fr_api_v1.0.0.yaml` - Functional Registry
+- `fr_api_v1.0.0.yaml` - Farmer Registry
 - `ibr_api_v1.0.0.yaml` - ID & Beneficiary Registry
 
 Not every included specification has implemented domain tests yet. See the top-level README for current domain coverage.
