@@ -1221,13 +1221,13 @@ components:
                         4. example: "spdci-extensions-dci:DisabledPerson"
                     example: 'spdci-extensions-dci:DisabledPerson'
                   reg_records:
-                    type: object
+                    type: array
                     description: |
                       The "group" object contains fields expected in response of search
                       @context: https://schema.spdci.org/extensions/dr/v1/DRPerson.jsonld <br>
                       @type: "DisabledPerson" <br>
                       @container: "@set" <br>
-                    example:
+                    items:
                       type: object
                       description: |
                         1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.

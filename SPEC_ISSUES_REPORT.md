@@ -38,15 +38,19 @@ Change `oneOf` to `anyOf` for the `attribute_value` field in TxnStatusRequest sc
 
 **Affected files:**
 - `fr_api_v1.0.0.yaml` (line ~1102)
+- `dr_api_v1.0.0.yaml` (line ~1223)
 
 **Description:**
 In the `SearchResponse` schema, the `reg_records` field type is inconsistent across specs:
 - `social_api_v1.0.0.yaml`: `type: array` (line ~1151)
 - `crvs_api_v1.0.0.yaml`: `type: array` (line ~1207)
 - `fr_api_v1.0.0.yaml`: `type: object` (line ~1102) ← Inconsistent
+- `dr_api_v1.0.0.yaml`: `type: object` (line ~1223) ← Inconsistent
+
+The JSON-LD annotation `@container: "@set"` in the field description, plus the cardinality declared in `total_count`, both imply the field is a collection. Declaring it as `type: object` makes valid array payloads fail AJV validation.
 
 **Fix:**
-Change `reg_records` in FR spec from `type: object` to `type: array` with `items` definition to match social and CRVS specs.
+Change `reg_records` in FR and DR specs from `type: object` to `type: array` with `items` definition to match social and CRVS specs.
 
 ---
 
