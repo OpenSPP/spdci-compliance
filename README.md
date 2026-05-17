@@ -63,7 +63,7 @@ All SPDCI specs share:
 - **Header format**: `version`, `message_id`, `sender_id`, `receiver_id`, `action`, etc.
 - **Async pattern**: Request → ACK → Callback (on-*)
 - **Error responses**: ACK/ERR with error codes
-- **Security**: Authorization headers, signature validation
+- **Security**: Authorization header handling, invalid signature rejection
 - **Endpoints pattern**: `/registry/search`, `/registry/subscribe`, `/registry/txn/status`
 
 ### Domain-Specific (domains/)
@@ -187,7 +187,8 @@ PROFILE=spmis-client CLIENT_TRIGGER_URL=http://your-client:8080/test/trigger npm
 
 The mock server:
 - Enforces OpenAPI request validation by default
-- Enforces Authorization for endpoints secured in the OpenAPI spec by default
+- Requires syntactically valid Bearer Authorization headers for secured OpenAPI operations by default
+- Rejects known invalid test signature values by default
 - Records all requests for assertion
 - Sends async callbacks to client's `sender_uri`
 - Provides admin API for test control

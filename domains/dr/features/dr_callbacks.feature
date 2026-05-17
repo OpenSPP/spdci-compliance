@@ -1,5 +1,8 @@
-@profile=dr-registry @tier=core
+@profile=dr-subscriber @tier=core
 Feature: DR callback receivers
+
+This feature validates that an SPMIS subscriber implementation
+can receive Disability Registry callbacks.
 
   @smoke @method=POST @endpoint=registry/on-search @req=DR-CORE-RG-ON-SEARCH-01
   Scenario: Successfully receive on-search callback
